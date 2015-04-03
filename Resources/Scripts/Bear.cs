@@ -27,9 +27,15 @@ public class Bear : MonoBehaviour {
 		isOnTwoLegs = false;
 		yRotation = 0f;
 		Vector3 p = GetComponent<Transform>().position;
-		GetComponent<Transform>().eulerAngles = Vector3.up;
+		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
 		GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
 		audios = GetComponents<AudioSource>();
+
+
+		//TODO hack for demo, do not keep forever
+		Transform t = GetComponent<Transform>();
+		t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
+		t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
 	}
 
 
@@ -48,12 +54,22 @@ public class Bear : MonoBehaviour {
 			if(isOnTwoLegs)	// switch to 2 legs
 			{
 				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Transform>().position = new Vector3(p.x,85f,p.z);
+				GetComponent<Transform>().position = new Vector3(p.x,84.8f,p.z);
+
+				//TODO hack for demo, do not keep forever
+				Transform t = GetComponent<Transform>();
+				t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
+				t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
 			}
 			else						// switch to 4 legs
 			{
 				GetComponent<Transform>().eulerAngles = Vector3.up;
 				GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
+
+				//TODO hack for demo, do not keep forever
+				Transform t = GetComponent<Transform>();
+				t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
+				t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
 			}
 		}
 	}
