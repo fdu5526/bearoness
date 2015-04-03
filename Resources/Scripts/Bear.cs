@@ -61,17 +61,18 @@ public class Bear : MonoBehaviour {
 	// get player keyboard input, do things
 	private void CheckMovement()
 	{
-		Vector3 r = GetComponent<Transform>().eulerAngles;
 		Vector3 v = GetComponent<Rigidbody>().velocity;
 		if(isOnTwoLegs)		// two legs movement
 		{
+
+			Vector3 r = GetComponent<Transform>().eulerAngles;
 			if(Input.GetKey("w"))
     	{
       	if(v.x < max2LegWalkSpeed)	// limit walk speed
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
       	}
-      	if(r.z - deltaTilt > 360f - maxTilt || r.z <= 1f)	// limit tilt
+      	if(r.z - deltaTilt > 360f - maxTilt || r.z < 360f - maxTilt - deltaTilt)	// limit tilt
       	{
       		GetComponent<Transform>().eulerAngles = new Vector3(r.x, r.y, r.z - deltaTilt);
       	}
@@ -82,19 +83,20 @@ public class Bear : MonoBehaviour {
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
       	}
-      	if(r.z + deltaTilt < maxTilt || r.z > 360f - maxTilt - 1f)	// limit tilt
+      	if(r.z + deltaTilt < maxTilt || r.z > maxTilt + deltaTilt)	// limit tilt
       	{
       		GetComponent<Transform>().eulerAngles = new Vector3(r.x, r.y, r.z + deltaTilt);
       	}
     	}
 
+    	r = GetComponent<Transform>().eulerAngles;
     	if(Input.GetKey("a"))
     	{ 
     		if(v.z < max2LegWalkSpeed)	// limit walk speed
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
       	}
-      	if(r.x < maxTilt)						// limit tilt
+      	if(r.x + deltaTilt < maxTilt || r.x > maxTilt + deltaTilt)	// limit tilt
       	{
       		GetComponent<Transform>().eulerAngles = new Vector3(r.x + deltaTilt, r.y, r.z);
       	}
@@ -105,7 +107,7 @@ public class Bear : MonoBehaviour {
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
       	}
-      	if(r.x > -maxTilt)					// limit tilt
+      	if(r.x - deltaTilt > 360f - maxTilt || r.x < 360f - maxTilt - deltaTilt)	// limit tilt
       	{
       		GetComponent<Transform>().eulerAngles = new Vector3(r.x - deltaTilt, r.y, r.z);
       	}
@@ -177,6 +179,7 @@ public class Bear : MonoBehaviour {
       	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, 0f);
     	}
 
+    	// rotate bear towards correct direction
     	GetComponent<Transform>().eulerAngles = new Vector3(0f,yRotation,90f);
 		}
 	}
