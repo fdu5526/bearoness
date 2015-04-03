@@ -5,14 +5,31 @@ public class Bear : MonoBehaviour {
 
 	private bool isOnTwoLegs;
 
-	private const float default4LegWalkSpeed = 3f;
-	private const float default2LegForce = 0.6f;
-	private const float deltaTilt = 0.001f;
+	// speed of 4 legs mode, and which direction player is facing
+	private const float default4LegWalkSpeed = 10f;
+	private float yRotation;
+	
+	// speed and force for 2 leg mode
+	private const float default2LegForce = 2f;
+	private const float max2LegWalkSpeed = 4f;
+		
+	// how much player tilt during 2 leg mode
+	private const float deltaTilt = 1f;
+	private const float maxTilt = 40f;
+
+	// audios
+	private AudioSource[] audios;
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		isOnTwoLegs = false;
+		yRotation = 0f;
+		Vector3 p = GetComponent<Transform>().position;
+		GetComponent<Transform>().eulerAngles = Vector3.up;
+		GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
+		audios = GetComponents<AudioSource>();
 	}
 
 
@@ -21,14 +38,22 @@ public class Bear : MonoBehaviour {
 	{ 
 		if(Input.GetKeyDown(KeyCode.LeftShift))
 		{
+
+			audios[0].Play();
+
 			isOnTwoLegs = !isOnTwoLegs;
-			if(isOnTwoLegs)
+    	GetComponent<Rigidbody>().velocity = Vector3.zero;
+    	Vector3 p = GetComponent<Transform>().position;
+
+			if(isOnTwoLegs)	// switch to 2 legs
 			{
-				GetComponent<Transform>().localRotation = Quaternion.identity;
+				GetComponent<Transform>().eulerAngles = Vector3.zero;
+				GetComponent<Transform>().position = new Vector3(p.x,85f,p.z);
 			}
-			else
+			else						// switch to 4 legs
 			{
-				Quaternion i = Quaternion.identity;
+				GetComponent<Transform>().eulerAngles = Vector3.up;
+				GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
 			}
 		}
 	}
@@ -36,48 +61,75 @@ public class Bear : MonoBehaviour {
 	// get player keyboard input, do things
 	private void CheckMovement()
 	{
+		Vector3 r = GetComponent<Transform>().eulerAngles;
+		Vector3 v = GetComponent<Rigidbody>().velocity;
 		if(isOnTwoLegs)		// two legs movement
 		{
-			Quaternion r = GetComponent<Transform>().localRotation;
 			if(Input.GetKey("w"))
-    	{ 
-      	GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
-      	GetComponent<Transform>().localRotation = new Quaternion(r.x, r.y, r.z - deltaTilt, r.w);
+    	{
+      	if(v.x < max2LegWalkSpeed)	// limit walk speed
+      	{
+      		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
+      	}
+      	if(r.z - deltaTilt > 360f - maxTilt || r.z <= 1f)	// limit tilt
+      	{
+      		GetComponent<Transform>().eulerAngles = new Vector3(r.x, r.y, r.z - deltaTilt);
+      	}
     	}
     	else if(Input.GetKey("s"))
     	{
-      	GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
-      	GetComponent<Transform>().localRotation = new Quaternion(r.x, r.y, r.z + deltaTilt, r.w);
+    		if(v.x > -max2LegWalkSpeed)	// limit walk speed
+      	{
+      		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
+      	}
+      	if(r.z + deltaTilt < maxTilt || r.z > 360f - maxTilt - 1f)	// limit tilt
+      	{
+      		GetComponent<Transform>().eulerAngles = new Vector3(r.x, r.y, r.z + deltaTilt);
+      	}
     	}
 
     	if(Input.GetKey("a"))
     	{ 
-      	GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
-      	GetComponent<Transform>().localRotation = new Quaternion(r.x + deltaTilt, r.y, r.z, r.w);
+    		if(v.z < max2LegWalkSpeed)	// limit walk speed
+      	{
+      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
+      	}
+      	if(r.x < maxTilt)						// limit tilt
+      	{
+      		GetComponent<Transform>().eulerAngles = new Vector3(r.x + deltaTilt, r.y, r.z);
+      	}
     	}
     	else if(Input.GetKey("d"))
     	{ 
-      	GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
-      	GetComponent<Transform>().localRotation = new Quaternion(r.x - deltaTilt, r.y, r.z, r.w);
-    	}
-
-    	// stop movement
-    	if(!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d"))
-    	{
-    		
+      	if(v.z > -max2LegWalkSpeed)	// limit walk speed
+      	{
+      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
+      	}
+      	if(r.x > -maxTilt)					// limit tilt
+      	{
+      		GetComponent<Transform>().eulerAngles = new Vector3(r.x - deltaTilt, r.y, r.z);
+      	}
     	}
 		}
 		else							// four legs movement
 		{
+			bool isMovingForwardOrBackward = true;
+
 			// up down movement
-			Vector3 v = GetComponent<Rigidbody>().velocity;
 			if(Input.GetKey("w"))
-    	{ 
+    	{
       	GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed, v.y, v.z);
+      	yRotation = 0f;
     	}
     	else if(Input.GetKey("s"))
     	{
       	GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed, v.y, v.z);
+      	yRotation = 180f;
+    	}
+    	else
+    	{
+    		GetComponent<Rigidbody>().velocity = new Vector3(0f, v.y, v.z);
+    		isMovingForwardOrBackward = false;
     	}
 
     	// left right movement
@@ -85,17 +137,47 @@ public class Bear : MonoBehaviour {
     	if(Input.GetKey("a"))
     	{ 
       	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, default4LegWalkSpeed);
+      	if(isMovingForwardOrBackward)
+      	{
+      		if(yRotation == 0f)
+      		{
+      			yRotation = 315f;
+      		}
+      		else
+      		{
+      			yRotation = 225f;
+      		}
+      	}
+      	else
+      	{
+      		yRotation = 270f;
+      	}
     	}
     	else if(Input.GetKey("d"))
     	{ 
       	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, -default4LegWalkSpeed);
+      	if(isMovingForwardOrBackward)
+      	{
+      		if(yRotation == 0f)
+      		{
+      			yRotation = 45f;
+      		}
+      		else
+      		{
+      			yRotation = 135f;
+      		}
+      	}
+      	else
+      	{
+      		yRotation = 90f;
+      	}
+    	}
+    	else
+    	{ 
+      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, 0f);
     	}
 
-    	// stop movement
-    	if(!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d"))
-    	{
-    		GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);	
-    	}
+    	GetComponent<Transform>().eulerAngles = new Vector3(0f,yRotation,90f);
 		}
 	}
 
