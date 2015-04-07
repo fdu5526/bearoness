@@ -5,7 +5,7 @@ public class Camera : MonoBehaviour {
 
 	// the player's transform
 	private Transform playerTransform;
-	private const float y = 98.06f;
+	private const float y = 96.55f;
 
 	// Use this for initialization
 	void Start () 
@@ -17,7 +17,7 @@ public class Camera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		float x = playerTransform.position.x - 5f;
+		float x = playerTransform.position.x - 10f;
 		float z = playerTransform.position.z - 3f;
 		transform.position = new Vector3(x,y,z);
 	}
