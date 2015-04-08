@@ -27,7 +27,7 @@ public class RegularNPC : MonoBehaviour {
 		audios = GetComponents<AudioSource>();
 	}
 
-
+	// bear runs into this NPC
 	void OnCollisionEnter(Collision collision)
 	{	
 

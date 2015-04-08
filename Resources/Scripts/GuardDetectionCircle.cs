@@ -7,15 +7,11 @@ public class GuardDetectionCircle : MonoBehaviour {
 	private GameObject bear;
 	private Bear bearScript;
 
-	// audio
-	private AudioSource[] audios;
-
 	// Use this for initialization
 	void Start () 
 	{
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
-		audios = GetComponents<AudioSource>();
 	}
 
 	void OnTriggerStay(Collider collider)
@@ -24,11 +20,11 @@ public class GuardDetectionCircle : MonoBehaviour {
 		{
 			if(bearScript.isOnTwoLegs)
 			{
-				bearScript.IncreaseSuspicion(0.2f);
+				bearScript.IncreaseSuspicion(0.05f);
 			}
 			else
 			{
-				bearScript.IncreaseSuspicion(1f);
+				bearScript.IncreaseSuspicion(0.5f);
 			}
 		}
 	}

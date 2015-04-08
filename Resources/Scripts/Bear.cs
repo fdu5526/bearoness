@@ -8,6 +8,14 @@ public class Bear : MonoBehaviour
   // how suspicious player is being
   public float suspicionPercent;
 
+  // 5 seconds since last discovery before player start to lose suspicion
+  // amount player lose suspicion per frame
+  // the last time player was suspicious
+  private const float suspicionCooldown = 5f;
+  private const float deltaSuspicion = 0.05f;
+  private float lastSuspicionTime;
+
+
   // whether bear is walking on 2 legs
   public bool isOnTwoLegs;
 
@@ -33,6 +41,7 @@ public class Bear : MonoBehaviour
 		suspicionPercent = 0f;
     isOnTwoLegs = false;
 		yRotation = 0f;
+    lastSuspicionTime = 0f;
 
 		Vector3 p = GetComponent<Transform>().position;
 		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
@@ -46,10 +55,10 @@ public class Bear : MonoBehaviour
 		t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
 	}
 
-
+  // gets discovered, gain suspicion
   public void IncreaseSuspicion(float amount)
   {
-    print(suspicionPercent + amount);
+    lastSuspicionTime = Time.time;
     suspicionPercent = Math.Min(100f, suspicionPercent + amount);
   }
 
@@ -233,5 +242,10 @@ public class Bear : MonoBehaviour
 	{
 		CheckLegsMode();
 		CheckMovement();
+
+    if(Time.time - lastSuspicionTime > suspicionCooldown)
+    {
+      suspicionPercent = Math.Max(0f, suspicionPercent - deltaSuspicion);
+    }
 	}
 }
