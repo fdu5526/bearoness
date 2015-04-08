@@ -78,7 +78,7 @@ public class Bear : MonoBehaviour {
 			}
 			else						// switch to 4 legs
 			{
-				GetComponent<Transform>().eulerAngles = Vector3.up;
+				GetComponent<Transform>().eulerAngles = Vector3.zero;
 				GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
 
 				//TODO hack for demo, do not keep forever
@@ -93,19 +93,22 @@ public class Bear : MonoBehaviour {
 	private void CheckMovement()
 	{
 		Vector3 v = GetComponent<Rigidbody>().velocity;
+
 		if(isOnTwoLegs)		// two legs movement
 		{
-
 			Vector3 r = GetComponent<Transform>().eulerAngles;
+      float xRotation = r.x;
+      float zRotation = r.z;
+
 			if(Input.GetKey("w"))
     	{
       	if(v.x < max2LegWalkSpeed)	// limit walk speed
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
       	}
-      	if(r.z - deltaTilt > 360f - maxTilt || r.z < 360f - maxTilt - deltaTilt)	// limit tilt
+      	if(zRotation - deltaTilt > 360f - maxTilt || zRotation < 360f - maxTilt - deltaTilt)	// limit tilt
       	{
-      		GetComponent<Transform>().eulerAngles = new Vector3(r.x, r.y, r.z - deltaTilt);
+          zRotation -= deltaTilt;
       	}
     	}
     	else if(Input.GetKey("s"))
@@ -114,22 +117,22 @@ public class Bear : MonoBehaviour {
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
       	}
-      	if(r.z + deltaTilt < maxTilt || r.z > maxTilt + deltaTilt)	// limit tilt
+      	if(zRotation + deltaTilt < maxTilt || zRotation > maxTilt + deltaTilt)	// limit tilt
       	{
-      		GetComponent<Transform>().eulerAngles = new Vector3(r.x, r.y, r.z + deltaTilt);
+          zRotation += deltaTilt;
       	}
     	}
 
-    	r = GetComponent<Transform>().eulerAngles;
     	if(Input.GetKey("a"))
     	{ 
     		if(v.z < max2LegWalkSpeed)	// limit walk speed
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
       	}
-      	if(r.x + deltaTilt < maxTilt || r.x > maxTilt + deltaTilt)	// limit tilt
+      	if(xRotation + deltaTilt < maxTilt || xRotation > maxTilt + deltaTilt)	// limit tilt
       	{
-      		GetComponent<Transform>().eulerAngles = new Vector3(r.x + deltaTilt, r.y, r.z);
+          xRotation += deltaTilt;
+      		
       	}
     	}
     	else if(Input.GetKey("d"))
@@ -138,11 +141,19 @@ public class Bear : MonoBehaviour {
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
       	}
-      	if(r.x - deltaTilt > 360f - maxTilt || r.x < 360f - maxTilt - deltaTilt)	// limit tilt
+      	if(xRotation - deltaTilt > 360f - maxTilt || xRotation < 360f - maxTilt - deltaTilt)	// limit tilt
       	{
-      		GetComponent<Transform>().eulerAngles = new Vector3(r.x - deltaTilt, r.y, r.z);
+          xRotation -= deltaTilt;
       	}
     	}
+
+      // get which direction player is facing
+      v = GetComponent<Rigidbody>().velocity;
+      float yRotation = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(1f,0f));
+      yRotation = v.z > 0f ? -yRotation : yRotation;
+
+      // perform actual rotation
+      GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
 		}
 		else							// four legs movement
 		{
