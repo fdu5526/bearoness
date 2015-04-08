@@ -1,9 +1,15 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class Bear : MonoBehaviour {
 
-	private bool isOnTwoLegs;
+	
+  // how suspicious player is being
+  public int suspicionPercent;
+
+  // whether bear is walking on 2 legs
+  public bool isOnTwoLegs;
 
 	// speed of 4 legs mode, and which direction player is facing
 	private const float default4LegWalkSpeed = 10f;
@@ -24,8 +30,10 @@ public class Bear : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		isOnTwoLegs = false;
+		suspicionPercent = 0;
+    isOnTwoLegs = false;
 		yRotation = 0f;
+
 		Vector3 p = GetComponent<Transform>().position;
 		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
 		GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
@@ -37,6 +45,13 @@ public class Bear : MonoBehaviour {
 		t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
 		t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
 	}
+
+
+  public void IncreaseSuspicion(int amount)
+  {
+    print(suspicionPercent + amount);
+    suspicionPercent = Math.Min(100, suspicionPercent + amount);
+  }
 
 
 

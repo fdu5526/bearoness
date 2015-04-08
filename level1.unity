@@ -2018,7 +2018,12 @@ Prefab:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 13677562, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 13677562, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1536573340
