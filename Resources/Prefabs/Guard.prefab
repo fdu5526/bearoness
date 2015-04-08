@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11433168}
   m_Layer: 0
   m_Name: DetectionCircle
-  m_TagString: Untagged
+  m_TagString: GuardDetectionCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 492.799988, y: 84.4700012, z: 548.599976}
+  m_LocalPosition: {x: 384.5, y: 85, z: 621.599976}
   m_LocalScale: {x: 1, y: 2.21801448, z: 1}
   m_Children:
   - {fileID: 494548}
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 105858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -.617670774, z: 0}
-  m_LocalScale: {x: 3, y: .151980802, z: 3}
+  m_LocalScale: {x: 5, y: .151980802, z: 5}
   m_Children: []
   m_Father: {fileID: 410874}
   m_RootOrder: 0
@@ -136,7 +136,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

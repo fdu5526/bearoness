@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 415556}
   - 33: {fileID: 3357654}
-  - 136: {fileID: 13677562}
   - 23: {fileID: 2302486}
   - 114: {fileID: 11486500}
   - 54: {fileID: 5470936}
@@ -17,7 +16,7 @@ GameObject:
   - 82: {fileID: 8210722}
   m_Layer: 0
   m_Name: Bear
-  m_TagString: Untagged
+  m_TagString: Bear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 400.000305, y: 84.5, z: 559.997437}
+  m_LocalPosition: {x: 430.299988, y: 85.1999969, z: 553.599976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446816}
@@ -200,7 +199,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!82 &8210722
 AudioSource:
@@ -282,19 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121310bf316f76b4cb3508b0dd355384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &13677562
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134036}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  suspicionPercent: 0
+  isOnTwoLegs: 0
 --- !u!136 &13690768
 CapsuleCollider:
   m_ObjectHideFlags: 1

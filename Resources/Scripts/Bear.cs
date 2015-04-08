@@ -2,11 +2,11 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class Bear : MonoBehaviour {
+public class Bear : MonoBehaviour 
+{
 
-	
   // how suspicious player is being
-  public int suspicionPercent;
+  public float suspicionPercent;
 
   // whether bear is walking on 2 legs
   public bool isOnTwoLegs;
@@ -30,7 +30,7 @@ public class Bear : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		suspicionPercent = 0;
+		suspicionPercent = 0f;
     isOnTwoLegs = false;
 		yRotation = 0f;
 
@@ -47,10 +47,10 @@ public class Bear : MonoBehaviour {
 	}
 
 
-  public void IncreaseSuspicion(int amount)
+  public void IncreaseSuspicion(float amount)
   {
     print(suspicionPercent + amount);
-    suspicionPercent = Math.Min(100, suspicionPercent + amount);
+    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
   }
 
 
@@ -222,6 +222,7 @@ public class Bear : MonoBehaviour {
     	}
 
     	// rotate bear towards correct direction
+      // TODO fix this when real bear model added
     	GetComponent<Transform>().eulerAngles = new Vector3(0f,yRotation,90f);
 		}
 	}
