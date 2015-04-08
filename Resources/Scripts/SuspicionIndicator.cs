@@ -4,7 +4,7 @@ using System.Collections;
 
 public class SuspicionIndicator : MonoBehaviour {
 
-	public int suspicion;
+	public float suspicion;
 	public Sprite blue, green, orange, red;
 	Image image;
 
@@ -24,14 +24,14 @@ public class SuspicionIndicator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// get suspicion from bear
-		//suspicion = GameObject.Find ("Bear").GetComponent<Bear>().suspicion;
+		suspicion = GameObject.Find ("Bear").GetComponent<Bear>().suspicionPercent;
 		
 		// change icon appropriately
-		if(suspicion >= 0 && suspicion < 25){
+		if(suspicion >= 0f && suspicion < 25f){
 			image.sprite = blue;
-		}else if (suspicion >= 25 && suspicion < 50){
+		}else if (suspicion >= 25f && suspicion < 50f){
 			image.sprite = green;
-		}else if (suspicion >= 50 && suspicion < 75){
+		}else if (suspicion >= 50f && suspicion < 75f){
 			image.sprite = orange;
 		}else {	
 			image.sprite = red;
