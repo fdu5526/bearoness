@@ -7,6 +7,9 @@ public class Guard : MonoBehaviour {
 	private GameObject bear;
 	private Bear bearScript;
 
+	// how much a collision should increase suspicion by
+	private const float suspicionIncreaseUponCollision = 10f;
+
 	// audio
 	private AudioSource[] audios;
 
@@ -25,7 +28,7 @@ public class Guard : MonoBehaviour {
 		// bear run into guard
 		if(collision.gameObject.name.Equals("Bear"))
 		{
-			bearScript.IncreaseSuspicion(5f);
+			bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
 			audios[0].Play();
 		}
 	}

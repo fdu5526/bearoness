@@ -11,6 +11,10 @@ public class GuardDetectionCircle : MonoBehaviour {
 	private const float defaultDetectionDiameter = 3f;
 	private const float extraDetectionDiameter = 7f;
 
+	// how much suspicion to increase per frame when player in circle
+	private const float twoLegSuspicionIncrease = 0.05f;
+	private const float fourLegSuspicionIncrease = 0.5f;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -26,12 +30,12 @@ public class GuardDetectionCircle : MonoBehaviour {
 			// guard suspicion for bear on 2 legs
 			if(bearScript.isOnTwoLegs)
 			{
-				bearScript.IncreaseSuspicion(0.05f);
+				bearScript.IncreaseSuspicion(twoLegSuspicionIncrease);
 			}
 			// guard suspicion for bear on 4 legs
 			else
 			{
-				bearScript.IncreaseSuspicion(0.5f);
+				bearScript.IncreaseSuspicion(fourLegSuspicionIncrease);
 			}
 		}
 	}
