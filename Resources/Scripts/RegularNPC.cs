@@ -16,7 +16,7 @@ public class RegularNPC : MonoBehaviour {
 	private const float maxStopTime = 2f;
 
 	// for when player is too suspicious
-	private const float runAwaySpeed = 10f;
+	private const float runAwaySpeed = 20f;
 
 	// how much a collision should increase suspicion by
 	private const float suspicionIncreaseUponCollision = 10f;
