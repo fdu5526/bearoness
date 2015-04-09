@@ -12,10 +12,17 @@ public class RegularNPC : MonoBehaviour {
 	private float prevStartWalkTime;
 	private bool isStopped;
 	private const float maxSpeed = 3f;
+	private const float minStopTime = 0.3f;
+	private const float maxStopTime = 2f;
 
 	// for when player is too suspicious
 	private bool isScared;
 	private const float runAwaySpeed = 10f;
+	private const float runAwaySuspicionPercentage = 99f;
+	private const float comeBackSuspicionPercentage = 30f;
+
+	// how much a collision should increase suspicion by
+	private const float suspicionIncreaseUponCollision = 10f;
 
 	// audio
 	private AudioSource[] audios;
@@ -39,7 +46,7 @@ public class RegularNPC : MonoBehaviour {
 		// bear run into this NPC
 		if(collision.gameObject.name.Equals("Bear"))
 		{
-			bearScript.IncreaseSuspicion(10f);
+			bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
 			audios[0].Play();
 		}
 	}
@@ -51,7 +58,7 @@ public class RegularNPC : MonoBehaviour {
 		if(Time.time - prevStartWalkTime > randomWalkCoodown)
 		{
 			// reset cooldown
-			randomWalkCoodown = Random.Range(0.3f, 2f);
+			randomWalkCoodown = Random.Range(minStopTime, maxStopTime);
 			prevStartWalkTime = Time.time;
 
 			// if stopped, walk. If walking, stop
@@ -72,12 +79,12 @@ public class RegularNPC : MonoBehaviour {
 	// should I be scared? Is there a bear in the room?
 	void CheckFear()
 	{
-		if(bearScript.suspicionPercent > 90f && !isScared)
+		if(bearScript.suspicionPercent > runAwaySuspicionPercentage && !isScared)
 		{
 			isScared = true;
 
 		}
-		else if(bearScript.suspicionPercent <= 50f && isScared)
+		else if(bearScript.suspicionPercent <= runAwaySuspicionPercentage && isScared)
 		{
 			isScared = false;
 		}
@@ -94,15 +101,16 @@ public class RegularNPC : MonoBehaviour {
 		d.Normalize();
 		d *= runAwaySpeed;
 
+		// gotta run
 		GetComponent<Rigidbody>().velocity = d;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{	
+		// should I be scared?
 		CheckFear();
-		
-
+	
 
 		if(!isScared)	// random walk if not scared
 		{
