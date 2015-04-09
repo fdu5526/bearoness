@@ -7,6 +7,10 @@ public class GuardDetectionCircle : MonoBehaviour {
 	private GameObject bear;
 	private Bear bearScript;
 
+	// how large detection circle normally is, then how much it expands by
+	private const float defaultDetectionDiameter = 3f;
+	private const float extraDetectionDiameter = 7f;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -35,6 +39,8 @@ public class GuardDetectionCircle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-
+		// expand based on player suspicion
+		float d = bearScript.suspicionPercent / 100f * extraDetectionDiameter + defaultDetectionDiameter;
+		GetComponent<Transform>().localScale = new Vector3(d, 0.15f, d);
 	}
 }
