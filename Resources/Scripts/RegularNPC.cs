@@ -90,7 +90,7 @@ public class RegularNPC : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
-		if(!bearScript.IsDiscovered)	// random walk if there is no bear
+		if(!bearScript.isDiscovered)	// random walk if there is no bear
 		{
 			Patrol();
 		}

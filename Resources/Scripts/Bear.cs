@@ -5,8 +5,25 @@ using System.Collections;
 public class Bear : MonoBehaviour 
 {
 
+////////////////////////////////////// public vars & functions /////////////////////////////
+
   // how suspicious player is being
   public float suspicionPercent;
+
+  // whether bear is walking on 2 legs
+  public bool isOnTwoLegs;
+
+  // player does suspicious things, gain suspicion
+  public void IncreaseSuspicion(float amount)
+  {
+    lastSuspicionTime = Time.time;
+    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+  }
+
+  // if player is completely discovered, no going back to pretending
+  public bool isDiscovered { get { return suspicionPercent >= 99.9f; } }
+
+////////////////////////////////////// private vars ////////////////////////////////////////	
 
   // 5 seconds since last discovery before player start to lose suspicion
   // amount of suspicion the player loses per frame
@@ -15,27 +32,24 @@ public class Bear : MonoBehaviour
   private const float deltaSuspicion = 0.05f;
   private float lastSuspicionTime;
 
+  // speed of 4 legs mode, and which direction player is facing
+  private const float default4LegWalkSpeed = 10f;
+  private float yRotation;
+  
+  // speed and force for 2 leg mode
+  private const float default2LegForce = 2f;
+  private const float max2LegWalkSpeed = 4f;
+    
+  // how much player tilt during 2 leg mode
+  private const float deltaTilt = 1f;
+  private const float maxTilt = 40f;
 
-  // whether bear is walking on 2 legs
-  public bool isOnTwoLegs;
+  // audios
+  private AudioSource[] audios;
 
-	// speed of 4 legs mode, and which direction player is facing
-	private const float default4LegWalkSpeed = 10f;
-	private float yRotation;
-	
-	// speed and force for 2 leg mode
-	private const float default2LegForce = 2f;
-	private const float max2LegWalkSpeed = 4f;
-		
-	// how much player tilt during 2 leg mode
-	private const float deltaTilt = 1f;
-	private const float maxTilt = 40f;
+///////////////////////////////////////////////////////////////////////////////////////////  
 
-	// audios
-	private AudioSource[] audios;
-
-
-	// Use this for initialization
+  // Use this for initialization
 	void Start () 
 	{
 		suspicionPercent = 0f;
@@ -55,18 +69,8 @@ public class Bear : MonoBehaviour
 		t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
 	}
 
-  // gets discovered, gain suspicion
-  public void IncreaseSuspicion(float amount)
-  {
-    lastSuspicionTime = Time.time;
-    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
-  }
 
-  // if player is discovered
-  public bool IsDiscovered { get { return suspicionPercent >= 99.9f; } }
-
-
-
+  // if player changes movement mode, make appropriate adjustments
 	private void CheckLegsMode()
 	{ 
 		if(Input.GetKeyDown(KeyCode.LeftShift))
@@ -247,7 +251,7 @@ public class Bear : MonoBehaviour
 		CheckMovement();
 
     // lose suspicion if doing nothing suspicious for a while
-    if(!IsDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
+    if(!isDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
     {
       suspicionPercent = Math.Max(0f, suspicionPercent - deltaSuspicion);
     }
