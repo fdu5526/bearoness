@@ -9,7 +9,7 @@ public class Bear : MonoBehaviour
   public float suspicionPercent;
 
   // 5 seconds since last discovery before player start to lose suspicion
-  // amount player lose suspicion per frame
+  // amount of suspicion the player loses per frame
   // the last time player was suspicious
   private const float suspicionCooldown = 5f;
   private const float deltaSuspicion = 0.05f;
@@ -243,6 +243,7 @@ public class Bear : MonoBehaviour
 		CheckLegsMode();
 		CheckMovement();
 
+    // lose suspicion if doing nothing suspicious for a while
     if(Time.time - lastSuspicionTime > suspicionCooldown)
     {
       suspicionPercent = Math.Max(0f, suspicionPercent - deltaSuspicion);
