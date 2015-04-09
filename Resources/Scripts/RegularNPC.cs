@@ -13,6 +13,10 @@ public class RegularNPC : MonoBehaviour {
 	private bool isStopped;
 	private const float maxSpeed = 3f;
 
+	// for when player is too suspicious
+	private bool isScared;
+	private const float runAwaySpeed = 10f;
+
 	// audio
 	private AudioSource[] audios;
 
@@ -21,6 +25,7 @@ public class RegularNPC : MonoBehaviour {
 	{
 		isStopped = Random.value >= 0.5f;
 		prevStartWalkTime = 0f;
+		isScared = false;
 
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
@@ -38,15 +43,18 @@ public class RegularNPC : MonoBehaviour {
 			audios[0].Play();
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+	// random walk this NPC
+	void Patrol()
 	{
+		// patrol cooldown
 		if(Time.time - prevStartWalkTime > randomWalkCoodown)
 		{
+			// reset cooldown
 			randomWalkCoodown = Random.Range(0.3f, 2f);
 			prevStartWalkTime = Time.time;
 
+			// if stopped, walk. If walking, stop
 			if(isStopped)
 			{
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -57,8 +65,54 @@ public class RegularNPC : MonoBehaviour {
 				float z = Random.Range(-maxSpeed,maxSpeed);
 				GetComponent<Rigidbody>().velocity = new Vector3(x,0f,z);
 			}
-
 			isStopped = !isStopped;
 		}
+	}
+
+	// should I be scared? Is there a bear in the room?
+	void CheckFear()
+	{
+		if(bearScript.suspicionPercent > 90f && !isScared)
+		{
+			isScared = true;
+
+		}
+		else if(bearScript.suspicionPercent <= 50f && isScared)
+		{
+			isScared = false;
+		}
+	}
+
+	// there is a bear in the room omg run away ahhhhhhhhhhhhhhhhh
+	void RunAway()
+	{
+		Vector3 tp = GetComponent<Transform>().position;
+		Vector3 bp = bear.GetComponent<Transform>().position;
+		
+		// set direction and magnitude
+		Vector3 d = tp - bp;
+		d.Normalize();
+		d *= runAwaySpeed;
+
+		GetComponent<Rigidbody>().velocity = d;
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{	
+		CheckFear();
+		
+
+
+		if(!isScared)	// random walk if not scared
+		{
+			Patrol();
+		}
+		else					// run away if scared
+		{
+			RunAway();
+		}
+		
+
 	}
 }
