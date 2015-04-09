@@ -31,8 +31,8 @@ public class RegularNPC : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{	
 
-		// 2 legged bear run into player
-		if(collision.gameObject.name.Equals("Bear") && bearScript.isOnTwoLegs)
+		// bear run into this NPC
+		if(collision.gameObject.name.Equals("Bear"))
 		{
 			bearScript.IncreaseSuspicion(10f);
 			audios[0].Play();

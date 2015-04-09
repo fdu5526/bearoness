@@ -16,12 +16,15 @@ public class GuardDetectionCircle : MonoBehaviour {
 
 	void OnTriggerStay(Collider collider)
 	{	
+		// bear is within range
 		if(collider.CompareTag("Bear"))
 		{
+			// guard suspicion for bear on 2 legs
 			if(bearScript.isOnTwoLegs)
 			{
 				bearScript.IncreaseSuspicion(0.05f);
 			}
+			// guard suspicion for bear on 4 legs
 			else
 			{
 				bearScript.IncreaseSuspicion(0.5f);

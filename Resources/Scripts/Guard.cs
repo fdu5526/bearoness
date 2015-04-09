@@ -22,8 +22,8 @@ public class Guard : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{	
 
-		// 2 legged bear run into player
-		if(collision.gameObject.name.Equals("Bear") && bearScript.isOnTwoLegs)
+		// bear run into guard
+		if(collision.gameObject.name.Equals("Bear"))
 		{
 			bearScript.IncreaseSuspicion(5f);
 			audios[0].Play();
