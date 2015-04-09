@@ -62,6 +62,9 @@ public class Bear : MonoBehaviour
     suspicionPercent = Math.Min(100f, suspicionPercent + amount);
   }
 
+  // if player is discovered
+  public bool IsDiscovered { get { return suspicionPercent >= 99.9f; } }
+
 
 
 	private void CheckLegsMode()
@@ -244,7 +247,7 @@ public class Bear : MonoBehaviour
 		CheckMovement();
 
     // lose suspicion if doing nothing suspicious for a while
-    if(Time.time - lastSuspicionTime > suspicionCooldown)
+    if(!IsDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
     {
       suspicionPercent = Math.Max(0f, suspicionPercent - deltaSuspicion);
     }

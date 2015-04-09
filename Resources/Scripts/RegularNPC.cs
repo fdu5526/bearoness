@@ -16,10 +16,7 @@ public class RegularNPC : MonoBehaviour {
 	private const float maxStopTime = 2f;
 
 	// for when player is too suspicious
-	private bool isScared;
 	private const float runAwaySpeed = 10f;
-	private const float runAwaySuspicionPercentage = 99f;
-	private const float comeBackSuspicionPercentage = 30f;
 
 	// how much a collision should increase suspicion by
 	private const float suspicionIncreaseUponCollision = 10f;
@@ -32,7 +29,6 @@ public class RegularNPC : MonoBehaviour {
 	{
 		isStopped = Random.value >= 0.5f;
 		prevStartWalkTime = 0f;
-		isScared = false;
 
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
@@ -76,20 +72,6 @@ public class RegularNPC : MonoBehaviour {
 		}
 	}
 
-	// should I be scared? Is there a bear in the room?
-	void CheckFear()
-	{
-		if(bearScript.suspicionPercent > runAwaySuspicionPercentage && !isScared)
-		{
-			isScared = true;
-
-		}
-		else if(bearScript.suspicionPercent <= runAwaySuspicionPercentage && isScared)
-		{
-			isScared = false;
-		}
-	}
-
 	// there is a bear in the room omg run away ahhhhhhhhhhhhhhhhh
 	void RunAway()
 	{
@@ -108,15 +90,11 @@ public class RegularNPC : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
-		// should I be scared?
-		CheckFear();
-	
-
-		if(!isScared)	// random walk if not scared
+		if(!bearScript.IsDiscovered)	// random walk if there is no bear
 		{
 			Patrol();
 		}
-		else					// run away if scared
+		else					// run away if there is a bear
 		{
 			RunAway();
 		}
