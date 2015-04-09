@@ -9,6 +9,7 @@ public class Guard : MonoBehaviour {
 
 	// audio
 	private AudioSource[] audios;
+	private AudioSource collide, detect, die;
 
 	// Use this for initialization
 	void Start () 
@@ -16,6 +17,9 @@ public class Guard : MonoBehaviour {
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
+		collide = audios[0];
+		//detect = audios[1];
+		//die = audios[2];
 	}
 
 	// bear runs into this NPC
@@ -26,7 +30,10 @@ public class Guard : MonoBehaviour {
 		if(collision.gameObject.name.Equals("Bear") && bearScript.isOnTwoLegs)
 		{
 			bearScript.IncreaseSuspicion(5f);
-			audios[0].Play();
+			collide.Play();
+		}
+		else if (collision.gameObject.name.Equals("Bear")){
+			collide.Play();
 		}
 	}
 	

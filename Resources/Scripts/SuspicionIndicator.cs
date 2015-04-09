@@ -7,10 +7,14 @@ public class SuspicionIndicator : MonoBehaviour {
 	public float suspicion;
 	public Sprite blue, green, orange, red;
 	Image image;
+	private AudioSource[] audios;
+	private AudioSource detect;
 
 	// Use this for initialization
 	void Start () {
 		suspicion = 0;
+		audios = GetComponents<AudioSource>();
+		detect = audios[0];
 		image = this.gameObject.GetComponent<Image> ();
 		/*
 		blue = Resources.Load <Sprite> ("Images/bearicon2");
@@ -35,6 +39,8 @@ public class SuspicionIndicator : MonoBehaviour {
 			image.sprite = orange;
 		}else {	
 			image.sprite = red;
+			Debug.Log("Threshold!");
+			detect.Play();
 		}
 	}
 }

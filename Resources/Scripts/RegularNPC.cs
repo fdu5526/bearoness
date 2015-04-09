@@ -15,6 +15,7 @@ public class RegularNPC : MonoBehaviour {
 
 	// audio
 	private AudioSource[] audios;
+	private AudioSource collide, detect, die;
 
 	// Use this for initialization
 	void Start () 
@@ -25,6 +26,9 @@ public class RegularNPC : MonoBehaviour {
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
+		collide = audios[0];
+		//detect = audios[1];
+		//die = audios[2];
 	}
 
 	// bear runs into this NPC
@@ -35,7 +39,10 @@ public class RegularNPC : MonoBehaviour {
 		if(collision.gameObject.name.Equals("Bear") && bearScript.isOnTwoLegs)
 		{
 			bearScript.IncreaseSuspicion(10f);
-			audios[0].Play();
+			collide.Play();
+		}
+		else if (collision.gameObject.name.Equals("Bear")){
+			collide.Play();
 		}
 	}
 	
