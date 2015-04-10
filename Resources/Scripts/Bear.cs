@@ -46,6 +46,7 @@ public class Bear : MonoBehaviour
 
   // audios
   private AudioSource[] audios;
+  private AudioSource growl, run2, run4;
 
 ///////////////////////////////////////////////////////////////////////////////////////////  
 
@@ -61,6 +62,9 @@ public class Bear : MonoBehaviour
 		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
 		GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
 		audios = GetComponents<AudioSource>();
+    growl = audios[0];
+    run2 = audios[1];
+    run4 = audios[2];
 
 
 		//TODO hack for demo, do not keep forever
@@ -76,7 +80,7 @@ public class Bear : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.LeftShift))
 		{
 
-			audios[0].Play();
+			growl.Play();
 
 			isOnTwoLegs = !isOnTwoLegs;
     	GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -243,12 +247,30 @@ public class Bear : MonoBehaviour
 		}
 	}
 
+    void stepCheck(){
+      /*if (isOnTwoLegs && (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))){
+
+        run2.loop = true;
+        run2.Play();
+      }*/
+      if (!isOnTwoLegs && (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))){
+        run4.loop = true;
+        run4.Play();
+      }
+      else if (isOnTwoLegs || (Input.GetKey("w") == false && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false)){
+        run4.loop = false;
+
+      }
+    }
+
+
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		CheckLegsMode();
 		CheckMovement();
+    stepCheck();
 
     // lose suspicion if doing nothing suspicious for a while
     if(!isDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)

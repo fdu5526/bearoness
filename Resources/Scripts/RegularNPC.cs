@@ -38,7 +38,6 @@ public class RegularNPC : MonoBehaviour {
 	// bear runs into this NPC
 	void OnCollisionEnter(Collision collision)
 	{	
-
 		// bear run into this NPC
 		if(collision.gameObject.name.Equals("Bear"))
 		{
