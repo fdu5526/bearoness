@@ -29,7 +29,7 @@ public class Bear : MonoBehaviour
   // amount of suspicion the player loses per frame
   // the last time player was suspicious
   private const float suspicionCooldown = 5f;
-  private const float deltaSuspicion = 0.05f;
+  private const float deltaSuspicion = 0.15f;
   private float lastSuspicionTime;
 
   // speed of 4 legs mode, and which direction player is facing
