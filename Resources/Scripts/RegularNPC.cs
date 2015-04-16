@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RegularNPC : MonoBehaviour {
 
@@ -7,13 +8,17 @@ public class RegularNPC : MonoBehaviour {
 	private GameObject bear;
 	private Bear bearScript;
 
+	// the gender and dialogues
+	private bool isFemale;
+	private List<string> dialogues;
+
 	// for patrolling
 	private float randomWalkCoodown;
 	private float prevStartWalkTime;
 	private bool isStopped;
-	private const float maxSpeed = 3f;
-	private const float minStopTime = 0.3f;
-	private const float maxStopTime = 2f;
+	private const float maxSpeed = 1.5f;
+	private const float minStopTime = 0.9f;
+	private const float maxStopTime = 3f;
 
 	// for when player is too suspicious
 	private const float runAwaySpeed = 20f;
@@ -25,14 +30,41 @@ public class RegularNPC : MonoBehaviour {
 	private AudioSource[] audios;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		isStopped = Random.value >= 0.5f;
+		isFemale = Random.value >= 0.5f;
 		prevStartWalkTime = 0f;
 
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
+
+		LoadDialogues();
+	}
+
+	// load the dialogues from text, based on gender
+	private void LoadDialogues()
+	{
+		dialogues = new List<string>();
+		
+		TextAsset txt;
+		if(isFemale)
+		{
+			txt = Resources.Load("Dialogues/femaleNPCDialogue") as TextAsset;
+		}
+		else
+		{
+			txt = Resources.Load("Dialogues/maleNPCDialogue") as TextAsset;	
+		}
+		string[] lines = txt.text.Split('\n');
+		
+		// read my text file
+	  foreach (string line in lines)
+	  {
+			dialogues.Add(line);
+ 		}
+		
 	}
 
 	// bear runs into this NPC
@@ -45,6 +77,18 @@ public class RegularNPC : MonoBehaviour {
 			audios[0].Play();
 		}
 	}
+
+
+	// player near vincinity to talk
+	void OnTriggerStay(Collider collider)
+  {
+    if(collider.CompareTag("Bear") && 
+    	 !bearScript.isDiscovered && 
+    	 Input.GetKeyDown("space"))
+    {
+    	print(dialogues[Random.Range(0, dialogues.Count)]);
+    }
+  }
 
 	// random walk this NPC
 	void Patrol()
