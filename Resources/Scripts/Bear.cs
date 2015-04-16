@@ -58,7 +58,6 @@ public class Bear : MonoBehaviour
 		yRotation = 0f;
     lastSuspicionTime = 0f;
 
-		Vector3 p = GetComponent<Transform>().position;
 		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
 		audios = GetComponents<AudioSource>();
     growl = audios[0];

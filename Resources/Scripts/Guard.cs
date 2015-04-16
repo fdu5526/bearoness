@@ -51,7 +51,7 @@ public class Guard : MonoBehaviour {
 	private void SetDetectionCirclePosition()
 	{
 		Vector3 v = GetComponent<Transform>().position;
-		float y = detectionCircle.GetComponent<Transform>().position.y;
+		float y = GetComponent<Transform>().position.y - 1.08f;
 		detectionCircle.GetComponent<Transform>().position = new Vector3(v.x, y, v.z);
 	}
 	
