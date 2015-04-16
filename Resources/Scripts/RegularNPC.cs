@@ -12,6 +12,11 @@ public class RegularNPC : MonoBehaviour {
 	private bool isFemale;
 	private List<string> dialogues;
 
+	// when guest is suspicious, and when to get back up after getting hit
+	private float prevSuspicionTime;
+	private const float suspicionCooldown = 0.5f;
+	private const float getUpTime = 2f;
+
 	// for patrolling
 	private float randomWalkCoodown;
 	private float prevStartWalkTime;
@@ -73,8 +78,15 @@ public class RegularNPC : MonoBehaviour {
 		// bear run into this NPC
 		if(collision.gameObject.name.Equals("Bear"))
 		{
-			bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
-			audios[0].Play();
+
+			// prevent rapid increase by tiny small run-intos with guests
+			if(Time.time - prevSuspicionTime > suspicionCooldown)
+			{
+				bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
+				audios[0].Play();
+				prevSuspicionTime = Time.time;
+			}
+			
 		}
 	}
 
@@ -141,7 +153,11 @@ public class RegularNPC : MonoBehaviour {
 		{
 			RunAway();
 		}
-		
 
+		// get back up after getting hit
+		if(Time.time - prevSuspicionTime > getUpTime)
+		{
+			GetComponent<Transform>().eulerAngles = Vector3.zero;
+		}
 	}
 }
