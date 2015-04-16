@@ -60,7 +60,6 @@ public class Bear : MonoBehaviour
 
 		Vector3 p = GetComponent<Transform>().position;
 		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
-		GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
 		audios = GetComponents<AudioSource>();
     growl = audios[0];
     run2 = audios[1];
@@ -88,7 +87,7 @@ public class Bear : MonoBehaviour
 			if(isOnTwoLegs)	// switch to 2 legs
 			{
 				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Transform>().position = new Vector3(p.x,84.8f,p.z);
+				GetComponent<Transform>().position = new Vector3(p.x,84.1f,p.z);
 
 				//TODO hack for demo, do not keep forever
 				Transform t = GetComponent<Transform>();
