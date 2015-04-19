@@ -8,12 +8,12 @@ public class GuardDetectionCircle : MonoBehaviour {
 	private Bear bearScript;
 
 	// how large detection circle normally is, then how much it expands by
-	private const float defaultDetectionDiameter = 3f;
-	private const float extraDetectionDiameter = 7f;
+	private const float defaultDetectionDiameter = 5f;
+	private const float extraDetectionDiameter = 15f;
 
 	// how much suspicion to increase per frame when player in circle
 	private const float twoLegSuspicionIncrease = 0.05f;
-	private const float fourLegSuspicionIncrease = 0.5f;
+	private const float fourLegSuspicionIncrease = 5.0f;
 
 	// Use this for initialization
 	void Start () 
