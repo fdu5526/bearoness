@@ -82,7 +82,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 404218}
   - 33: {fileID: 3332210}
-  - 65: {fileID: 6582708}
   - 23: {fileID: 2327152}
   - 54: {fileID: 5481974}
   m_Layer: 0
@@ -123,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 479.640015, y: 84.6999969, z: 576.580017}
+  m_LocalPosition: {x: 479.670013, y: 84.0500031, z: 576.210022}
   m_LocalScale: {x: 2.83535194, y: 2.44097567, z: 2.38429761}
   m_Children:
   - {fileID: 405126}
@@ -151,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.12785959, y: 0, z: -13.479867}
+  m_LocalPosition: {x: 7.17999983, y: 0, z: -13.4799995}
   m_LocalScale: {x: .27033174, y: 1, z: 1.91359687}
   m_Children: []
   m_Father: {fileID: 429196}
@@ -302,10 +301,10 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144844}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: .100000001
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -317,10 +316,10 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120438}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: .100000001
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -338,7 +337,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!59 &5955462
 HingeJoint:
@@ -350,10 +349,10 @@ HingeJoint:
   m_Anchor: {x: .5, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.677053034, y: .0819363296, z: .490947694}
+  m_ConnectedAnchor: {x: -.869927227, y: .0819363296, z: .491016984}
   m_UseSpring: 1
   m_Spring:
-    spring: 10
+    spring: 4
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -382,10 +381,10 @@ HingeJoint:
   m_Anchor: {x: -.5, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .918998957, y: .0819363296, z: 2.24363399}
+  m_ConnectedAnchor: {x: .918999135, y: .0819363296, z: 2.24363661}
   m_UseSpring: 1
   m_Spring:
-    spring: 10
+    spring: 4
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -416,18 +415,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .831645966, y: .877247512, z: .999999821}
   m_Center: {x: -.0111930165, y: .0613772161, z: 0}
---- !u!65 &6582708
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197670}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6588964
 BoxCollider:
   m_ObjectHideFlags: 1
