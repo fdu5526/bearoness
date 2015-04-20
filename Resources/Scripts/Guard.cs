@@ -7,6 +7,11 @@ public class Guard : MonoBehaviour {
 	private GameObject bear;
 	private Bear bearScript;
 
+	// way points
+	public GameObject[] waypoints;
+	private GameObject currentWaypoint;
+	private int currentIndex;
+
 	// the detection circle
 	private GameObject detectionCircle;
 
@@ -14,6 +19,10 @@ public class Guard : MonoBehaviour {
 	private float prevSuspicionTime;
 	private const float suspicionCooldown = 0.3f;
 	private const float getUpTime = 1f;
+
+	// movement
+	public float moveSpeed;
+	private float minDistance = 0.2f;
 
 	// how much a collision should increase suspicion by
 	private const float suspicionIncreaseUponCollision = 10f;
@@ -24,11 +33,24 @@ public class Guard : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		currentWaypoint = waypoints[0];
+		currentIndex = 0;
+
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
 
 		detectionCircle = Instantiate ((GameObject)(Resources.Load("Prefabs/GuardDetectionCircle")));
+	}
+
+
+	//waypoints courtesy of http://www.attiliocarotenuto.com/83-articles-tutorials/unity/292-unity-3-moving-a-npc-along-a-path
+	void MoveTowardWaypoint(){
+		Vector3 direction = currentWaypoint.transform.position - transform.position;
+		Vector3 moveVector = direction.normalized * moveSpeed * Time.deltaTime;
+		transform.position += moveVector;
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4 * Time.deltaTime);
+
 	}
 
 	// bear runs into this NPC
@@ -65,6 +87,16 @@ public class Guard : MonoBehaviour {
 		if(Time.time - prevSuspicionTime > getUpTime)
 		{
 			GetComponent<Transform>().eulerAngles = Vector3.zero;
+		}
+
+		MoveTowardWaypoint();
+
+		if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
+			currentIndex += 1;
+			if (currentIndex > waypoints.Length - 1){
+				currentIndex = 0;
+			}
+			currentWaypoint = waypoints [currentIndex];
 		}
 	}
 }
