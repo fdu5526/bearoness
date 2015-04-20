@@ -37,8 +37,8 @@ public class Bear : MonoBehaviour
   private float yRotation;
   
   // speed and force for 2 leg mode
-  private const float default2LegForce = 2f;
-  private const float max2LegWalkSpeed = 4f;
+  private const float default2LegForce = 5f;
+  private const float max2LegWalkSpeed = 5f;
     
   // how much player tilt during 2 leg mode
   private const float deltaTilt = 1f;
@@ -63,6 +63,9 @@ public class Bear : MonoBehaviour
     growl = audios[0];
     run2 = audios[1];
     run4 = audios[2];
+
+    // do not destroy this when we load levels
+    DontDestroyOnLoad(this);
 
 
 		//TODO hack for demo, do not keep forever

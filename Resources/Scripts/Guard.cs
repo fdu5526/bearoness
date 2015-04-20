@@ -34,6 +34,7 @@ public class Guard : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		// if this has waypoints, get waypoints
 		hasWayPoints = (waypoints != null && waypoints.Length > 0);
 		if(hasWayPoints)
 		{
