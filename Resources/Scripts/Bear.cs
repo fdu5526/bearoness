@@ -58,9 +58,7 @@ public class Bear : MonoBehaviour
 		yRotation = 0f;
     lastSuspicionTime = 0f;
 
-		Vector3 p = GetComponent<Transform>().position;
 		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
-		GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
 		audios = GetComponents<AudioSource>();
     growl = audios[0];
     run2 = audios[1];
@@ -79,7 +77,6 @@ public class Bear : MonoBehaviour
 	{ 
 		if(Input.GetKeyDown(KeyCode.LeftShift))
 		{
-
 			growl.Play();
 
 			isOnTwoLegs = !isOnTwoLegs;
@@ -89,7 +86,7 @@ public class Bear : MonoBehaviour
 			if(isOnTwoLegs)	// switch to 2 legs
 			{
 				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Transform>().position = new Vector3(p.x,84.8f,p.z);
+				GetComponent<Transform>().position = new Vector3(p.x,84.1f,p.z);
 
 				//TODO hack for demo, do not keep forever
 				Transform t = GetComponent<Transform>();
@@ -99,7 +96,7 @@ public class Bear : MonoBehaviour
 			else						// switch to 4 legs
 			{
 				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Transform>().position = new Vector3(p.x,84.5f,p.z);
+				GetComponent<Transform>().position = new Vector3(p.x,83.73f,p.z);
 
 				//TODO hack for demo, do not keep forever
 				Transform t = GetComponent<Transform>();
@@ -265,6 +262,9 @@ public class Bear : MonoBehaviour
 
 
 	
+
+
+
 	// Update is called once per frame
 	void Update () 
 	{
