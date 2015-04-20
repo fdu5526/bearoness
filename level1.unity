@@ -44,7 +44,7 @@ LevelGameManager:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -68,7 +68,8 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightmapSnapshot: {fileID: 112000000, guid: 20c93f59955dfd64bae68f6a0afb07fc,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
 NavMeshSettings:
@@ -5616,10 +5617,6 @@ Prefab:
     - target: {fileID: 486808, guid: 5fc3edc70bc94824db0d2a8d047539b4, type: 2}
       propertyPath: m_RootOrder
       value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 189902, guid: 5fc3edc70bc94824db0d2a8d047539b4, type: 2}
-      propertyPath: m_Name
-      value: CoatCloset
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fc3edc70bc94824db0d2a8d047539b4, type: 2}
