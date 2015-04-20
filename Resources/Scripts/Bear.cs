@@ -64,10 +64,6 @@ public class Bear : MonoBehaviour
     run2 = audios[1];
     run4 = audios[2];
 
-    // do not destroy this when we load levels
-    DontDestroyOnLoad(this);
-
-
 		//TODO hack for demo, do not keep forever
 		Transform t = GetComponent<Transform>();
 		t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -78,7 +74,7 @@ public class Bear : MonoBehaviour
   // if player changes movement mode, make appropriate adjustments
 	private void CheckLegsMode()
 	{ 
-		if(Input.GetKeyDown(KeyCode.LeftShift))
+		if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
 		{
 			growl.Play();
 

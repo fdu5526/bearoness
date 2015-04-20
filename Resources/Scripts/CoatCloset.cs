@@ -3,21 +3,14 @@ using System.Collections;
 
 public class CoatCloset : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-
+	// enter the coat closet, time to reset
 	void OnTriggerEnter(Collider collider)
 	{
 		if(collider.CompareTag("Bear"))
 		{
-			Application.LoadLevel ("level1");
+			string levelName = Application.loadedLevelName;
+			//levelName = levelName + "_reloaded";
+			Application.LoadLevel (levelName);
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
