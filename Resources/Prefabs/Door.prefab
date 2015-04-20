@@ -75,7 +75,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 446.73999, y: 84.3199997, z: 547.179993}
+  m_LocalPosition: {x: 446.5, y: 83.9899979, z: 547.630005}
   m_LocalScale: {x: 2.83535194, y: 2.44097567, z: 2.38429761}
   m_Children:
   - {fileID: 491696}
@@ -224,7 +224,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: .638417661, y: .00749986572, z: .486146808}
   m_UseSpring: 1
   m_Spring:
-    spring: 4
+    spring: 1
     damper: 0
     targetPosition: 0
   m_UseMotor: 0

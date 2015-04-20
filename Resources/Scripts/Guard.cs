@@ -11,6 +11,7 @@ public class Guard : MonoBehaviour {
 	public GameObject[] waypoints;
 	private GameObject currentWaypoint;
 	private int currentIndex;
+	private bool hasWayPoints;
 
 	// the detection circle
 	private GameObject detectionCircle;
@@ -33,8 +34,12 @@ public class Guard : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		currentWaypoint = waypoints[0];
-		currentIndex = 0;
+		hasWayPoints = (waypoints != null && waypoints.Length > 0);
+		if(hasWayPoints)
+		{
+			currentWaypoint = waypoints[0];
+			currentIndex = 0;
+		}
 
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
@@ -45,7 +50,8 @@ public class Guard : MonoBehaviour {
 
 
 	//waypoints courtesy of http://www.attiliocarotenuto.com/83-articles-tutorials/unity/292-unity-3-moving-a-npc-along-a-path
-	void MoveTowardWaypoint(){
+	void MoveTowardWaypoint()
+	{
 		Vector3 direction = currentWaypoint.transform.position - transform.position;
 		Vector3 moveVector = direction.normalized * moveSpeed * Time.deltaTime;
 		transform.position += moveVector;
@@ -88,15 +94,17 @@ public class Guard : MonoBehaviour {
 		{
 			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
+		if(hasWayPoints)
+		{
+			MoveTowardWaypoint();
 
-		MoveTowardWaypoint();
-
-		if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
-			currentIndex += 1;
-			if (currentIndex > waypoints.Length - 1){
-				currentIndex = 0;
+			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
+				currentIndex += 1;
+				if (currentIndex > waypoints.Length - 1){
+					currentIndex = 0;
+				}
+				currentWaypoint = waypoints [currentIndex];
 			}
-			currentWaypoint = waypoints [currentIndex];
 		}
 	}
 }
