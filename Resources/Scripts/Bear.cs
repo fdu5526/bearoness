@@ -251,8 +251,12 @@ public class Bear : MonoBehaviour
         run2.Play();
       }*/
       if (!isOnTwoLegs && (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))){
-        run4.loop = true;
-        run4.Play();
+        
+        if(!run4.loop)
+        {
+          run4.loop = true;
+          run4.Play();
+        }
       }
       else if (isOnTwoLegs || (Input.GetKey("w") == false && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false)){
         run4.loop = false;
