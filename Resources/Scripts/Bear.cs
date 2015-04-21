@@ -32,6 +32,10 @@ public class Bear : MonoBehaviour
   private const float deltaSuspicion = 0.05f;
   private float lastSuspicionTime;
 
+  // the actual bear model, and the 2 colliders
+  private GameObject bearModel;
+  private Collider fourLegsCollider, twoLegsCollider;
+
   // speed of 4 legs mode, and which direction player is facing
   private const float default4LegWalkSpeed = 10f;
   private float yRotation;
@@ -62,6 +66,13 @@ public class Bear : MonoBehaviour
     growl = audios[0];
     run2 = audios[1];
     run4 = audios[2];
+
+    bearModel = GetComponent<Transform>().Find("BearModel").gameObject;
+    fourLegsCollider = GetComponents<Collider>()[0];
+    twoLegsCollider = GetComponents<Collider>()[1];
+    twoLegsCollider.enabled = false;
+
+
 	}
 
 
@@ -73,12 +84,11 @@ public class Bear : MonoBehaviour
 			growl.Play();
 
 			isOnTwoLegs = !isOnTwoLegs;
-      GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
+      bearModel.GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
+      twoLegsCollider.enabled = isOnTwoLegs;
+      fourLegsCollider.enabled = !isOnTwoLegs;
 
     	GetComponent<Rigidbody>().velocity = Vector3.zero;
-    	Vector3 p = GetComponent<Transform>().position;
-
-			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
 	}
 
@@ -99,10 +109,10 @@ public class Bear : MonoBehaviour
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
       	}
-      	if(zRotation - deltaTilt > 360f - maxTilt || zRotation < 360f - maxTilt - deltaTilt)	// limit tilt
-      	{
-          zRotation -= deltaTilt;
-      	}
+      	if(xRotation - deltaTilt > 360f - maxTilt || xRotation < 360f - maxTilt - deltaTilt) // limit tilt
+        {
+          xRotation -= deltaTilt;
+        }
     	}
     	else if(Input.GetKey("s"))
     	{
@@ -110,10 +120,11 @@ public class Bear : MonoBehaviour
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
       	}
-      	if(zRotation + deltaTilt < maxTilt || zRotation > maxTilt + deltaTilt)	// limit tilt
-      	{
-          zRotation += deltaTilt;
-      	}
+      	if(xRotation + deltaTilt < maxTilt || xRotation > maxTilt + deltaTilt) // limit tilt
+        {
+          xRotation += deltaTilt;
+          
+        }
     	}
 
     	if(Input.GetKey("a"))
@@ -122,11 +133,11 @@ public class Bear : MonoBehaviour
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
       	}
-      	if(xRotation + deltaTilt < maxTilt || xRotation > maxTilt + deltaTilt)	// limit tilt
-      	{
-          xRotation += deltaTilt;
-      		
-      	}
+        if(zRotation + deltaTilt < maxTilt || zRotation > maxTilt + deltaTilt)  // limit tilt
+        {
+          zRotation += deltaTilt;
+        }
+      	
     	}
     	else if(Input.GetKey("d"))
     	{ 
@@ -134,19 +145,24 @@ public class Bear : MonoBehaviour
       	{
       		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
       	}
-      	if(xRotation - deltaTilt > 360f - maxTilt || xRotation < 360f - maxTilt - deltaTilt)	// limit tilt
-      	{
-          xRotation -= deltaTilt;
-      	}
+        if(zRotation - deltaTilt > 360f - maxTilt || zRotation < 360f - maxTilt - deltaTilt)  // limit tilt
+        {
+          zRotation -= deltaTilt;
+        }
+      	
     	}
 
       // get which direction player is facing
       v = GetComponent<Rigidbody>().velocity;
-      float yRotation = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(1f,0f));
-      yRotation = v.z > 0f ? -yRotation : yRotation;
+      yRotation = r.y;
+      if(v.magnitude > 0.1f)  // prevent crazy bounce due to small velocity changes
+      {
+        yRotation = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(0f,1f));
+        yRotation = v.x > 0f ? yRotation : -yRotation;
+      }
 
       // perform actual rotation
-      //GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
+      GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
 		}
 		else							// four legs movement
 		{
@@ -218,11 +234,12 @@ public class Bear : MonoBehaviour
       
 
     	// rotate bear towards correct direction
-    	GetComponent<Transform>().eulerAngles = new Vector3(0f,yRotation,0f);
+    	GetComponent<Transform>().eulerAngles = new Vector3(90f,yRotation,0f);
 		}
 	}
 
-    void stepCheck(){
+    // play stepping sounds when moving
+    void StepSounds(){
       /*if (isOnTwoLegs && (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))){
 
         run2.loop = true;
@@ -252,7 +269,7 @@ public class Bear : MonoBehaviour
 	{
 		CheckLegsMode();
 		CheckMovement();
-    stepCheck();
+    StepSounds();
 
     // lose suspicion if doing nothing suspicious for a while
     if(!isDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
