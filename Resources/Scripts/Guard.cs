@@ -9,9 +9,12 @@ public class Guard : MonoBehaviour {
 
 	// way points
 	public GameObject[] waypoints;
+	public GameObject[] suspWaypoints;
 	private GameObject currentWaypoint;
 	private int currentIndex;
+	private int counter;
 	private bool hasWayPoints;
+	private bool isSuspicious;
 
 	// the detection circle
 	private GameObject detectionCircle;
@@ -34,6 +37,8 @@ public class Guard : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		isSuspicious = false;
+		counter = 0;
 		// if this has waypoints, get waypoints
 		hasWayPoints = (waypoints != null && waypoints.Length > 0);
 		if(hasWayPoints)
@@ -56,8 +61,26 @@ public class Guard : MonoBehaviour {
 		Vector3 direction = currentWaypoint.transform.position - transform.position;
 		Vector3 moveVector = direction.normalized * moveSpeed * Time.deltaTime;
 		transform.position += moveVector;
-		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4 * Time.deltaTime);
+		//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4 * Time.deltaTime);
 
+	}
+
+	void changeWaypoints()
+	{
+		if (isSuspicious = true && counter == 0){
+			waypoints = suspWaypoints;
+			currentWaypoint = waypoints[0];
+			currentIndex = 0;
+			counter += 1;
+		}
+	}
+
+	void checkSuspicion()
+	{
+		if (bearScript.suspicionPercent >= 90f){
+			isSuspicious = true;
+			changeWaypoints();
+		}
 	}
 
 	// bear runs into this NPC
@@ -88,6 +111,7 @@ public class Guard : MonoBehaviour {
 	void Update () 
 	{
 		SetDetectionCirclePosition();
+		checkSuspicion();
 		
 
 		// get back up after getting hit
@@ -95,8 +119,18 @@ public class Guard : MonoBehaviour {
 		{
 			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
-		if(hasWayPoints)
+
+		if(counter >= 1)
 		{
+			MoveTowardWaypoint();
+
+			if ((Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) && (currentIndex < waypoints.Length -1)) {
+				currentIndex += 1;
+				currentWaypoint = waypoints [currentIndex];
+			}
+		}
+		else{
+
 			MoveTowardWaypoint();
 
 			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
@@ -105,7 +139,8 @@ public class Guard : MonoBehaviour {
 					currentIndex = 0;
 				}
 				currentWaypoint = waypoints [currentIndex];
-			}
 		}
+
 	}
+}
 }

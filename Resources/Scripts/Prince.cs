@@ -15,6 +15,17 @@ public class Prince : MonoBehaviour {
 	private const float minStopTime = 0.3f;
 	private const float maxStopTime = 2f;
 
+	//waypoints
+	public GameObject[] waypoints;
+	private GameObject currentWaypoint;
+	private int currentIndex;
+	private bool hasWayPoints;
+
+	//dance speed
+	public int moveSpeed;
+	private float minDistance = 0.2f;
+
+
 	// for when player is too suspicious
 	private const float runAwaySpeed = 20f;
 
@@ -33,6 +44,14 @@ public class Prince : MonoBehaviour {
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
+
+		// if this has waypoints, get waypoints
+		hasWayPoints = (waypoints != null && waypoints.Length > 0);
+		if(hasWayPoints)
+		{
+			currentWaypoint = waypoints[0];
+			currentIndex = 0;
+		}
 	}
 
 	// bear runs into this NPC
@@ -46,30 +65,15 @@ public class Prince : MonoBehaviour {
 		}
 	}
 
-	// random walk this NPC
-	void Patrol()
+	void MoveTowardWaypoint()
 	{
-		// patrol cooldown
-		if(Time.time - prevStartWalkTime > randomWalkCoodown)
-		{
-			// reset cooldown
-			randomWalkCoodown = Random.Range(minStopTime, maxStopTime);
-			prevStartWalkTime = Time.time;
+		Vector3 direction = currentWaypoint.transform.position - transform.position;
+		Vector3 moveVector = direction.normalized * moveSpeed * Time.deltaTime;
+		transform.position += moveVector;
+		//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4 * Time.deltaTime);
 
-			// if stopped, walk. If walking, stop
-			if(isStopped)
-			{
-				GetComponent<Rigidbody>().velocity = Vector3.zero;
-			}
-			else
-			{
-				float x = Random.Range(-maxSpeed,maxSpeed);
-				float z = Random.Range(-maxSpeed,maxSpeed);
-				GetComponent<Rigidbody>().velocity = new Vector3(x,0f,z);
-			}
-			isStopped = !isStopped;
-		}
 	}
+
 
 	// there is a bear in the room omg run away ahhhhhhhhhhhhhhhhh
 	void RunAway()
@@ -91,7 +95,15 @@ public class Prince : MonoBehaviour {
 	{	
 		if(!bearScript.isDiscovered)	// random walk if there is no bear
 		{
-			//Patrol();
+			MoveTowardWaypoint();
+
+			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
+				currentIndex += 1;
+				if (currentIndex > waypoints.Length - 1){
+					currentIndex = 0;
+				}
+				currentWaypoint = waypoints [currentIndex];
+			}
 		}
 		else					// run away if there is a bear
 		{
