@@ -58,16 +58,10 @@ public class Bear : MonoBehaviour
 		yRotation = 0f;
     lastSuspicionTime = 0f;
 
-		GetComponent<Transform>().eulerAngles = new Vector3(0f,-90f,0f);
 		audios = GetComponents<AudioSource>();
     growl = audios[0];
     run2 = audios[1];
     run4 = audios[2];
-
-		//TODO hack for demo, do not keep forever
-		Transform t = GetComponent<Transform>();
-		t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
-		t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
 	}
 
 
@@ -79,29 +73,12 @@ public class Bear : MonoBehaviour
 			growl.Play();
 
 			isOnTwoLegs = !isOnTwoLegs;
+      GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
+
     	GetComponent<Rigidbody>().velocity = Vector3.zero;
     	Vector3 p = GetComponent<Transform>().position;
 
-			if(isOnTwoLegs)	// switch to 2 legs
-			{
-				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Transform>().position = new Vector3(p.x,84.1f,p.z);
-
-				//TODO hack for demo, do not keep forever
-				Transform t = GetComponent<Transform>();
-				t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
-				t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
-			}
-			else						// switch to 4 legs
-			{
-				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Transform>().position = new Vector3(p.x,83.73f,p.z);
-
-				//TODO hack for demo, do not keep forever
-				Transform t = GetComponent<Transform>();
-				t.Find("bear2LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = false;
-				t.Find("bear4LegPlaceholder").gameObject.GetComponent<MeshRenderer>().enabled = true;
-			}
+			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
 	}
 
@@ -118,9 +95,9 @@ public class Bear : MonoBehaviour
 
 			if(Input.GetKey("w"))
     	{
-      	if(v.x < max2LegWalkSpeed)	// limit walk speed
+      	if(v.z < max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
       	}
       	if(zRotation - deltaTilt > 360f - maxTilt || zRotation < 360f - maxTilt - deltaTilt)	// limit tilt
       	{
@@ -129,9 +106,9 @@ public class Bear : MonoBehaviour
     	}
     	else if(Input.GetKey("s"))
     	{
-    		if(v.x > -max2LegWalkSpeed)	// limit walk speed
+    		if(v.z > -max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
       	}
       	if(zRotation + deltaTilt < maxTilt || zRotation > maxTilt + deltaTilt)	// limit tilt
       	{
@@ -141,9 +118,9 @@ public class Bear : MonoBehaviour
 
     	if(Input.GetKey("a"))
     	{ 
-    		if(v.z < max2LegWalkSpeed)	// limit walk speed
+    		if(v.x > -max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
       	}
       	if(xRotation + deltaTilt < maxTilt || xRotation > maxTilt + deltaTilt)	// limit tilt
       	{
@@ -153,9 +130,9 @@ public class Bear : MonoBehaviour
     	}
     	else if(Input.GetKey("d"))
     	{ 
-      	if(v.z > -max2LegWalkSpeed)	// limit walk speed
+      	if(v.x < max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
       	}
       	if(xRotation - deltaTilt > 360f - maxTilt || xRotation < 360f - maxTilt - deltaTilt)	// limit tilt
       	{
@@ -169,7 +146,7 @@ public class Bear : MonoBehaviour
       yRotation = v.z > 0f ? -yRotation : yRotation;
 
       // perform actual rotation
-      GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
+      //GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
 		}
 		else							// four legs movement
 		{
@@ -178,25 +155,26 @@ public class Bear : MonoBehaviour
 			// up down movement
 			if(Input.GetKey("w"))
     	{
-      	GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed, v.y, v.z);
+      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, default4LegWalkSpeed);
       	yRotation = 0f;
     	}
     	else if(Input.GetKey("s"))
     	{
-      	GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed, v.y, v.z);
+      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, -default4LegWalkSpeed);
       	yRotation = 180f;
     	}
     	else
     	{
-    		GetComponent<Rigidbody>().velocity = new Vector3(0f, v.y, v.z);
+    		GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, 0f);
     		isMovingForwardOrBackward = false;
     	}
 
+      
     	// left right movement
   		v = GetComponent<Rigidbody>().velocity;
     	if(Input.GetKey("a"))
     	{ 
-      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, default4LegWalkSpeed);
+        GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed, v.y, v.z);
       	if(isMovingForwardOrBackward)
       	{
       		if(yRotation == 0f)
@@ -215,7 +193,8 @@ public class Bear : MonoBehaviour
     	}
     	else if(Input.GetKey("d"))
     	{ 
-      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, -default4LegWalkSpeed);
+      	
+        GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed, v.y, v.z);
       	if(isMovingForwardOrBackward)
       	{
       		if(yRotation == 0f)
@@ -234,12 +213,12 @@ public class Bear : MonoBehaviour
     	}
     	else
     	{ 
-      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, 0f);
+      	GetComponent<Rigidbody>().velocity = new Vector3(0f, v.y, v.z);
     	}
+      
 
     	// rotate bear towards correct direction
-      // TODO fix this when real bear model added
-    	GetComponent<Transform>().eulerAngles = new Vector3(0f,yRotation,90f);
+    	GetComponent<Transform>().eulerAngles = new Vector3(0f,yRotation,0f);
 		}
 	}
 

@@ -95,6 +95,7 @@ public class Guard : MonoBehaviour {
 		{
 			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
+		
 		if(hasWayPoints)
 		{
 			MoveTowardWaypoint();
