@@ -32,21 +32,20 @@ public class Bear : MonoBehaviour
   private const float deltaSuspicion = 0.05f;
   private float lastSuspicionTime;
 
-  // the actual bear model, and the 2 colliders
+  // the actual bear model
   private GameObject bearModel;
-  private Collider fourLegsCollider, twoLegsCollider;
 
   // speed of 4 legs mode, and which direction player is facing
   private const float default4LegWalkSpeed = 10f;
   private float yRotation;
   
   // speed and force for 2 leg mode
-  private const float default2LegForce = 5f;
-  private const float max2LegWalkSpeed = 5f;
+  private const float default2LegForce = 10f;
+  private const float max2LegWalkSpeed = 7f;
     
   // how much player tilt during 2 leg mode
   private const float deltaTilt = 1f;
-  private const float maxTilt = 40f;
+  private const float maxTilt = 30f;
 
   // audios
   private AudioSource[] audios;
@@ -68,9 +67,6 @@ public class Bear : MonoBehaviour
     run4 = audios[2];
 
     bearModel = GetComponent<Transform>().Find("BearModel").gameObject;
-    fourLegsCollider = GetComponents<Collider>()[0];
-    twoLegsCollider = GetComponents<Collider>()[1];
-    twoLegsCollider.enabled = false;
 
 
 	}
@@ -85,8 +81,13 @@ public class Bear : MonoBehaviour
 
 			isOnTwoLegs = !isOnTwoLegs;
       bearModel.GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
-      twoLegsCollider.enabled = isOnTwoLegs;
-      fourLegsCollider.enabled = !isOnTwoLegs;
+      GetComponent<Collider>().enabled = !isOnTwoLegs;
+      bearModel.GetComponent<Collider>().enabled = isOnTwoLegs;
+
+      if(!isOnTwoLegs)
+      {
+        bearModel.GetComponent<Transform>().localEulerAngles = new Vector3(270f, 0f, 0f);
+      }
 
     	GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
@@ -99,7 +100,7 @@ public class Bear : MonoBehaviour
 
 		if(isOnTwoLegs)		// two legs movement
 		{
-			Vector3 r = GetComponent<Transform>().eulerAngles;
+			Vector3 r = bearModel.GetComponent<Transform>().eulerAngles;
       float xRotation = r.x;
       float zRotation = r.z;
 
@@ -155,14 +156,14 @@ public class Bear : MonoBehaviour
       // get which direction player is facing
       v = GetComponent<Rigidbody>().velocity;
       yRotation = r.y;
-      if(v.magnitude > 0.1f)  // prevent crazy bounce due to small velocity changes
+      if(v.magnitude > 1f)  // prevent crazy bounce due to small velocity changes
       {
         yRotation = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(0f,1f));
         yRotation = v.x > 0f ? yRotation : -yRotation;
       }
 
       // perform actual rotation
-      GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
+      bearModel.GetComponent<Transform>().eulerAngles = new Vector3(xRotation, yRotation, zRotation);
 		}
 		else							// four legs movement
 		{
