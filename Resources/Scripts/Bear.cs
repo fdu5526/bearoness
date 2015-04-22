@@ -249,7 +249,8 @@ public class Bear : MonoBehaviour
 	}
 
     // play stepping sounds when moving
-    void StepSounds(){
+    void StepSounds()
+    {
       if (isOnTwoLegs && isWalking)
       {
         /*
