@@ -15,6 +15,7 @@ public class Guard : MonoBehaviour {
 	private int counter;
 	private bool hasWayPoints;
 	private bool isSuspicious;
+	private bool isLocked;
 
 	// the detection circle
 	private GameObject detectionCircle;
@@ -114,12 +115,20 @@ public class Guard : MonoBehaviour {
 		float y = GetComponent<Transform>().position.y - 1.08f;
 		detectionCircle.GetComponent<Transform>().position = new Vector3(v.x, y, v.z);
 	}
+
+	private void checkLock(){
+		if (isLocked){
+			Vector3 temp = transform.position;
+			transform.position = temp;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		SetDetectionCirclePosition();
 		checkSuspicion();
+		checkLock();
 		
 
 		// get back up after getting hit
@@ -136,6 +145,9 @@ public class Guard : MonoBehaviour {
 				currentIndex += 1;
 				currentWaypoint = waypoints [currentIndex];
 			}
+			else if (currentIndex == waypoints.Length - 1){
+				isLocked = true;
+			}
 		}
 		else if (hasWayPoints)
 		{
@@ -148,6 +160,8 @@ public class Guard : MonoBehaviour {
 				}
 				currentWaypoint = waypoints [currentIndex];
 		}
+
+
 
 	}
 }
