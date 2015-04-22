@@ -67,17 +67,25 @@ public class Guard : MonoBehaviour {
 
 	void changeWaypoints()
 	{
-		if (isSuspicious = true && counter == 0){
+		if (isSuspicious = true && counter == 0)
+		{
 			waypoints = suspWaypoints;
-			currentWaypoint = waypoints[0];
-			currentIndex = 0;
-			counter += 1;
+			
+			hasWayPoints = (waypoints != null && waypoints.Length > 0);
+
+			if(hasWayPoints)
+			{
+				currentWaypoint = waypoints[0];
+				currentIndex = 0;
+				counter += 1;
+			}
 		}
 	}
 
 	void checkSuspicion()
 	{
-		if (bearScript.suspicionPercent >= 90f){
+		if (bearScript.suspicionPercent >= 90f)
+		{
 			isSuspicious = true;
 			changeWaypoints();
 		}
@@ -120,7 +128,7 @@ public class Guard : MonoBehaviour {
 			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
 
-		if(counter >= 1)
+		if(counter >= 1 && hasWayPoints)
 		{
 			MoveTowardWaypoint();
 
@@ -129,8 +137,8 @@ public class Guard : MonoBehaviour {
 				currentWaypoint = waypoints [currentIndex];
 			}
 		}
-		else{
-
+		else if (hasWayPoints)
+		{
 			MoveTowardWaypoint();
 
 			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
