@@ -35,6 +35,8 @@ public class Bear : MonoBehaviour
   // the actual bear model
   private GameObject bearModel;
 
+  private bool isWalking;
+
   // speed of 4 legs mode, and which direction player is facing
   private const float default4LegWalkSpeed = 10f;
   private float yRotation;
@@ -97,6 +99,7 @@ public class Bear : MonoBehaviour
 	private void CheckMovement()
 	{
 		Vector3 v = GetComponent<Rigidbody>().velocity;
+    isWalking = false;
 
 		if(isOnTwoLegs)		// two legs movement
 		{
@@ -114,6 +117,7 @@ public class Bear : MonoBehaviour
         {
           xRotation -= deltaTilt;
         }
+        isWalking = true;
     	}
     	else if(Input.GetKey("s"))
     	{
@@ -124,8 +128,8 @@ public class Bear : MonoBehaviour
       	if(xRotation + deltaTilt < maxTilt || xRotation > maxTilt + deltaTilt) // limit tilt
         {
           xRotation += deltaTilt;
-          
         }
+        isWalking = true;
     	}
 
     	if(Input.GetKey("a"))
@@ -138,6 +142,7 @@ public class Bear : MonoBehaviour
         {
           zRotation += deltaTilt;
         }
+        isWalking = true;
       	
     	}
     	else if(Input.GetKey("d"))
@@ -150,7 +155,7 @@ public class Bear : MonoBehaviour
         {
           zRotation -= deltaTilt;
         }
-      	
+      	isWalking = true;
     	}
 
       // get which direction player is facing
@@ -174,11 +179,13 @@ public class Bear : MonoBehaviour
     	{
       	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, default4LegWalkSpeed);
       	yRotation = 0f;
+        isWalking = true;
     	}
     	else if(Input.GetKey("s"))
     	{
       	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, -default4LegWalkSpeed);
       	yRotation = 180f;
+        isWalking = true;
     	}
     	else
     	{
@@ -207,6 +214,7 @@ public class Bear : MonoBehaviour
       	{
       		yRotation = 270f;
       	}
+        isWalking = true;
     	}
     	else if(Input.GetKey("d"))
     	{ 
@@ -227,6 +235,7 @@ public class Bear : MonoBehaviour
       	{
       		yRotation = 90f;
       	}
+        isWalking = true;
     	}
     	else
     	{ 
@@ -241,22 +250,33 @@ public class Bear : MonoBehaviour
 
     // play stepping sounds when moving
     void StepSounds(){
-      /*if (isOnTwoLegs && (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))){
-
-        run2.loop = true;
-        run2.Play();
-      }*/
-      if (!isOnTwoLegs && (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))){
+      if (isOnTwoLegs && isWalking)
+      {
+        /*
+        if(!run2.loop)
+        {
+          run2.loop = true;
+          run2.Play();
+          run4.loop = false;
+        }
+        */
+        run4.loop = false;
+        
+      }
+      if (!isOnTwoLegs && isWalking)
+      {
         
         if(!run4.loop)
         {
           run4.loop = true;
           run4.Play();
+          //run2.loop = false;
         }
       }
-      else if (isOnTwoLegs || (Input.GetKey("w") == false && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false)){
+      if(!isWalking)
+      {
+        //run2.loop = false;
         run4.loop = false;
-
       }
     }
 
@@ -271,6 +291,8 @@ public class Bear : MonoBehaviour
 		CheckLegsMode();
 		CheckMovement();
     StepSounds();
+
+    bearModel.GetComponent<Animator>().SetBool("isFourlegsRunning", isWalking && !isOnTwoLegs);
 
     // lose suspicion if doing nothing suspicious for a while
     if(!isDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
