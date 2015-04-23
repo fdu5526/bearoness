@@ -21,11 +21,8 @@ public class Prince : MonoBehaviour {
 	private int currentIndex;
 	private bool hasWayPoints;
 
-	//dance radius
-	private GameObject danceCircle;
-
 	//dance speed
-	public float moveSpeed;
+	public int moveSpeed;
 	private float minDistance = 0.2f;
 
 
@@ -55,8 +52,6 @@ public class Prince : MonoBehaviour {
 			currentWaypoint = waypoints[0];
 			currentIndex = 0;
 		}
-
-		danceCircle = Instantiate ((GameObject)(Resources.Load("Prefabs/danceCircle")));
 	}
 
 	// bear runs into this NPC
@@ -79,14 +74,6 @@ public class Prince : MonoBehaviour {
 
 	}
 
-	// put the detection circle where the guard is
-	private void SetDanceCirclePosition()
-	{
-		Vector3 v = GetComponent<Transform>().position;
-		float y = GetComponent<Transform>().position.y - 1.08f;
-		danceCircle.GetComponent<Transform>().position = new Vector3(v.x, y, v.z);
-	}
-
 
 	// there is a bear in the room omg run away ahhhhhhhhhhhhhhhhh
 	void RunAway()
@@ -106,8 +93,7 @@ public class Prince : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
-		SetDanceCirclePosition();
-		if(!bearScript.isDiscovered)	// do ur dance gurl
+		if(!bearScript.isDiscovered)	// random walk if there is no bear
 		{
 			MoveTowardWaypoint();
 
