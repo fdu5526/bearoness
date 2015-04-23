@@ -112,7 +112,7 @@ public class Bear : MonoBehaviour
     	{
       	if(v.z < max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, default2LegForce));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, default2LegForce));
       	}
       	if(xRotation - deltaTilt > 360f - maxTilt || xRotation < 360f - maxTilt - deltaTilt) // limit tilt
         {
@@ -124,7 +124,7 @@ public class Bear : MonoBehaviour
     	{
     		if(v.z > -max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, -default2LegForce));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, -default2LegForce));
       	}
       	if(xRotation + deltaTilt < maxTilt || xRotation > maxTilt + deltaTilt) // limit tilt
         {
@@ -137,7 +137,7 @@ public class Bear : MonoBehaviour
     	{ 
     		if(v.x > -max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, 0f));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(-default2LegForce, 0f, default2LegForce));
       	}
         if(zRotation + deltaTilt < maxTilt || zRotation > maxTilt + deltaTilt)  // limit tilt
         {
@@ -150,7 +150,7 @@ public class Bear : MonoBehaviour
     	{ 
       	if(v.x < max2LegWalkSpeed)	// limit walk speed
       	{
-      		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, 0f));
+      		GetComponent<Rigidbody>().AddForce(new Vector3(default2LegForce, 0f, -default2LegForce));
       	}
         if(zRotation - deltaTilt > 360f - maxTilt || zRotation < 360f - maxTilt - deltaTilt)  // limit tilt
         {
