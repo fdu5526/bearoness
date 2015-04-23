@@ -16,10 +16,10 @@ public class SuspiciousArea : MonoBehaviour {
 	}
 
 
-	// stay in the suspicion area, increase suspicion
+	// stay in the suspicion area on 4 legs, increase suspicion
 	void OnTriggerStay(Collider collider)
 	{
-		if(collider.CompareTag("Bear"))
+		if(collider.CompareTag("Bear") && !bearScript.isOnTwoLegs)
 		{
 			bearScript.IncreaseSuspicion(suspicionIncreaseCount);
 		}
