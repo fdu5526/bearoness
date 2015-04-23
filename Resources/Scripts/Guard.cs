@@ -11,10 +11,14 @@ public class Guard : MonoBehaviour {
 	public GameObject[] waypoints;
 	public GameObject[] suspWaypoints;
 	private GameObject currentWaypoint;
+	private Vector3 currentPosition;
 	private int currentIndex;
 	private int counter;
 	private bool hasWayPoints;
 	private bool isSuspicious;
+
+	//rigidbody
+	private Rigidbody rb;
 
 	// the detection circle
 	private GameObject detectionCircle;
@@ -37,6 +41,7 @@ public class Guard : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		rb = GetComponent<Rigidbody>();
 		isSuspicious = false;
 		counter = 0;
 		// if this has waypoints, get waypoints
@@ -60,9 +65,9 @@ public class Guard : MonoBehaviour {
 	{
 		if(currentWaypoint == null)
 			return;
-		Vector3 direction = currentWaypoint.transform.position - transform.position;
+		Vector3 direction = currentWaypoint.transform.position - this.transform.position;
 		Vector3 moveVector = direction.normalized * moveSpeed * Time.deltaTime;
-		transform.position += moveVector;
+		this.transform.position += moveVector;
 		//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4 * Time.deltaTime);
 
 	}
@@ -133,13 +138,23 @@ public class Guard : MonoBehaviour {
 		{
 			MoveTowardWaypoint();
 
-			if ((Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) && (currentIndex < waypoints.Length -1)) {
-				currentIndex += 1;
-				currentWaypoint = waypoints [currentIndex];
+			if ((Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) && (currentIndex <= (waypoints.Length -1))) {
+				if (currentIndex >= (waypoints.Length - 1)){
+					Debug.Log("last waypoint!");
+					rb.velocity = new Vector3(0,0,0);
+					Debug.Log("fuk my dude stop");
+				}
+
+				else{
+					currentIndex += 1;
+					currentWaypoint = waypoints [currentIndex];
+				}
 			}
-		}
-		else if (hasWayPoints)
+		}	
+
+		else if (counter == 0 && hasWayPoints)
 		{
+
 			MoveTowardWaypoint();
 
 			if (currentWaypoint != null && Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) 
