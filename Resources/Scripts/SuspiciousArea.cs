@@ -16,7 +16,7 @@ public class SuspiciousArea : MonoBehaviour {
 	}
 
 
-	// enter the coat closet, time to reset
+	// stay in the suspicion area, increase suspicion
 	void OnTriggerStay(Collider collider)
 	{
 		if(collider.CompareTag("Bear"))
