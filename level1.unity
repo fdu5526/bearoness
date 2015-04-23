@@ -5218,22 +5218,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1844845557 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 165612, guid: c43a80da171c1d948b7d2c42de4fdfba, type: 2}
-  m_PrefabInternal: {fileID: 1367247807}
---- !u!64 &1844845561
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1844845557}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300004, guid: 0e604c204429f7747bb65b29a49f690a, type: 3}
 --- !u!1001 &1925166415
 Prefab:
   m_ObjectHideFlags: 0
