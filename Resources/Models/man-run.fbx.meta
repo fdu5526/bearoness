@@ -76,7 +76,85 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform2
+        weight: 1
+      - path: pCube2
+        weight: 1
+      - path: pCube2/transform1
+        weight: 1
+      - path: polySurface1
+        weight: 1
+      - path: waist
+        weight: 1
+      - path: waist/spine
+        weight: 1
+      - path: waist/spine/head
+        weight: 1
+      - path: waist/spine/head/neck
+        weight: 1
+      - path: waist/spine/head/shoulder_L
+        weight: 1
+      - path: waist/spine/head/shoulder_L/elbow_L
+        weight: 1
+      - path: waist/spine/head/shoulder_L/elbow_L/wrist_L
+        weight: 1
+      - path: waist/spine/head/shoulder_L/elbow_L/wrist_L/wrist_Lq
+        weight: 1
+      - path: waist/spine/head/shoulder_R
+        weight: 1
+      - path: waist/spine/head/shoulder_R/elbow_R
+        weight: 1
+      - path: waist/spine/head/shoulder_R/elbow_R/wrist_R
+        weight: 1
+      - path: waist/spine/head/shoulder_R/elbow_R/wrist_R/wrist_Rq
+        weight: 1
+      - path: waist/thigh_L
+        weight: 1
+      - path: waist/thigh_L/knee_L
+        weight: 1
+      - path: waist/thigh_L/knee_L/ankle_L
+        weight: 1
+      - path: waist/thigh_L/knee_L/ankle_L/foot_L
+        weight: 1
+      - path: waist/thigh_R
+        weight: 1
+      - path: waist/thigh_R/knee_R
+        weight: 1
+      - path: waist/thigh_R/knee_R/ankle_R
+        weight: 1
+      - path: waist/thigh_R/knee_R/ankle_R/foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

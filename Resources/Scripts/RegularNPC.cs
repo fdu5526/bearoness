@@ -53,7 +53,7 @@ public class RegularNPC : MonoBehaviour {
 
 		LoadDialogues();
 
-		GetComponent<Rigidbody>().centerOfMass = new Vector3(0f,-1.5f,0f);
+		GetComponent<Rigidbody>().centerOfMass = new Vector3(0f,-1f,0f);
 		model = GetComponent<Transform>().Find("model").gameObject;
 	}
 
@@ -129,7 +129,7 @@ public class RegularNPC : MonoBehaviour {
 			{
 				velocity = Vector3.zero;
 				Vector3 r = GetComponent<Transform>().eulerAngles;
-				GetComponent<Transform>().eulerAngles = new Vector3(0f, r.y, 0f);
+				GetComponent<Transform>().localEulerAngles = new Vector3(0f, r.y, 0f);
 				model.GetComponent<Animator>().SetInteger("walkState",0);
 			}
 			else
@@ -139,7 +139,7 @@ public class RegularNPC : MonoBehaviour {
 				velocity = new Vector3(x,0f,z);
 				float yRotation = Vector2.Angle(new Vector2(x, z), new Vector2(0f,1f));
         yRotation = x > 0f ? yRotation : -yRotation;
-        GetComponent<Transform>().eulerAngles = new Vector3(0f, yRotation, 0f);
+        GetComponent<Transform>().localEulerAngles = new Vector3(0f, yRotation, 0f);
         model.GetComponent<Animator>().SetInteger("walkState",1);
 			}
 			isStopped = !isStopped;
@@ -174,11 +174,10 @@ public class RegularNPC : MonoBehaviour {
 			// if down, get up
 			if(!isUp)
 			{
-				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;	
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
-				isUp = true;
 				model.GetComponent<Animator>().SetInteger("walkState",0);
+				isUp = true;
 			}
 			else
 			{

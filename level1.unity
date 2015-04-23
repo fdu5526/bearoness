@@ -794,22 +794,6 @@ Prefab:
       propertyPath: m_Name
       value: NPC 37
       objectReference: {fileID: 0}
-    - target: {fileID: 411924, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -.467000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 411924, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 28.7740612
-      objectReference: {fileID: 0}
-    - target: {fileID: 411924, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10.2545948
-      objectReference: {fileID: 0}
-    - target: {fileID: 411924, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 27.6355038
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
   m_IsPrefabParent: 0
