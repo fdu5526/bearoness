@@ -136,7 +136,7 @@ public class Guard : MonoBehaviour {
 		{
 			GetComponent<Transform>().eulerAngles = Vector3.zero;
 		}
-
+		/*
 		if(counter >= 1 && hasWayPoints)
 		{
 			MoveTowardWaypoint();
@@ -153,16 +153,14 @@ public class Guard : MonoBehaviour {
 		{
 			MoveTowardWaypoint();
 
-			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
+			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) 
+			{
 				currentIndex += 1;
 				if (currentIndex > waypoints.Length - 1){
 					currentIndex = 0;
 				}
 				currentWaypoint = waypoints [currentIndex];
-		}
-
-
-
+			}
+		}*/
 	}
-}
 }
