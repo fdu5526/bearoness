@@ -39,6 +39,7 @@ public class Bear : MonoBehaviour
 
   // speed of 4 legs mode, and which direction player is facing
   private const float default4LegWalkSpeed = 10f;
+  private const float sqrtRoot2 = 1.414f;
   private float yRotation;
   
   // speed and force for 2 leg mode
@@ -172,76 +173,60 @@ public class Bear : MonoBehaviour
 		}
 		else							// four legs movement
 		{
-			bool isMovingForwardOrBackward = true;
+		 
+      if(Input.GetKey("w"))
+      {
+        if(Input.GetKey("a"))
+        {
+          GetComponent<Rigidbody>().velocity = new Vector3(0f, v.y, default4LegWalkSpeed);
+          yRotation = 0f;
+        }
+        else if(Input.GetKey("d"))
+        {
+          GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed, v.y, 0f);
+          yRotation = 90f;
+        }
+        else
+        {
+          GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed/sqrtRoot2, v.y, default4LegWalkSpeed/sqrtRoot2);
+          yRotation = 45f;
+        }
+      }
+      else if(Input.GetKey("s"))
+      {
+        if(Input.GetKey("a"))
+        {
+          GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed, v.y, 0f);
+          yRotation = 270f;
+        }
+        else if(Input.GetKey("d"))
+        {
+          GetComponent<Rigidbody>().velocity = new Vector3(0f, v.y, -default4LegWalkSpeed);
+          yRotation = 180f;
+        }
+        else
+        {
+          GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed/sqrtRoot2, v.y, -default4LegWalkSpeed/sqrtRoot2);
+          yRotation = 225f;
+        }
+      }
+      else if(Input.GetKey("a"))
+      {
+        GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed/sqrtRoot2, v.y, default4LegWalkSpeed/sqrtRoot2);
+        yRotation = 315f;
+      }
+      else if(Input.GetKey("d"))
+      {
+        GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed/sqrtRoot2, v.y, -default4LegWalkSpeed/sqrtRoot2);
+        yRotation = 135f;
+      }
+      else
+      {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+      }
 
-			// up down movement
-			if(Input.GetKey("w"))
-    	{
-      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, default4LegWalkSpeed);
-      	yRotation = 0f;
-        isWalking = true;
-    	}
-    	else if(Input.GetKey("s"))
-    	{
-      	GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, -default4LegWalkSpeed);
-      	yRotation = 180f;
-        isWalking = true;
-    	}
-    	else
-    	{
-    		GetComponent<Rigidbody>().velocity = new Vector3(v.x, v.y, 0f);
-    		isMovingForwardOrBackward = false;
-    	}
-
-      
-    	// left right movement
-  		v = GetComponent<Rigidbody>().velocity;
-    	if(Input.GetKey("a"))
-    	{ 
-        GetComponent<Rigidbody>().velocity = new Vector3(-default4LegWalkSpeed, v.y, v.z);
-      	if(isMovingForwardOrBackward)
-      	{
-      		if(yRotation == 0f)
-      		{
-      			yRotation = 315f;
-      		}
-      		else
-      		{
-      			yRotation = 225f;
-      		}
-      	}
-      	else
-      	{
-      		yRotation = 270f;
-      	}
-        isWalking = true;
-    	}
-    	else if(Input.GetKey("d"))
-    	{ 
-      	
-        GetComponent<Rigidbody>().velocity = new Vector3(default4LegWalkSpeed, v.y, v.z);
-      	if(isMovingForwardOrBackward)
-      	{
-      		if(yRotation == 0f)
-      		{
-      			yRotation = 45f;
-      		}
-      		else
-      		{
-      			yRotation = 135f;
-      		}
-      	}
-      	else
-      	{
-      		yRotation = 90f;
-      	}
-        isWalking = true;
-    	}
-    	else
-    	{ 
-      	GetComponent<Rigidbody>().velocity = new Vector3(0f, v.y, v.z);
-    	}
-      
+      // if we pressed WASD, then we are walkin
+      isWalking = Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d");
 
     	// rotate bear towards correct direction
     	GetComponent<Transform>().eulerAngles = new Vector3(90f,yRotation,0f);
