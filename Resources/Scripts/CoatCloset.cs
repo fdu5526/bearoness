@@ -10,13 +10,12 @@ public class CoatCloset : MonoBehaviour {
 		{
 			GetComponent<AudioSource>().Play();
 
-			Invoke( "Reset", 2);
-
-			
+			// wait 2 seconds, to let changing audio play
+			Invoke( "Reset", 2);			
 		}
 	}
 
-
+	// reset the level
 	private void Reset() 
 	{
 		string levelName = Application.loadedLevelName;
