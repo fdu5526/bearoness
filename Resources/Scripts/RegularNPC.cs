@@ -189,6 +189,11 @@ public class RegularNPC : MonoBehaviour {
 				}
 				else					// run away if there is a bear
 				{
+					if(model.GetComponent<Animator>().GetInteger("walkState") != 2)
+					{
+						audios[1].Play();
+					}
+
 					RunAway();
 				}
 			}
