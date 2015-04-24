@@ -60,7 +60,6 @@ public class Bear : MonoBehaviour
 	void Start () 
 	{
 		suspicionPercent = 0f;
-    isOnTwoLegs = false;
 		yRotation = 0f;
     lastSuspicionTime = 0f;
 
@@ -70,10 +69,24 @@ public class Bear : MonoBehaviour
     run4 = audios[2];
 
     bearModel = GetComponent<Transform>().Find("BearModel").gameObject;
-
+    SwitchLegMode();
 
 	}
 
+
+  private void SwitchLegMode()
+  {
+    bearModel.GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
+    GetComponent<Collider>().enabled = !isOnTwoLegs;
+    bearModel.GetComponent<Collider>().enabled = isOnTwoLegs;
+
+    if(!isOnTwoLegs)
+    {
+      bearModel.GetComponent<Transform>().localEulerAngles = new Vector3(270f, 0f, 0f);
+    }
+
+    GetComponent<Rigidbody>().velocity = Vector3.zero;
+  }
 
   // if player changes movement mode, make appropriate adjustments
 	private void CheckLegsMode()
@@ -83,16 +96,7 @@ public class Bear : MonoBehaviour
 			growl.Play();
 
 			isOnTwoLegs = !isOnTwoLegs;
-      bearModel.GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
-      GetComponent<Collider>().enabled = !isOnTwoLegs;
-      bearModel.GetComponent<Collider>().enabled = isOnTwoLegs;
-
-      if(!isOnTwoLegs)
-      {
-        bearModel.GetComponent<Transform>().localEulerAngles = new Vector3(270f, 0f, 0f);
-      }
-
-    	GetComponent<Rigidbody>().velocity = Vector3.zero;
+      SwitchLegMode();
 		}
 	}
 

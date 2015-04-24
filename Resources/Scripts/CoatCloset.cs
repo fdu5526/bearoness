@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CoatCloset : MonoBehaviour {
 
+	private string reload = "_reload";
+	public int checkpointNumber;
+
 	// enter the coat closet, time to reset
 	void OnTriggerEnter(Collider collider)
 	{
@@ -19,7 +22,15 @@ public class CoatCloset : MonoBehaviour {
 	private void Reset() 
 	{
 		string levelName = Application.loadedLevelName;
-		//levelName = levelName + "_reloaded";
+		if(levelName.Length < 8)
+		{
+			levelName = levelName + reload + checkpointNumber.ToString();
+		}
+		else
+		{
+			levelName = levelName.Substring(0, levelName.Length - 1) + checkpointNumber.ToString();
+		}
+		
 		Application.LoadLevel (levelName);
 	}
 }

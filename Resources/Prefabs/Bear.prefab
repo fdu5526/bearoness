@@ -200,7 +200,7 @@ GameObject:
   - 136: {fileID: 13699224}
   m_Layer: 0
   m_Name: BearModel
-  m_TagString: Untagged
+  m_TagString: Bear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -527,7 +527,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157124}
-  m_LocalRotation: {x: .194092408, y: .815719008, z: .126135334, w: .530113816}
+  m_LocalRotation: {x: .194092378, y: .815718889, z: .126135319, w: .530113757}
   m_LocalPosition: {x: -.00735898828, y: -.0010647031, z: -.000317094993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -590,8 +590,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134036}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 371.059998, y: 83.9749985, z: 661.179993}
+  m_LocalRotation: {x: .5, y: .5, z: -.500000119, w: .49999994}
+  m_LocalPosition: {x: 449.01001, y: 83.3000031, z: 550.099976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 438916}
@@ -816,7 +816,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119832}
-  m_LocalRotation: {x: .194092408, y: .815719008, z: .126135334, w: .530113816}
+  m_LocalRotation: {x: .194092378, y: .815718889, z: .126135319, w: .530113757}
   m_LocalPosition: {x: .00735873124, y: .00106469996, z: .000316625519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1017,7 +1017,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 155cd7d88f3404b4785577b7a926498c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c2c0ba5f76853db478431bf55198168b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1244,7 +1244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suspicionPercent: 0
-  isOnTwoLegs: 0
+  isOnTwoLegs: 1
 --- !u!136 &13690952
 CapsuleCollider:
   m_ObjectHideFlags: 1
