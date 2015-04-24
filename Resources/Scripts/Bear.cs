@@ -13,6 +13,9 @@ public class Bear : MonoBehaviour
   // whether bear is walking on 2 legs
   public bool isOnTwoLegs;
 
+  // whether player can move
+  public bool isDisabled;
+
   // player does suspicious things, gain suspicion
   public void IncreaseSuspicion(float amount)
   {
@@ -278,16 +281,19 @@ public class Bear : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		CheckLegsMode();
-		CheckMovement();
-    StepSounds();
+    if(!isDisabled)
+		{
+      CheckLegsMode();
+  		CheckMovement();
+      StepSounds();
 
-    bearModel.GetComponent<Animator>().SetBool("isFourlegsRunning", isWalking && !isOnTwoLegs);
+      bearModel.GetComponent<Animator>().SetBool("isFourlegsRunning", isWalking && !isOnTwoLegs);
 
-    // lose suspicion if doing nothing suspicious for a while
-    if(!isDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
-    {
-      suspicionPercent = Math.Max(0f, suspicionPercent - deltaSuspicion);
+      // lose suspicion if doing nothing suspicious for a while
+      if(!isDiscovered && Time.time - lastSuspicionTime > suspicionCooldown)
+      {
+        suspicionPercent = Math.Max(0f, suspicionPercent - deltaSuspicion);
+      }
     }
 	}
 }

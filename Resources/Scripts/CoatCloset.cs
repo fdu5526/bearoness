@@ -12,6 +12,7 @@ public class CoatCloset : MonoBehaviour {
 		if(collider.CompareTag("Bear"))
 		{
 			GetComponent<AudioSource>().Play();
+			collider.gameObject.GetComponent<Bear>().isDisabled = true;
 
 			// wait 2 seconds, to let changing audio play
 			Invoke( "Reset", 2);			
