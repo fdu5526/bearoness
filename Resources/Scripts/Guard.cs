@@ -156,9 +156,7 @@ public class Guard : MonoBehaviour {
 
 			if ((Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) && (currentIndex <= (waypoints.Length -1))) {
 				if (currentIndex >= (waypoints.Length - 1)){
-					Debug.Log("last waypoint!");
 					rb.velocity = new Vector3(0,0,0);
-					Debug.Log("fuk my dude stop");
 				}
 
 				else{
