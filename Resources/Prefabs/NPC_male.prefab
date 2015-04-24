@@ -393,7 +393,7 @@ GameObject:
   - 54: {fileID: 5457952}
   - 135: {fileID: 13510260}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: NPC_male
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
