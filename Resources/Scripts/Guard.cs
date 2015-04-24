@@ -17,8 +17,9 @@ public class Guard : MonoBehaviour {
 	private bool hasWayPoints;
 	private bool isSuspicious;
 
-	//rigidbody
+	//rigidbody and guard model
 	private Rigidbody rb;
+	private GameObject model;
 
 	// the detection circle
 	private GameObject detectionCircle;
@@ -56,6 +57,8 @@ public class Guard : MonoBehaviour {
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
 
+		model = GetComponent<Transform>().Find("model").gameObject;
+
 		detectionCircle = Instantiate ((GameObject)(Resources.Load("Prefabs/GuardDetectionCircle")));
 	}
 
@@ -91,8 +94,9 @@ public class Guard : MonoBehaviour {
 
 	void checkSuspicion()
 	{
-		if (bearScript.suspicionPercent >= 90f)
+		if (bearScript.isDiscovered)
 		{
+			model.GetComponent<Animator>().SetInteger("walkState",2);
 			isSuspicious = true;
 			changeWaypoints();
 		}
@@ -110,6 +114,7 @@ public class Guard : MonoBehaviour {
 				bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
 				audios[0].Play();
 				prevSuspicionTime = Time.time;
+				model.GetComponent<Animator>().SetInteger("walkState",2);
 			}
 		}
 	}
@@ -132,7 +137,18 @@ public class Guard : MonoBehaviour {
 		// get back up after getting hit
 		if(Time.time - prevSuspicionTime > getUpTime)
 		{
-			GetComponent<Transform>().eulerAngles = Vector3.zero;
+			if(!hasWayPoints)
+			{
+				if(!isSuspicious)
+				{
+					model.GetComponent<Animator>().SetInteger("walkState",0);
+				}
+				GetComponent<Transform>().eulerAngles = Vector3.zero;
+			}
+			else if(!isSuspicious)
+			{
+				model.GetComponent<Animator>().SetInteger("walkState",1);
+			}
 		}
 		if(counter >= 1 && hasWayPoints)
 		{
