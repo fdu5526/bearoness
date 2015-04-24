@@ -5117,8 +5117,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 68
       objectReference: {fileID: 0}
-    - target: {fileID: 2393050, guid: 5fc3edc70bc94824db0d2a8d047539b4, type: 2}
-      propertyPath: m_Enabled
+    - target: {fileID: 8240752, guid: 5fc3edc70bc94824db0d2a8d047539b4, type: 2}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
