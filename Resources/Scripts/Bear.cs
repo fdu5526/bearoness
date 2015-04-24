@@ -38,7 +38,7 @@ public class Bear : MonoBehaviour
   private bool isWalking;
 
   // speed of 4 legs mode, and which direction player is facing
-  private const float default4LegWalkSpeed = 10f;
+  private const float default4LegWalkSpeed = 15f;
   private const float sqrtRoot2 = 1.414f;
   private float yRotation;
   
