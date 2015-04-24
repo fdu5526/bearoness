@@ -8,9 +8,19 @@ public class CoatCloset : MonoBehaviour {
 	{
 		if(collider.CompareTag("Bear"))
 		{
-			string levelName = Application.loadedLevelName;
-			//levelName = levelName + "_reloaded";
-			Application.LoadLevel (levelName);
+			GetComponent<AudioSource>().Play();
+
+			Invoke( "Reset", 2);
+
+			
 		}
+	}
+
+
+	private void Reset() 
+	{
+		string levelName = Application.loadedLevelName;
+		//levelName = levelName + "_reloaded";
+		Application.LoadLevel (levelName);
 	}
 }
