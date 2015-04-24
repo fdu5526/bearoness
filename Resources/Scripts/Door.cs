@@ -13,7 +13,7 @@ public class Door : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if(Time.time - prevOpenTime > 1f)
+		if(collision.gameObject.name.Equals("Bear") && Time.time - prevOpenTime > 1f)
 		{
 			GetComponent<AudioSource>().Play();
 			prevOpenTime = Time.time;
