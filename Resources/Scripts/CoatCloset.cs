@@ -3,19 +3,21 @@ using System.Collections;
 
 public class CoatCloset : MonoBehaviour {
 
-	private string reload = "_reload";
-	public int checkpointNumber;
+	private bool pressedE, closedDistance;
+	private GameObject closetButton;
 
+
+	void Start()
+	{
+		closetButton = GameObject.Find("closeButton");
+	}
+	
 	// enter the coat closet, time to reset
 	void OnTriggerEnter(Collider collider)
 	{
 		if(collider.CompareTag("Bear"))
 		{
-			GetComponent<AudioSource>().Play();
-			collider.gameObject.GetComponent<Bear>().isDisabled = true;
-
-			// wait 2 seconds, to let changing audio play
-			Invoke( "Reset", 2);			
+			closedDistance = true;		
 		}
 	}
 
@@ -23,15 +25,32 @@ public class CoatCloset : MonoBehaviour {
 	private void Reset() 
 	{
 		string levelName = Application.loadedLevelName;
-		if(levelName.Length < 8)
+		//levelName = levelName + "_reloaded";
+		Application.LoadLevel (levelName);
+	}
+
+	void activateButton()
+	{
+		if (closedDistance)
 		{
-			levelName = levelName + reload + checkpointNumber.ToString();
+			closetButton.active = true;
 		}
+
 		else
 		{
-			levelName = levelName.Substring(0, levelName.Length - 1) + checkpointNumber.ToString();
+			closetButton.active = false;
 		}
-		
-		Application.LoadLevel (levelName);
+	}
+
+	void Update ()
+	{
+		//activateButton();
+
+		if (pressedE)
+		{
+			GetComponent<AudioSource>().Play();
+			// wait 2 seconds, to let changing audio play
+			Invoke( "Reset", 2);	
+		}
 	}
 }

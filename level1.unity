@@ -797,6 +797,14 @@ Prefab:
       propertyPath: m_ConnectedAnchor.z
       value: -.672867417
       objectReference: {fileID: 0}
+    - target: {fileID: 8228642, guid: f9d9c47b3977efe488b3751a9bf18db0, type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284716, guid: f9d9c47b3977efe488b3751a9bf18db0, type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9d9c47b3977efe488b3751a9bf18db0, type: 2}
   m_IsPrefabParent: 0
