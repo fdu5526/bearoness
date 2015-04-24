@@ -26,7 +26,7 @@ public class RegularNPC : MonoBehaviour {
 	private float randomWalkCoodown;
 	private float prevStartWalkTime;
 	private bool isStopped;
-	private const float maxSpeed = 2f;
+	public float maxSpeed = 2f;
 	private const float minStopTime = 3f;
 	private const float maxStopTime = 6f;
 
@@ -182,7 +182,10 @@ public class RegularNPC : MonoBehaviour {
 			{
 				if(!bearScript.isDiscovered)	// random walk if there is no bear
 				{
-					Patrol();
+					if(maxSpeed > 0f)
+					{
+						Patrol();
+					}
 				}
 				else					// run away if there is a bear
 				{
