@@ -2438,7 +2438,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22d522e4ac523cd4c9b001b389921a9c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &631910940 stripped
+--- !u!1 &631910940
 GameObject:
   m_PrefabParentObject: {fileID: 158264, guid: 22d522e4ac523cd4c9b001b389921a9c, type: 2}
   m_PrefabInternal: {fileID: 631910939}
@@ -5997,7 +5997,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22d522e4ac523cd4c9b001b389921a9c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1925166416 stripped
+--- !u!1 &1925166416
 GameObject:
   m_PrefabParentObject: {fileID: 158264, guid: 22d522e4ac523cd4c9b001b389921a9c, type: 2}
   m_PrefabInternal: {fileID: 1925166415}
@@ -6644,7 +6644,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25f38bb7c1362d54da092c70ffef592e, type: 2}
   m_IsPrefabParent: 0
---- !u!54 &2066262890 stripped
+--- !u!54 &2066262890
 Rigidbody:
   m_PrefabParentObject: {fileID: 5454710, guid: 29a4e513bff01294dbfe9e0412bd2211,
     type: 2}

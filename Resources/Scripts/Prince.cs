@@ -24,6 +24,11 @@ public class Prince : MonoBehaviour {
 	//dance speed
 	public int moveSpeed;
 	private float minDistance = 0.2f;
+	public bool distanceClosed;
+	private bool pressedE;
+
+	//UI junk
+	private GameObject button;
 
 
 	// for when player is too suspicious
@@ -38,12 +43,14 @@ public class Prince : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		isStopped = Random.value >= 0.5f;
-		prevStartWalkTime = 0f;
-
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
+		button = GameObject.Find("e key");
 		audios = GetComponents<AudioSource>();
+
+		pressedE = false;
+		isStopped = Random.value >= 0.5f;
+		prevStartWalkTime = 0f;
 
 		// if this has waypoints, get waypoints
 		hasWayPoints = (waypoints != null && waypoints.Length > 0);
@@ -64,6 +71,8 @@ public class Prince : MonoBehaviour {
 			audios[0].Play();
 		}
 	}
+
+
 
 	void MoveTowardWaypoint()
 	{
@@ -89,11 +98,40 @@ public class Prince : MonoBehaviour {
 		// gotta run
 		GetComponent<Rigidbody>().velocity = d;
 	}
+
+	void checkBearDistance()
+	{
+		if (Vector3.Distance(bear.transform.position, transform.position) < 10f)
+		{
+			distanceClosed = true;
+			if (pressedE == false)
+			{
+				button.active = true;
+			}
+			else
+			{
+				button.active = false;
+			}
+		}
+		else
+		{
+			button.active = false;
+			distanceClosed = false;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () 
 	{	
-		if(!bearScript.isDiscovered)	// random walk if there is no bear
+
+		checkBearDistance();
+
+		if (Input.GetKeyDown("e") && distanceClosed){
+			pressedE = true;
+		}
+
+
+		if(!bearScript.isDiscovered && pressedE )	// random walk if there is no bear
 		{
 			MoveTowardWaypoint();
 
@@ -105,7 +143,7 @@ public class Prince : MonoBehaviour {
 				currentWaypoint = waypoints [currentIndex];
 			}
 		}
-		else					// run away if there is a bear
+		else if (bearScript.isDiscovered)				// run away if there is a bear
 		{
 			RunAway();
 		}
