@@ -9,7 +9,7 @@ public class RegularNPC : MonoBehaviour {
 	private Bear bearScript;
 
 	// the gender and dialogues
-	public bool isFemale;
+	private bool isFemale;
 	private List<string> dialogues;
 
 	// when guest is suspicious, and when to get back up after getting hit
@@ -43,6 +43,7 @@ public class RegularNPC : MonoBehaviour {
 	void Start ()
 	{
 		isStopped = Random.value >= 0.5f;
+		isFemale = Random.value >= 0.5f;
 		prevStartWalkTime = 0f;
 		isUp = true;
 

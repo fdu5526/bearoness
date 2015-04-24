@@ -91,7 +91,7 @@ public class Guard : MonoBehaviour {
 
 	void checkSuspicion()
 	{
-		if (bearScript.isDiscovered)
+		if (bearScript.suspicionPercent >= 90f)
 		{
 			isSuspicious = true;
 			changeWaypoints();
