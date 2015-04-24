@@ -31,6 +31,7 @@ public class CoatCloset : MonoBehaviour {
 
 	void activateButton()
 	{
+
 		if (closedDistance)
 		{
 			closetButton.active = true;
