@@ -3,21 +3,26 @@ using System.Collections;
 
 public class CoatCloset : MonoBehaviour {
 
-	private bool pressedE, closedDistance;
+	private bool pressedE, closedDistance, activated;
 	private GameObject closetButton;
 
 
-	void Start()
-	{
-		closetButton = GameObject.Find("closeButton");
+	void Start(){
+		closetButton = GameObject.Find("closetButton");
+		closedDistance = false;
+		activated = false;
 	}
-	
+
 	// enter the coat closet, time to reset
 	void OnTriggerEnter(Collider collider)
 	{
 		if(collider.CompareTag("Bear"))
 		{
 			closedDistance = true;		
+		}
+
+		else{
+			closedDistance = false;
 		}
 	}
 
@@ -29,10 +34,10 @@ public class CoatCloset : MonoBehaviour {
 		Application.LoadLevel (levelName);
 	}
 
+	//activate UI if bear closes distance with closet
 	void activateButton()
 	{
-
-		if (closedDistance)
+		if (closedDistance && activated == false)
 		{
 			closetButton.active = true;
 		}
@@ -43,15 +48,23 @@ public class CoatCloset : MonoBehaviour {
 		}
 	}
 
+	void changeActivate()
+	{
+		activated = !activated;
+	}
+
 	void Update ()
 	{
-		//activateButton();
+		activateButton();
 
-		if (pressedE)
+		if (Input.GetKeyDown("e") && closedDistance)
 		{
+			activated = true;
+			closetButton.active = false;
 			GetComponent<AudioSource>().Play();
 			// wait 2 seconds, to let changing audio play
 			Invoke( "Reset", 2);	
+			Invoke ("changeActivate", 2);
 		}
 	}
 }
