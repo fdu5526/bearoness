@@ -21,11 +21,15 @@ public class Prince : MonoBehaviour {
 	private int currentIndex;
 	private bool hasWayPoints;
 
+	// the dance circle
+	private GameObject danceCircle;
+	private bool danceCirclePresent;
+
 	//dance speed
 	public int moveSpeed;
 	private float minDistance = 0.2f;
 	public bool distanceClosed;
-	private bool pressedE;
+	public bool pressedE;
 
 	//UI junk
 	private GameObject button;
@@ -43,12 +47,15 @@ public class Prince : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		danceCircle = Instantiate ((GameObject)(Resources.Load("Prefabs/PrinceDanceCircle")));
+		danceCircle.SetActive(false);
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		button = GameObject.Find("e key");
 		audios = GetComponents<AudioSource>();
 
 		pressedE = false;
+		danceCirclePresent = false;
 		isStopped = Random.value >= 0.5f;
 		prevStartWalkTime = 0f;
 
@@ -71,8 +78,6 @@ public class Prince : MonoBehaviour {
 			audios[0].Play();
 		}
 	}
-
-
 
 	void MoveTowardWaypoint()
 	{
@@ -106,18 +111,26 @@ public class Prince : MonoBehaviour {
 			distanceClosed = true;
 			if (pressedE == false)
 			{
-				button.active = true;
+				button.SetActive(true);
 			}
 			else
 			{
-				button.active = false;
+				button.SetActive(false);
 			}
 		}
 		else
 		{
-			button.active = false;
+			button.SetActive(false);
 			distanceClosed = false;
 		}
+	}
+
+	// put the dance circle where the guard is
+	private void SetDanceCirclePosition()
+	{
+		Vector3 v = GetComponent<Transform>().position;
+		float y = GetComponent<Transform>().position.y - 1.08f;
+		danceCircle.GetComponent<Transform>().position = new Vector3(v.x, y, v.z);
 	}
 	
 	// Update is called once per frame
@@ -126,13 +139,24 @@ public class Prince : MonoBehaviour {
 
 		checkBearDistance();
 
-		if (Input.GetKeyDown("e") && distanceClosed){
+		if (danceCirclePresent){
+			SetDanceCirclePosition();
+		}
+
+		if (Input.GetKey(KeyCode.E)){
+			Debug.Log("fuck dude you pressed e");
+		}
+
+		if (Input.GetKeyDown(KeyCode.E) && distanceClosed){
 			pressedE = true;
+			Debug.Log("pressed E woahhhh");
 		}
 
 
-		if(!bearScript.isDiscovered && pressedE )	// random walk if there is no bear
+		if(!bearScript.isDiscovered && pressedE )	// drop dance circle and get down my dude
 		{
+			danceCirclePresent = true;
+			danceCircle.SetActive(true);
 			MoveTowardWaypoint();
 
 			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {

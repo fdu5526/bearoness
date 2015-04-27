@@ -8,7 +8,7 @@ public class CoatCloset : MonoBehaviour {
 
 
 	void Start(){
-		closetButton = GameObject.Find("closetButton");
+		closetButton = GameObject.Find("closetE");
 		closedDistance = false;
 		activated = false;
 	}
@@ -39,12 +39,12 @@ public class CoatCloset : MonoBehaviour {
 	{
 		if (closedDistance && activated == false)
 		{
-			closetButton.active = true;
+			closetButton.SetActive(true);
 		}
 
 		else
 		{
-			closetButton.active = false;
+			closetButton.SetActive(false);
 		}
 	}
 
@@ -60,7 +60,7 @@ public class CoatCloset : MonoBehaviour {
 		if (Input.GetKeyDown("e") && closedDistance)
 		{
 			activated = true;
-			closetButton.active = false;
+			closetButton.SetActive(false);
 			GetComponent<AudioSource>().Play();
 			// wait 2 seconds, to let changing audio play
 			Invoke( "Reset", 2);	

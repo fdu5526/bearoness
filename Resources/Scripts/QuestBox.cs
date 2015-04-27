@@ -7,12 +7,14 @@ public class QuestBox : MonoBehaviour {
 	private Sprite regbox, suspbox;
 	private GameObject bear, questBox;
 	private Bear bearScript;
+	private Image image;
 	Text questText;
 	string activeQuest = "Go to the Ballroom";
 
 	// Use this for initialization
 	void Start () {
 		bear = GameObject.Find ("Bear");
+		image = this.gameObject.GetComponent<Image>();
 		questBox = GameObject.Find("Quest");
 		bearScript = bear.GetComponent<Bear>();
 		regbox = Resources.Load<Sprite>("UI/questbox");
@@ -20,7 +22,7 @@ public class QuestBox : MonoBehaviour {
 		questText = this.gameObject.GetComponentInChildren<Text>();
 		questText.text = activeQuest;
 
-		gameObject.GetComponent<SpriteRenderer>().sprite = regbox;
+		image.sprite = regbox;
 	}
 	
 	void ChangeQuest(string s){
@@ -31,7 +33,7 @@ public class QuestBox : MonoBehaviour {
 	void Update () {
 		if (bearScript.isDiscovered)
 		{
-			questBox.GetComponentInChildren<Image>().sprite = suspbox;
+			image.sprite = suspbox;
 			ChangeQuest("Find a Changing Room!");
 		}
 	}

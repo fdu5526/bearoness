@@ -17,11 +17,11 @@ public class showEKey : MonoBehaviour {
 	void Update () {
 		if (princeScript.distanceClosed)
 		{
-			eKey.active = true;
+			eKey.SetActive(true);
 		}
 		else
 		{
-			eKey.active = false;
+			eKey.SetActive(false);
 		}
 	}
 }
