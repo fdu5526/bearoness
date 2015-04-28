@@ -39,7 +39,9 @@ public class Minimap : MonoBehaviour {
 				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
 				break;
 			case 3:
-				
+				ix = Remap(bz, 680f, 548f, 720f, 859f);
+				iy = Remap(bx, 370f, 485f, 354f, 483f);
+				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
 				break;
 		}
 	}
