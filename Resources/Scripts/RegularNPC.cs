@@ -10,7 +10,9 @@ public class RegularNPC : MonoBehaviour {
 
 	// the gender and dialogues
 	public bool isFemale;
-	private List<string> dialogues;
+	private List<string> lowDialogues, midDialogues, highDialogues;
+	private float preDialogueTime;
+	private const float dialogueCooldown = 1f;
 
 	// when guest is suspicious, and when to get back up after getting hit
 	private float prevSuspicionTime;
@@ -56,27 +58,39 @@ public class RegularNPC : MonoBehaviour {
 		model = GetComponent<Transform>().Find("model").gameObject;
 	}
 
-	// load the dialogues from text, based on gender
-	private void LoadDialogues()
+	// load file name's contents into the list
+	private void LoadDialoguesFromFileToList(string name, List<string> list)
 	{
-		dialogues = new List<string>();
-		
 		TextAsset txt;
-		if(isFemale)
-		{
-			txt = Resources.Load("Dialogues/femaleNPCDialogue") as TextAsset;
-		}
-		else
-		{
-			txt = Resources.Load("Dialogues/maleNPCDialogue") as TextAsset;	
-		}
+		txt = Resources.Load(name) as TextAsset;
 		string[] lines = txt.text.Split('\n');
 		
 		// read my text file
 	  foreach (string line in lines)
 	  {
-			dialogues.Add(line);
+			list.Add(line);
  		}
+	}
+
+	// load the dialogues from text, based on gender
+	private void LoadDialogues()
+	{
+		lowDialogues = new List<string>();
+		midDialogues = new List<string>();
+		highDialogues = new List<string>();
+		
+		if(isFemale)
+		{
+			LoadDialoguesFromFileToList("Dialogues/femaleNPC_low", lowDialogues);
+			LoadDialoguesFromFileToList("Dialogues/femaleNPC_mid", midDialogues);
+			LoadDialoguesFromFileToList("Dialogues/femaleNPC_high", highDialogues);
+		}
+		else
+		{
+			LoadDialoguesFromFileToList("Dialogues/maleNPC_low", lowDialogues);
+			LoadDialoguesFromFileToList("Dialogues/maleNPC_mid", midDialogues);
+			LoadDialoguesFromFileToList("Dialogues/maleNPC_high", highDialogues);
+		}
 		
 	}
 
@@ -107,9 +121,25 @@ public class RegularNPC : MonoBehaviour {
   {
     if(collider.CompareTag("Bear") && 
     	 !bearScript.isDiscovered && 
+    	 Time.time - preDialogueTime > dialogueCooldown &&
     	 Input.GetKeyDown("space"))
     {
-    	print(dialogues[Random.Range(0, dialogues.Count)]);
+    	if(bearScript.suspicionPercent < 40f)
+    	{
+    		print(lowDialogues[Random.Range(0, lowDialogues.Count)]);
+    	}
+    	else if(bearScript.suspicionPercent < 80f)
+    	{
+    		print(midDialogues[Random.Range(0, midDialogues.Count)]);
+    	}
+    	else
+    	{
+    		print(highDialogues[Random.Range(0, highDialogues.Count)]);
+    	}
+
+
+
+    	preDialogueTime = Time.time;
     }
   }
 
