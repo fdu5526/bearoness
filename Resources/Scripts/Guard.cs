@@ -150,6 +150,7 @@ public class Guard : MonoBehaviour {
 				model.GetComponent<Animator>().SetInteger("walkState",1);
 			}
 		}
+		
 		if(counter >= 1 && hasWayPoints)
 		{
 			MoveTowardWaypoint();
