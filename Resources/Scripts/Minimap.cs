@@ -29,12 +29,13 @@ public class Minimap : MonoBehaviour {
 		switch(levelNumber)
 		{
 			case 1:
-				
+				float ix = Remap(bz, 682f, 540f, 720f, 859f);
+				float iy = Remap(bx, 364f, 486f, 354f, 483f);
+				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
 				break;
 			case 2:
-				float ix = Remap(bz, 680f, 548f, 720f, 859f);
-				float iy = Remap(bx, 370f, 485f, 354f, 483f);
-
+				ix = Remap(bz, 680f, 548f, 720f, 859f);
+				iy = Remap(bx, 370f, 485f, 354f, 483f);
 				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
 				break;
 			case 3:
