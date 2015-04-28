@@ -3,12 +3,15 @@ using System.Collections;
 
 public class Prop : MonoBehaviour {
 
-
+	public bool isDoor;
 	private float prevOpenTime;
+	private Bear bearScript;
+	private const float suspicionIncreaseUponCollision = 5f;
 
 	// Use this for initialization
 	void Start () {
 		prevOpenTime = -100f;
+		bearScript = (GameObject.Find ("Bear")).GetComponent<Bear>();
 	}
 
 	void OnCollisionEnter(Collision collision)
@@ -17,6 +20,11 @@ public class Prop : MonoBehaviour {
 		{
 			GetComponent<AudioSource>().Play();
 			prevOpenTime = Time.time;
+
+			if(!isDoor)
+			{
+				bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
+			}
 		}
 	}
 	
