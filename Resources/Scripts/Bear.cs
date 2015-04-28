@@ -76,7 +76,7 @@ public class Bear : MonoBehaviour
 
 	}
 
-
+  // swap to current leg mode
   private void SwitchLegMode()
   {
     bearModel.GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
@@ -102,6 +102,33 @@ public class Bear : MonoBehaviour
       SwitchLegMode();
 		}
 	}
+
+  // swap out bear clothing to something random
+  private void ChangeToRandomClothing()
+  {
+    GameObject polysurface = bearModel.GetComponent<Transform>().Find("polySurface1").gameObject;
+
+    int ri1 = UnityEngine.Random.Range(0, 9);
+    int ri2 = UnityEngine.Random.Range(0, 9);
+    while(ri2 == ri1)
+    {
+      ri2 = UnityEngine.Random.Range(0, 9);
+    }
+
+
+    Material m1 = Resources.Load("ClothesMaterials/" + ri1, typeof(Material)) as Material;
+    Material m2 = Resources.Load("ClothesMaterials/" + ri2, typeof(Material)) as Material;
+    
+    Renderer r = polysurface.GetComponent<Renderer>();
+    Material[] materials = r.materials;
+    
+    materials[1] = m1;
+    materials[2] = m2;
+
+    r.materials = materials;
+    
+  }
+
 
 	// get player keyboard input, do things
 	private void CheckMovement()
@@ -281,6 +308,13 @@ public class Bear : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+    //TODO
+    if(Input.GetKeyDown("e"))
+    {
+      ChangeToRandomClothing();
+    }
+
+
     if(!isDisabled)
 		{
       CheckLegsMode();
