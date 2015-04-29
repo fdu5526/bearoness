@@ -143,10 +143,6 @@ public class Prince : MonoBehaviour {
 			SetDanceCirclePosition();
 		}
 
-		if (Input.GetKey(KeyCode.E)){
-			Debug.Log("fuck dude you pressed e");
-		}
-
 		if (Input.GetKeyDown(KeyCode.E) && distanceClosed){
 			pressedE = true;
 			Debug.Log("pressed E woahhhh");
