@@ -21,7 +21,7 @@ public class Bear : MonoBehaviour
   public void IncreaseSuspicion(float amount)
   {
     lastSuspicionTime = Time.time;
-    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    //TODOsuspicionPercent = Math.Min(100f, suspicionPercent + amount);
   }
 
   // if player is completely discovered, no going back to pretending
@@ -78,6 +78,13 @@ public class Bear : MonoBehaviour
     SwitchLegMode();
 
 	}
+
+
+
+  void OnTriggerEnter(Collider collider)
+  {
+    print(collider.tag);
+  }
 
   // swap to current leg mode
   private void SwitchLegMode()
