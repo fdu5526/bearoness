@@ -137,7 +137,7 @@ public class Prince : MonoBehaviour {
 	void Update () 
 	{	
 
-		//checkBearDistance();
+		checkBearDistance();
 
 		if (danceCirclePresent){
 			SetDanceCirclePosition();
