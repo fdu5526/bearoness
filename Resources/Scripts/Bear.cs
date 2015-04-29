@@ -17,11 +17,14 @@ public class Bear : MonoBehaviour
   // whether player can move
   public bool isDisabled;
 
+  // whether bear has drink platter
+  public bool hasDrinkPlatter;
+
   // player does suspicious things, gain suspicion
   public void IncreaseSuspicion(float amount)
   {
     lastSuspicionTime = Time.time;
-    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    //TODOsuspicionPercent = Math.Min(100f, suspicionPercent + amount);
   }
 
   // if player is completely discovered, no going back to pretending
@@ -81,11 +84,16 @@ public class Bear : MonoBehaviour
 
 
   // for interaction systems
-  void OnTriggerEnter(Collider collider)
+  void OnTriggerStay(Collider collider)
   {
-    if(collider.CompareTag("DrinkPlatter"))
+    if(!hasDrinkPlatter && 
+       Input.GetKeyDown("e") && 
+       collider.CompareTag("DrinkPlatter"))
     {
-
+      hasDrinkPlatter = true;
+      GameObject platter = GameObject.Find("DrinkPlatter");
+      platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,2.5f,0f);
+      platter.GetComponent<Transform>().parent = bearModel.GetComponent<Transform>();
     }
   }
 
@@ -333,7 +341,7 @@ public class Bear : MonoBehaviour
 	void Update () 
 	{
     //TODO
-    if(Input.GetKeyDown("e"))
+    if(Input.GetKeyDown("space"))
     {
       ChangeToRandomClothing();
     }

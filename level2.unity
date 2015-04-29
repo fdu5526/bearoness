@@ -822,7 +822,7 @@ GameObject:
   - 95: {fileID: 134879709}
   - 135: {fileID: 134879710}
   m_Layer: 0
-  m_Name: drink_platter
+  m_Name: DrinkPlatter
   m_TagString: DrinkPlatter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8471,7 +8471,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11425426, guid: ae9a4c21704e5fa41ab5a0a001ea611c, type: 2}
       propertyPath: maxSpeed
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 13758596, guid: ae9a4c21704e5fa41ab5a0a001ea611c, type: 2}
       propertyPath: m_Materials.Array.data[0]
@@ -8481,6 +8481,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eb29dd3ae8277e84eae71bc55232afa2, type: 2}
+    - target: {fileID: 156380, guid: ae9a4c21704e5fa41ab5a0a001ea611c, type: 2}
+      propertyPath: m_TagString
+      value: NPCRival
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ae9a4c21704e5fa41ab5a0a001ea611c, type: 2}
   m_IsPrefabParent: 0

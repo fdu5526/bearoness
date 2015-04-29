@@ -132,7 +132,7 @@ public class RegularNPC : MonoBehaviour {
     if(collider.CompareTag("Bear") && 
     	 !bearScript.isDiscovered && 
     	 Time.time - preDialogueTime > dialogueCooldown &&
-    	 Input.GetKeyDown("space"))
+    	 Input.GetKeyDown("e"))
     {
     	if(bearScript.suspicionPercent < 40f)
     	{
