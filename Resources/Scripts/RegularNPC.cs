@@ -56,7 +56,44 @@ public class RegularNPC : MonoBehaviour {
 
 		GetComponent<Rigidbody>().centerOfMass = new Vector3(0f,-1f,0f);
 		model = GetComponent<Transform>().Find("model").gameObject;
+
+		ChangeToRandomClothing();
 	}
+
+
+	// swap out bear clothing to something random
+  private void ChangeToRandomClothing()
+  {
+    GameObject polysurface = model.GetComponent<Transform>().Find("group").Find("polySurface1").gameObject;
+
+    int ri1 = UnityEngine.Random.Range(0, 9);
+    int ri2 = UnityEngine.Random.Range(0, 9);
+    while(ri2 == ri1)
+    {
+      ri2 = UnityEngine.Random.Range(0, 9);
+    }
+
+
+    Material m1 = Resources.Load("ClothesMaterials/" + ri1, typeof(Material)) as Material;
+    Material m2 = Resources.Load("ClothesMaterials/" + ri2, typeof(Material)) as Material;
+    
+    Renderer r = polysurface.GetComponent<Renderer>();
+    Material[] materials = r.materials;
+    
+    if(isFemale)
+    {
+    	materials[2] = m2;
+    	materials[1] = m1;
+    }
+    else
+    {
+    	materials[2] = m2;
+    }
+
+    r.materials = materials;
+    
+  }
+
 
 	// load file name's contents into the list
 	private void LoadDialoguesFromFileToList(string name, List<string> list)
