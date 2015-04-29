@@ -46,7 +46,7 @@ public class Bear : MonoBehaviour
   private float yRotation;
   
   // speed and force for 2 leg mode
-  private const float default2LegForce = 10f;
+  private const float default2LegForce = 20f;
   private const float max2LegWalkSpeed = 7f;
     
   // how much player tilt during 2 leg mode
@@ -195,11 +195,22 @@ public class Bear : MonoBehaviour
 
       // get which direction player is facing
       v = GetComponent<Rigidbody>().velocity;
-      yRotation = r.y;
+
       if(v.magnitude > 1f)  // prevent crazy bounce due to small velocity changes
       {
-        yRotation = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(0f,1f));
-        yRotation = v.x > 0f ? yRotation : -yRotation;
+        float tempy = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(0f,1f));
+        tempy = v.x > 0f ? tempy : -tempy;
+
+        // black magic hax to fix immediate 180 degree flip
+        float dy = Math.Abs(tempy - yRotation);
+        if(dy > 140f && dy < 300f)
+        {
+          yRotation = (yRotation + tempy) / 2;
+        }
+        else
+        {
+          yRotation = tempy;
+        }
       }
 
       // perform actual rotation
