@@ -31,6 +31,7 @@ ModelImporter:
     100046: wrist_Lq
     100048: wrist_R
     100050: wrist_Rq
+    100052: group
     400000: ankle_L
     400002: ankle_R
     400004: elbow_L
@@ -57,6 +58,7 @@ ModelImporter:
     400046: wrist_Lq
     400048: wrist_R
     400050: wrist_Rq
+    400052: group
     4300000: polySurface1
     7400000: Take 001
     9500000: //RootNode
