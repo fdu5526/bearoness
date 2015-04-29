@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class Prince : MonoBehaviour {
@@ -23,7 +25,10 @@ public class Prince : MonoBehaviour {
 
 	// the dance circle
 	private GameObject danceCircle;
+	private GameObject danceMeter;
+	private Slider danceMeterSlider;
 	private bool danceCirclePresent;
+	private float danceValue;
 
 	//dance speed
 	public int moveSpeed;
@@ -32,7 +37,8 @@ public class Prince : MonoBehaviour {
 	public bool pressedE;
 
 	//UI junk
-	private GameObject button;
+	private GameObject button, danceTutWindow;
+	private bool activeDanceTut;
 
 
 	// for when player is too suspicious
@@ -49,14 +55,24 @@ public class Prince : MonoBehaviour {
 	{
 		danceCircle = Instantiate ((GameObject)(Resources.Load("Prefabs/PrinceDanceCircle")));
 		danceCircle.SetActive(false);
+
+		danceValue = 0f;
+		danceMeterSlider = GameObject.Find("UI").GetComponent<Transform>().Find("DanceMeter").gameObject.GetComponent<Slider>();
+		danceMeter = GameObject.Find("DanceMeter");
+		danceMeter.SetActive(false);
+
+		danceTutWindow = GameObject.Find("DanceTutWindow");
+		danceTutWindow.SetActive(false);
+		activeDanceTut = false;
+
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
+
 		button = GameObject.Find("e key");
 		audios = GetComponents<AudioSource>();
 
 		pressedE = false;
 		danceCirclePresent = false;
-		isStopped = Random.value >= 0.5f;
 		prevStartWalkTime = 0f;
 
 		// if this has waypoints, get waypoints
@@ -74,7 +90,10 @@ public class Prince : MonoBehaviour {
 		// bear run into this NPC
 		if(collision.gameObject.name.Equals("Bear"))
 		{
-			bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
+			if (danceValue > 0f)
+				{
+					danceValue -= 0.04f;
+				}
 			audios[0].Play();
 		}
 	}
@@ -136,8 +155,13 @@ public class Prince : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
-
+		danceMeterSlider.value = danceValue;
 		checkBearDistance();
+
+		if (activeDanceTut == false)
+		{
+			danceTutWindow.SetActive(false);
+		}
 
 		if (danceCirclePresent){
 			SetDanceCirclePosition();
@@ -145,12 +169,29 @@ public class Prince : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.E) && distanceClosed){
 			pressedE = true;
-			Debug.Log("pressed E woahhhh");
+			activeDanceTut = true;
+			Time.timeScale = 0;
+		}
+
+		if (danceValue >= 100f)
+		{
+			//you fuckin did it
 		}
 
 
 		if(!bearScript.isDiscovered && pressedE )	// drop dance circle and get down my dude
 		{
+			if (activeDanceTut)
+			{
+				danceTutWindow.SetActive(true);
+				if (Input.GetKeyDown("space"))
+					{
+						danceTutWindow.SetActive(false);
+						Time.timeScale = 1;
+						activeDanceTut = false;
+					}
+			}
+			danceMeter.SetActive(true);
 			danceCirclePresent = true;
 			danceCircle.SetActive(true);
 			MoveTowardWaypoint();
@@ -162,6 +203,20 @@ public class Prince : MonoBehaviour {
 				}
 				currentWaypoint = waypoints [currentIndex];
 			}
+
+			if (Vector3.Distance(bear.transform.position, transform.position) < 5f && danceCirclePresent && bearScript.isOnTwoLegs)
+			{
+				danceValue += 0.1f;
+			}
+
+			else if (danceCirclePresent && Vector3.Distance(bear.transform.position, transform.position) > 5f)
+			{
+				if (danceValue > 0f)
+				{
+					danceValue -= 0.04f;
+				}
+			}
+
 		}
 		else if (bearScript.isDiscovered)				// run away if there is a bear
 		{

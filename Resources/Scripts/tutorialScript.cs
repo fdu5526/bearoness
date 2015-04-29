@@ -18,6 +18,7 @@ public class tutorialScript : MonoBehaviour {
 		alreadyDiscovered = false;
 		twoLegsBox.SetActive(false);
 		detectedBox.SetActive(false);
+
 	}
 
 	void OnTriggerEnter(Collider collision)
@@ -56,6 +57,7 @@ public class tutorialScript : MonoBehaviour {
 		if (Input.GetKeyDown("space") && detectedBox.activeInHierarchy)
 		{
 			detectedBox.SetActive(false);
+			Destroy(detectedBox);
 			Time.timeScale = 1;
 		}
 
