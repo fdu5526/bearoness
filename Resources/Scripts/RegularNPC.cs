@@ -105,7 +105,17 @@ public class RegularNPC : MonoBehaviour {
 			if(Time.time - prevSuspicionTime > suspicionCooldown)
 			{
 				bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
-				audios[0].Play();
+				
+				if(bearScript.isDiscovered)
+				{
+					audios[1].Play();
+				}
+				else
+				{
+					audios[0].Play();
+				}
+				
+
 				prevSuspicionTime = Time.time;
 				isUp = false;
 
