@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a6bab4f93ffdfd9459a4cc7dbbd7007f
-timeCreated: 1429840800
+guid: 22e9024cbf76cac468285420cf9777cc
+timeCreated: 1430321355
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -11,60 +11,60 @@ ModelImporter:
     100006: elbow_R
     100008: foot_L
     100010: foot_R
-    100012: head
-    100014: knee_L
-    100016: knee_R
-    100018: neck
-    100020: pCube1
-    100022: pCube2
-    100024: polySurface1
-    100026: pPyramid1
-    100028: shoulder_L
-    100030: shoulder_R
-    100032: //RootNode
-    100034: spine
-    100036: thigh_L
-    100038: thigh_R
-    100040: transform1
-    100042: transform2
-    100044: waist
-    100046: wrist_L
-    100048: wrist_Lq
-    100050: wrist_R
-    100052: wrist_Rq
-    100054: group
+    100012: group
+    100014: head
+    100016: knee_L
+    100018: knee_R
+    100020: neck
+    100022: pCube1
+    100024: pCube2
+    100026: polySurface1
+    100028: pPyramid1
+    100030: shoulder_L
+    100032: shoulder_R
+    100034: //RootNode
+    100036: spine
+    100038: thigh_L
+    100040: thigh_R
+    100042: transform1
+    100044: transform2
+    100046: waist
+    100048: wrist_L
+    100050: wrist_Lq
+    100052: wrist_R
+    100054: wrist_Rq
     400000: ankle_L
     400002: ankle_R
     400004: elbow_L
     400006: elbow_R
     400008: foot_L
     400010: foot_R
-    400012: head
-    400014: knee_L
-    400016: knee_R
-    400018: neck
-    400020: pCube1
-    400022: pCube2
-    400024: polySurface1
-    400026: pPyramid1
-    400028: shoulder_L
-    400030: shoulder_R
-    400032: //RootNode
-    400034: spine
-    400036: thigh_L
-    400038: thigh_R
-    400040: transform1
-    400042: transform2
-    400044: waist
-    400046: wrist_L
-    400048: wrist_Lq
-    400050: wrist_R
-    400052: wrist_Rq
-    400054: group
+    400012: group
+    400014: head
+    400016: knee_L
+    400018: knee_R
+    400020: neck
+    400022: pCube1
+    400024: pCube2
+    400026: polySurface1
+    400028: pPyramid1
+    400030: shoulder_L
+    400032: shoulder_R
+    400034: //RootNode
+    400036: spine
+    400038: thigh_L
+    400040: thigh_R
+    400042: transform1
+    400044: transform2
+    400046: waist
+    400048: wrist_L
+    400050: wrist_Lq
+    400052: wrist_R
+    400054: wrist_Rq
     2300000: pPyramid1
     3300000: pPyramid1
-    4300000: polySurface1
-    4300002: pPyramid1
+    4300000: pPyramid1
+    4300002: polySurface1
     7400000: Take 001
     9500000: //RootNode
     13700000: polySurface1

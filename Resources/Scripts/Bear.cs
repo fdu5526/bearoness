@@ -24,7 +24,7 @@ public class Bear : MonoBehaviour
   public void IncreaseSuspicion(float amount)
   {
     lastSuspicionTime = Time.time;
-    //TODOsuspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
   }
 
   // if player is completely discovered, no going back to pretending

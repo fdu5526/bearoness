@@ -32,6 +32,7 @@ ModelImporter:
     100048: wrist_Lq
     100050: wrist_R
     100052: wrist_Rq
+    100054: group
     400000: ankle_L
     400002: ankle_R
     400004: elbow_L
@@ -59,6 +60,7 @@ ModelImporter:
     400048: wrist_Lq
     400050: wrist_R
     400052: wrist_Rq
+    400054: group
     2300000: pPyramid1
     3300000: pPyramid1
     4300000: polySurface1

@@ -799,6 +799,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1573683208}
     m_Modifications:
+    - target: {fileID: 11410618, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
       propertyPath: m_LocalPosition.x
       value: -2.87286377
@@ -5395,6 +5399,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1573683208}
     m_Modifications:
+    - target: {fileID: 11410618, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
       propertyPath: m_LocalPosition.x
       value: -24.0728455
@@ -5983,6 +5991,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1573683208}
     m_Modifications:
+    - target: {fileID: 11410618, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
       propertyPath: m_LocalPosition.x
       value: -12.9728394
@@ -6029,6 +6041,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1573683208}
     m_Modifications:
+    - target: {fileID: 11410618, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.32714844
