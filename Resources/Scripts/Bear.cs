@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 
@@ -35,8 +36,9 @@ public class Bear : MonoBehaviour
   private const float deltaSuspicion = 0.05f;
   private float lastSuspicionTime;
 
-  // the actual bear model
+  // the actual bear model, and suspicion meter
   private GameObject bearModel;
+  private Slider suspicionMeter;
 
   private bool isWalking;
 
@@ -72,6 +74,7 @@ public class Bear : MonoBehaviour
     run4 = audios[2];
 
     bearModel = GetComponent<Transform>().Find("BearModel").gameObject;
+    suspicionMeter = GameObject.Find("UI").GetComponent<Transform>().Find("SuspicionMeter").gameObject.GetComponent<Slider>();
     SwitchLegMode();
 
 	}
@@ -325,6 +328,7 @@ public class Bear : MonoBehaviour
       ChangeToRandomClothing();
     }
 
+    suspicionMeter.value = suspicionPercent;
 
     if(!isDisabled)
 		{
