@@ -137,14 +137,10 @@ public class Prince : MonoBehaviour {
 	void Update () 
 	{	
 
-		checkBearDistance();
+		//checkBearDistance();
 
 		if (danceCirclePresent){
 			SetDanceCirclePosition();
-		}
-
-		if (Input.GetKey(KeyCode.E)){
-			Debug.Log("fuck dude you pressed e");
 		}
 
 		if (Input.GetKeyDown(KeyCode.E) && distanceClosed){
