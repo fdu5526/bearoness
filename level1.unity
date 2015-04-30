@@ -337,6 +337,7 @@ MonoBehaviour:
   - {fileID: 1099779734}
   - {fileID: 456650857}
   - {fileID: 1320684629}
+  hasSuspWaypoints: 0
   moveSpeed: 6
 --- !u!65 &6395266
 BoxCollider:
@@ -555,7 +556,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fafc2d430d77dcd4bb0c1f92f71e7825, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &18076892
+--- !u!4 &18076892 stripped
 Transform:
   m_PrefabParentObject: {fileID: 472354, guid: fafc2d430d77dcd4bb0c1f92f71e7825, type: 2}
   m_PrefabInternal: {fileID: 18076891}
@@ -8495,6 +8496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &313277170
 BoxCollider:
@@ -9291,6 +9293,7 @@ MonoBehaviour:
   - {fileID: 211662731}
   - {fileID: 2057375168}
   - {fileID: 231524324}
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &340415831
 BoxCollider:
@@ -12127,6 +12130,34 @@ Prefab:
 
 
         Move with WASD, and press SPACEBAR to continue.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 976
+      objectReference: {fileID: 0}
+    - target: {fileID: 22412528, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -66
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
@@ -15827,6 +15858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &576196219
 BoxCollider:
@@ -21181,6 +21213,7 @@ MonoBehaviour:
   - {fileID: 1099779734}
   - {fileID: 456650857}
   - {fileID: 73529598}
+  hasSuspWaypoints: 0
   moveSpeed: 5
 --- !u!65 &794589760
 BoxCollider:
@@ -23718,7 +23751,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &883183979
+--- !u!4 &883183979 stripped
 Transform:
   m_PrefabParentObject: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
   m_PrefabInternal: {fileID: 883183978}
@@ -26158,7 +26191,7 @@ Transform:
   m_PrefabParentObject: {fileID: 470312, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1009986233}
-  m_LocalRotation: {x: .194092408, y: .815719008, z: .126135334, w: .530113816}
+  m_LocalRotation: {x: .194092378, y: .815718889, z: .126135319, w: .530113757}
   m_LocalPosition: {x: .00735873124, y: .00106469996, z: .000316625519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -26535,7 +26568,7 @@ Transform:
   m_PrefabParentObject: {fileID: 402354, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1037470677}
-  m_LocalRotation: {x: .194092408, y: .815719008, z: .126135334, w: .530113816}
+  m_LocalRotation: {x: .194092378, y: .815718889, z: .126135319, w: .530113757}
   m_LocalPosition: {x: -.00735898828, y: -.0010647031, z: -.000317094993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -30347,6 +30380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &1182159181
 BoxCollider:
@@ -31291,6 +31325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &1212343679
 BoxCollider:
@@ -40604,6 +40639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &1574947387
 BoxCollider:
@@ -42255,6 +42291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &1619076591
 BoxCollider:
@@ -48525,6 +48562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &1892431499
 BoxCollider:
@@ -49111,6 +49149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   suspWaypoints: []
+  hasSuspWaypoints: 0
   moveSpeed: 8
 --- !u!65 &1906969665
 BoxCollider:
@@ -53138,7 +53177,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!224 &2090492947
+--- !u!224 &2090492947 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22433858, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
     type: 2}

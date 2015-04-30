@@ -31,7 +31,7 @@ public class CoatCloset : MonoBehaviour {
 
 	void OnTriggerExit(Collider collider)
 	{
-		bool b = collider.CompareTag("Bear");
+		bool b = !(collider.CompareTag("Bear"));
 		closetButton.SetActive(b);
 		closedDistance = b;
 	}

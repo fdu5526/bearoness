@@ -14,7 +14,7 @@ public class musicController : MonoBehaviour {
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
 
-		AudioSource[] audios = GetComponents<AudioSource>(); 
+		audios = GetComponents<AudioSource>(); 
 		normMusic = audios[0];
 		detectMusic = audios[1];
 	}
