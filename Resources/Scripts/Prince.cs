@@ -107,6 +107,7 @@ public class Prince : MonoBehaviour {
 	{
 		Vector3 direction = currentWaypoint.transform.position - transform.position;
 		Vector3 moveVector = direction.normalized * moveSpeed * Time.deltaTime;
+		moveVector = new Vector3(moveVector.x, 0f, moveVector.z);
 		transform.position += moveVector;
 		//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4 * Time.deltaTime);
 
