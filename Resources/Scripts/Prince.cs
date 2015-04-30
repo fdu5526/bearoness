@@ -190,8 +190,14 @@ public class Prince : MonoBehaviour {
 						danceTutWindow.SetActive(false);
 						Time.timeScale = 1;
 						activeDanceTut = false;
+
+						AudioSource[] musics = GameObject.Find("Main Camera").GetComponents<AudioSource>();
+
+						musics[0].Stop();
+						musics[2].Play();
 					}
 			}
+
 			danceMeter.SetActive(true);
 			danceCirclePresent = true;
 			danceCircle.SetActive(true);

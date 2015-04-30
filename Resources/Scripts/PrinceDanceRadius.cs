@@ -6,7 +6,7 @@ public class PrinceDanceRadius : MonoBehaviour {
 	private Bear bearScript, princeScript;
 	private bool isDancing, pressedE;
 
-	private float defaultDiameter = 5f;
+	private float defaultDiameter = 10f;
 
 	private const float frameReduce = -0.05f;
 
