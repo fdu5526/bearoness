@@ -180,6 +180,7 @@ public class Prince : MonoBehaviour {
 			pressedE = true;
 			activeDanceTut = true;
 			Time.timeScale = 0;
+			button.SetActive(false);
 		}
 
 		if (danceValue >= 100f)
