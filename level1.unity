@@ -590,7 +590,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fafc2d430d77dcd4bb0c1f92f71e7825, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &18076892
+--- !u!4 &18076892 stripped
 Transform:
   m_PrefabParentObject: {fileID: 409122, guid: fafc2d430d77dcd4bb0c1f92f71e7825, type: 2}
   m_PrefabInternal: {fileID: 18076891}
@@ -2986,7 +2986,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f12fd6c1b39ea24eb8d6b3d757a0b57, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &115933143
+--- !u!1 &115933143 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 187190, guid: 0f12fd6c1b39ea24eb8d6b3d757a0b57, type: 2}
   m_PrefabInternal: {fileID: 115933142}
@@ -8174,70 +8174,6 @@ Transform:
   - {fileID: 1666520107}
   m_Father: {fileID: 617894025}
   m_RootOrder: 0
---- !u!1 &300393677
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 188300, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 300393678}
-  - 222: {fileID: 300393680}
-  - 114: {fileID: 300393679}
-  m_Layer: 5
-  m_Name: FadeBlack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &300393678
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22434638, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 300393677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1775640328}
-  m_RootOrder: 5
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -74, y: -159.000015}
-  m_SizeDelta: {x: 2000, y: 2000}
-  m_Pivot: {x: .5, y: .5}
---- !u!114 &300393679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11444004, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 300393677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &300393680
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22253318, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 300393677}
 --- !u!1 &301435459
 GameObject:
   m_ObjectHideFlags: 0
@@ -23443,7 +23379,7 @@ RectTransform:
   - {fileID: 1922329898}
   - {fileID: 341893587}
   m_Father: {fileID: 1775640328}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -222, y: -152}
@@ -24084,7 +24020,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &883183979
+--- !u!4 &883183979 stripped
 Transform:
   m_PrefabParentObject: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
   m_PrefabInternal: {fileID: 883183978}
@@ -24952,7 +24888,7 @@ GameObject:
   - 114: {fileID: 917531929}
   - 114: {fileID: 917531928}
   m_Layer: 5
-  m_Name: closetE 1
+  m_Name: closetE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24971,7 +24907,7 @@ RectTransform:
   m_Children:
   - {fileID: 1102207881}
   m_Father: {fileID: 1775640328}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 808, y: -140}
@@ -47401,7 +47337,6 @@ RectTransform:
   - {fileID: 16432004}
   - {fileID: 47851218}
   - {fileID: 1079209686}
-  - {fileID: 300393678}
   - {fileID: 855479945}
   - {fileID: 917531927}
   m_Father: {fileID: 0}
