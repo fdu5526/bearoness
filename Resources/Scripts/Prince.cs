@@ -16,6 +16,9 @@ public class Prince : MonoBehaviour {
 	private const float maxSpeed = 3f;
 	private const float minStopTime = 0.3f;
 	private const float maxStopTime = 2f;
+	
+	// actual NPC model
+	private GameObject model;
 
 	//waypoints
 	public GameObject[] waypoints;
@@ -28,7 +31,7 @@ public class Prince : MonoBehaviour {
 	private GameObject danceMeter;
 	private Slider danceMeterSlider;
 	private bool danceCirclePresent;
-	private float danceValue;
+	public float danceValue;
 
 	//dance speed
 	public int moveSpeed;
@@ -71,6 +74,8 @@ public class Prince : MonoBehaviour {
 		button = GameObject.Find("e key");
 		audios = GetComponents<AudioSource>();
 
+		model = GetComponent<Transform>().Find("model").gameObject;
+
 		pressedE = false;
 		danceCirclePresent = false;
 		prevStartWalkTime = 0f;
@@ -111,6 +116,7 @@ public class Prince : MonoBehaviour {
 	// there is a bear in the room omg run away ahhhhhhhhhhhhhhhhh
 	void RunAway()
 	{
+		model.GetComponent<Animator>().SetInteger("walkState",2);
 		Vector3 tp = GetComponent<Transform>().position;
 		Vector3 bp = bear.GetComponent<Transform>().position;
 		
@@ -155,15 +161,18 @@ public class Prince : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
-		danceMeterSlider.value = danceValue;
-		checkBearDistance();
+		if(!pressedE)
+		{
+			checkBearDistance();
+		}
 
 		if (activeDanceTut == false)
 		{
 			danceTutWindow.SetActive(false);
 		}
 
-		if (danceCirclePresent){
+		if (danceCirclePresent)
+		{
 			SetDanceCirclePosition();
 		}
 
@@ -171,6 +180,7 @@ public class Prince : MonoBehaviour {
 			pressedE = true;
 			activeDanceTut = true;
 			Time.timeScale = 0;
+			button.SetActive(false);
 		}
 
 		if (danceValue >= 100f)
@@ -183,6 +193,8 @@ public class Prince : MonoBehaviour {
 
 		if(!bearScript.isDiscovered && pressedE )	// drop dance circle and get down my dude
 		{
+			danceMeterSlider.value = danceValue;
+
 			if (activeDanceTut)
 			{
 				danceTutWindow.SetActive(true);
@@ -196,12 +208,14 @@ public class Prince : MonoBehaviour {
 
 						musics[0].Stop();
 						musics[2].Play();
+
+						model.GetComponent<Animator>().SetInteger("walkState",1);
+						
+						danceMeter.SetActive(true);
+						danceCirclePresent = true;
+						danceCircle.SetActive(true);
 					}
 			}
-
-			danceMeter.SetActive(true);
-			danceCirclePresent = true;
-			danceCircle.SetActive(true);
 			MoveTowardWaypoint();
 
 			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
@@ -212,20 +226,10 @@ public class Prince : MonoBehaviour {
 				currentWaypoint = waypoints [currentIndex];
 			}
 
-			if (Vector3.Distance(bear.transform.position, transform.position) < 10f && danceCirclePresent && bearScript.isOnTwoLegs)
+			if (danceCirclePresent && danceValue > 0f)
 			{
-				danceValue += 0.15f;
-
-			}
-
-			else if (danceCirclePresent && Vector3.Distance(bear.transform.position, transform.position) > 5f)
-			{
-				if (danceValue > 0f)
-				{
 					danceValue -= 0.04f;
-				}
 			}
-
 		}
 		else if (bearScript.isDiscovered)				// run away if there is a bear
 		{

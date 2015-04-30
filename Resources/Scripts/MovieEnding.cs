@@ -18,7 +18,7 @@ public class MovieEnding : MonoBehaviour {
 	{
 		if(!movTexture.isPlaying)
 		{
-			print("dsf");
+			Application.Quit();
 		}
 	}
 }
