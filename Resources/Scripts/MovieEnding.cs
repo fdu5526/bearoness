@@ -10,6 +10,7 @@ public class MovieEnding : MonoBehaviour {
 	{
 		movTexture = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
 		movTexture.Play();
+		GetComponent<AudioSource>().Play();
 	}
 	
 	// Update is called once per frame

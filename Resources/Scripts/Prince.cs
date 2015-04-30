@@ -177,6 +177,7 @@ public class Prince : MonoBehaviour {
 		{
 			
 			//you fuckin did it
+			Application.LoadLevel ("endingAnimation");
 		}
 
 
@@ -211,7 +212,7 @@ public class Prince : MonoBehaviour {
 				currentWaypoint = waypoints [currentIndex];
 			}
 
-			if (Vector3.Distance(bear.transform.position, transform.position) < 5f && danceCirclePresent && bearScript.isOnTwoLegs)
+			if (Vector3.Distance(bear.transform.position, transform.position) < 10f && danceCirclePresent && bearScript.isOnTwoLegs)
 			{
 				danceValue += 0.15f;
 
