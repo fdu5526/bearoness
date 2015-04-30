@@ -4031,6 +4031,10 @@ Prefab:
       propertyPath: waypoints.Array.size
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 11410618, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
+      propertyPath: suspWaypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 410874, guid: 29a4e513bff01294dbfe9e0412bd2211, type: 2}
       propertyPath: m_LocalPosition.x
       value: -37.1728516
