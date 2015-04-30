@@ -26,7 +26,7 @@ public class Bear : MonoBehaviour
     if(!isDisabled)
     {
       lastSuspicionTime = Time.time;
-      //suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+      suspicionPercent = Math.Min(100f, suspicionPercent + amount);
     }
   }
 
@@ -39,7 +39,7 @@ public class Bear : MonoBehaviour
   // amount of suspicion the player loses per frame
   // the last time player was suspicious
   private const float suspicionCooldown = 5f;
-  private const float deltaSuspicion = 0.05f;
+  private const float deltaSuspicion = 0.1f;
   private float lastSuspicionTime;
 
   // the actual bear model, and suspicion meter
@@ -85,17 +85,20 @@ public class Bear : MonoBehaviour
 
 	}
 
-
+  // let player have drink platter
   public void GiveDrinkPlatter()
   {
+    audios[3].Play();
     hasDrinkPlatter = true;
     GameObject platter = GameObject.Find("DrinkPlatter");
     platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,2.5f,0f);
     platter.GetComponent<Transform>().parent = bearModel.GetComponent<Transform>();
   }
 
+  // delete the drink platter
   public void RemoveDrinkPlatter()
   {
+    audios[3].Play();
     hasDrinkPlatter = false;
     GameObject platter = GameObject.Find("DrinkPlatter");
     Destroy(platter);

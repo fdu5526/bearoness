@@ -89,12 +89,13 @@ public class RivalPrincess : MonoBehaviour {
 
     	audios[3].Play();
 
-    	Invoke( "GetPoisoned", 6);	
+    	Invoke( "GetPoisoned", 6);
+    	Invoke( "Level2Victory", 10);
 
     }
   }
 
-
+  // get poisoned, run away really fast, ignore gravity and collision
   void GetPoisoned()
   {
   	GetComponent<Rigidbody>().useGravity = false;
@@ -104,6 +105,13 @@ public class RivalPrincess : MonoBehaviour {
   	GetComponent<Transform>().eulerAngles = new Vector3(0f,180f,0f);
   	model.GetComponent<Animator>().SetInteger("walkState",2);
   	audios[2].Play();
+  }
+
+  // move onto level 3
+  void Level2Victory()
+  {
+  	GameObject v = GameObject.Find("UI").GetComponent<Transform>().Find("Victory pop-up").gameObject;
+  	v.SetActive(true);
   }
 
 
