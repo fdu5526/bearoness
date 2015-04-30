@@ -133,7 +133,8 @@ public class Prince : MonoBehaviour {
 
 	void checkBearDistance()
 	{
-		if (Vector3.Distance(bear.transform.position, transform.position) < 10f)
+		if (!bearScript.isDiscovered &&
+				Vector3.Distance(bear.transform.position, transform.position) < 10f)
 		{
 			distanceClosed = true;
 			if (pressedE == false)
@@ -231,7 +232,7 @@ public class Prince : MonoBehaviour {
 
 			if (danceCirclePresent && danceValue > 0f)
 			{
-					danceValue -= 0.05f;
+					danceValue -= 0.03f;
 			}
 		}
 		else if (bearScript.isDiscovered)				// run away if there is a bear

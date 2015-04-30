@@ -13,7 +13,8 @@ public class CoatCloset : MonoBehaviour {
 	public int checkpointNumber;
 
 
-	void Start(){
+	void Start()
+	{
 		bear = GameObject.Find("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		closetButton = GameObject.Find("UI").GetComponent<Transform>().GetChild(6).gameObject;
@@ -23,17 +24,21 @@ public class CoatCloset : MonoBehaviour {
 	// enter the coat closet, time to reset
 	void OnTriggerEnter(Collider collider)
 	{
-		bool b = collider.CompareTag("Bear");
-		closetButton.SetActive(b);
-		closedDistance = b;
+		if(collider.CompareTag("Bear"))
+		{
+			closetButton.SetActive(true);
+			closedDistance = true;
+		}
 	}
 
 
 	void OnTriggerExit(Collider collider)
 	{
-		bool b = !(collider.CompareTag("Bear"));
-		closetButton.SetActive(b);
-		closedDistance = b;
+		if(collider.CompareTag("Bear"))
+		{
+			closetButton.SetActive(false);
+			closedDistance = false;
+		}
 	}
 
 

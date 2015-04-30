@@ -27,7 +27,7 @@ public class PrinceDanceRadius : MonoBehaviour {
 		// bear is within range
 		if(collider.CompareTag("Bear") && bearScript.isOnTwoLegs)
 		{
-			princeScript.danceValue += 0.1f;
+			princeScript.danceValue += 0.06f;
 		}
 	}
 	
