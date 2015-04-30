@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Minimap : MonoBehaviour {
 
-	private GameObject indicator;
+	private Transform indicatorTransform;
 	private int levelNumber;
 	private Transform bearTransform;
 
@@ -11,7 +11,7 @@ public class Minimap : MonoBehaviour {
 	void Start () 
 	{
 		bearTransform = GameObject.Find("Bear").GetComponent<Transform>();
-		indicator = GetComponent<Transform>().Find("indicator").gameObject;
+		indicatorTransform = GetComponent<Transform>().Find("indicator");
 		levelNumber = (int)System.Char.GetNumericValue(Application.loadedLevelName[5]);
 	}
 
@@ -29,19 +29,19 @@ public class Minimap : MonoBehaviour {
 		switch(levelNumber)
 		{
 			case 1:
-				float ix = Remap(bz, 682f, 540f, 720f, 859f);
-				float iy = Remap(bx, 364f, 486f, 354f, 483f);
-				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
+				float ix = Remap(bz, 682f, 540f, -45f, 0f);
+				float iy = Remap(bx, 364f, 486f, -30f, 8f);
+				indicatorTransform.localPosition = new Vector3(ix, iy, 0f);
 				break;
 			case 2:
-				ix = Remap(bz, 680f, 548f, 720f, 859f);
-				iy = Remap(bx, 370f, 485f, 354f, 483f);
-				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
+				ix = Remap(bz, 680f, 548f, -45f, -2f);
+				iy = Remap(bx, 370f, 485f, -30f, 8f);
+				indicatorTransform.localPosition = new Vector3(ix, iy, 0f);
 				break;
 			case 3:
-				ix = Remap(bz, 680f, 548f, 720f, 859f);
-				iy = Remap(bx, 370f, 485f, 354f, 483f);
-				indicator.GetComponent<Transform>().position = new Vector3(ix, iy, 0f);
+				ix = Remap(bz, 680f, 548f, -45f, -2f);
+				iy = Remap(bx, 370f, 485f, -30f, 8f);
+				indicatorTransform.localPosition = new Vector3(ix, iy, 0f);
 				break;
 		}
 	}

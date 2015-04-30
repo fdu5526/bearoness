@@ -56,7 +56,44 @@ public class RegularNPC : MonoBehaviour {
 
 		GetComponent<Rigidbody>().centerOfMass = new Vector3(0f,-1f,0f);
 		model = GetComponent<Transform>().Find("model").gameObject;
+
+		ChangeToRandomClothing();
 	}
+
+
+	// swap out bear clothing to something random
+  private void ChangeToRandomClothing()
+  {
+    GameObject polysurface = model.GetComponent<Transform>().Find("group").Find("polySurface1").gameObject;
+
+    int ri1 = UnityEngine.Random.Range(0, 9);
+    int ri2 = UnityEngine.Random.Range(0, 9);
+    while(ri2 == ri1)
+    {
+      ri2 = UnityEngine.Random.Range(0, 9);
+    }
+
+
+    Material m1 = Resources.Load("ClothesMaterials/" + ri1, typeof(Material)) as Material;
+    Material m2 = Resources.Load("ClothesMaterials/" + ri2, typeof(Material)) as Material;
+    
+    Renderer r = polysurface.GetComponent<Renderer>();
+    Material[] materials = r.materials;
+    
+    if(isFemale)
+    {
+    	materials[2] = m2;
+    	materials[1] = m1;
+    }
+    else
+    {
+    	materials[2] = m2;
+    }
+
+    r.materials = materials;
+    
+  }
+
 
 	// load file name's contents into the list
 	private void LoadDialoguesFromFileToList(string name, List<string> list)
@@ -105,7 +142,17 @@ public class RegularNPC : MonoBehaviour {
 			if(Time.time - prevSuspicionTime > suspicionCooldown)
 			{
 				bearScript.IncreaseSuspicion(suspicionIncreaseUponCollision);
-				audios[0].Play();
+				
+				if(bearScript.isDiscovered)
+				{
+					audios[1].Play();
+				}
+				else
+				{
+					audios[0].Play();
+				}
+				
+
 				prevSuspicionTime = Time.time;
 				isUp = false;
 
@@ -122,7 +169,7 @@ public class RegularNPC : MonoBehaviour {
     if(collider.CompareTag("Bear") && 
     	 !bearScript.isDiscovered && 
     	 Time.time - preDialogueTime > dialogueCooldown &&
-    	 Input.GetKeyDown("space"))
+    	 Input.GetKeyDown("e"))
     {
     	if(bearScript.suspicionPercent < 40f)
     	{
@@ -205,6 +252,7 @@ public class RegularNPC : MonoBehaviour {
 			{
 				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;	
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				GetComponent<Transform>().eulerAngles = Vector3.zero;
 				model.GetComponent<Animator>().SetInteger("walkState",0);
 				isUp = true;
 			}

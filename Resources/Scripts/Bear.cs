@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 
@@ -16,11 +17,17 @@ public class Bear : MonoBehaviour
   // whether player can move
   public bool isDisabled;
 
+  // whether bear has drink platter
+  public bool hasDrinkPlatter;
+
   // player does suspicious things, gain suspicion
   public void IncreaseSuspicion(float amount)
   {
-    lastSuspicionTime = Time.time;
-    suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    if(!isDisabled)
+    {
+      lastSuspicionTime = Time.time;
+      //suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    }
   }
 
   // if player is completely discovered, no going back to pretending
@@ -35,8 +42,9 @@ public class Bear : MonoBehaviour
   private const float deltaSuspicion = 0.05f;
   private float lastSuspicionTime;
 
-  // the actual bear model
+  // the actual bear model, and suspicion meter
   private GameObject bearModel;
+  private Slider suspicionMeter;
 
   private bool isWalking;
 
@@ -46,7 +54,7 @@ public class Bear : MonoBehaviour
   private float yRotation;
   
   // speed and force for 2 leg mode
-  private const float default2LegForce = 10f;
+  private const float default2LegForce = 20f;
   private const float max2LegWalkSpeed = 7f;
     
   // how much player tilt during 2 leg mode
@@ -72,11 +80,40 @@ public class Bear : MonoBehaviour
     run4 = audios[2];
 
     bearModel = GetComponent<Transform>().Find("BearModel").gameObject;
+    suspicionMeter = GameObject.Find("UI").GetComponent<Transform>().Find("SuspicionMeter").gameObject.GetComponent<Slider>();
     SwitchLegMode();
 
 	}
 
 
+  public void GiveDrinkPlatter()
+  {
+    hasDrinkPlatter = true;
+    GameObject platter = GameObject.Find("DrinkPlatter");
+    platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,2.5f,0f);
+    platter.GetComponent<Transform>().parent = bearModel.GetComponent<Transform>();
+  }
+
+  public void RemoveDrinkPlatter()
+  {
+    hasDrinkPlatter = false;
+    GameObject platter = GameObject.Find("DrinkPlatter");
+    Destroy(platter);
+  }
+
+
+  // for interaction systems
+  void OnTriggerStay(Collider collider)
+  {
+    if(!hasDrinkPlatter && 
+       Input.GetKeyDown("e") && 
+       collider.CompareTag("DrinkPlatter"))
+    {
+      GiveDrinkPlatter();
+    }
+  }
+
+  // swap to current leg mode
   private void SwitchLegMode()
   {
     bearModel.GetComponent<Animator>().SetBool("isOnTwoLegs", isOnTwoLegs);
@@ -102,6 +139,33 @@ public class Bear : MonoBehaviour
       SwitchLegMode();
 		}
 	}
+
+  // swap out bear clothing to something random
+  private void ChangeToRandomClothing()
+  {
+    GameObject polysurface = bearModel.GetComponent<Transform>().Find("polySurface1").gameObject;
+
+    int ri1 = UnityEngine.Random.Range(0, 9);
+    int ri2 = UnityEngine.Random.Range(0, 9);
+    while(ri2 == ri1)
+    {
+      ri2 = UnityEngine.Random.Range(0, 9);
+    }
+
+
+    Material m1 = Resources.Load("ClothesMaterials/" + ri1, typeof(Material)) as Material;
+    Material m2 = Resources.Load("ClothesMaterials/" + ri2, typeof(Material)) as Material;
+    
+    Renderer r = polysurface.GetComponent<Renderer>();
+    Material[] materials = r.materials;
+    
+    materials[1] = m1;
+    materials[2] = m2;
+
+    r.materials = materials;
+    
+  }
+
 
 	// get player keyboard input, do things
 	private void CheckMovement()
@@ -168,11 +232,22 @@ public class Bear : MonoBehaviour
 
       // get which direction player is facing
       v = GetComponent<Rigidbody>().velocity;
-      yRotation = r.y;
+
       if(v.magnitude > 1f)  // prevent crazy bounce due to small velocity changes
       {
-        yRotation = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(0f,1f));
-        yRotation = v.x > 0f ? yRotation : -yRotation;
+        float tempy = Vector2.Angle(new Vector2(v.x, v.z), new Vector2(0f,1f));
+        tempy = v.x > 0f ? tempy : -tempy;
+
+        // black magic hax to fix immediate 180 degree flip
+        float dy = Math.Abs(tempy - yRotation);
+        if(dy > 140f && dy < 300f)
+        {
+          yRotation = (yRotation + tempy) / 2;
+        }
+        else
+        {
+          yRotation = tempy;
+        }
       }
 
       // perform actual rotation
@@ -281,6 +356,14 @@ public class Bear : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+    //TODO
+    if(Input.GetKeyDown("space"))
+    {
+      ChangeToRandomClothing();
+    }
+
+    suspicionMeter.value = suspicionPercent;
+
     if(!isDisabled)
 		{
       CheckLegsMode();
