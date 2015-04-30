@@ -76,7 +76,7 @@ public class Bear : MonoBehaviour
 
 		audios = GetComponents<AudioSource>();
     growl = audios[0];
-    run2 = audios[1];
+    //run2 = audios[1];
     run4 = audios[2];
 
     bearModel = GetComponent<Transform>().Find("BearModel").gameObject;

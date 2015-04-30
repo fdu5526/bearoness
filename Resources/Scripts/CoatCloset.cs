@@ -4,7 +4,7 @@ using System.Collections;
 
 public class CoatCloset : MonoBehaviour {
 
-	private bool pressedE, closedDistance, activated;
+	private bool pressedE, closedDistance;
 	private GameObject closetButton;
 	private GameObject bear;
 	private Bear bearScript;
@@ -16,38 +16,40 @@ public class CoatCloset : MonoBehaviour {
 	void Start(){
 		bear = GameObject.Find("Bear");
 		bearScript = bear.GetComponent<Bear>();
-		//closetButton = GameObject.Find("closetE");
-		//fadeBlack = GameObject.Find("FadeBlackObj").GetComponent<Image>();
-		//closetButton.SetActive(false);
-		//closedDistance = false;
-		activated = false;
-		//c = fadeBlack.color;
-		//c.a = 0;
-		//fadeBlack.color = c;
+		closetButton = GameObject.Find("UI").GetComponent<Transform>().GetChild(6).gameObject;
+
+		closedDistance = false;
 	}
 
 	// enter the coat closet, time to reset
-	void checkDistance()
+	void OnTriggerEnter(Collider collider)
 	{
-		if (Vector3.Distance(transform.position, bear.transform.position) < 5f)
-		{
-			Debug.Log("in range");
-			closedDistance = true;
-		}
-
-		else{
-			closedDistance = false;
-		}
+		bool b = collider.CompareTag("Bear");
+		closetButton.SetActive(b);
+		closedDistance = b;
 	}
 
-	/*void fadeToBlack()
+
+	void OnTriggerExit(Collider collider)
 	{
-		c = fadeBlack.color; 
-		while (c.a < 100f){
-			c.a += 10f;
-			fadeBlack.color = c;
+		bool b = collider.CompareTag("Bear");
+		closetButton.SetActive(b);
+		closedDistance = b;
+	}
+
+
+	void OnTriggerStay(Collider collider)
+	{
+		if (Input.GetKeyDown("e") && closedDistance)
+		{
+			closetButton.SetActive(false);
+			GetComponent<AudioSource>().Play();
+			bearScript.isDisabled = true;
+
+			// wait 2 seconds, to let changing audio play
+			Invoke( "Reset", 4);
 		}
-	}*/
+	}
 
 	// reset the level
 	private void Reset() 
@@ -65,40 +67,10 @@ public class CoatCloset : MonoBehaviour {
 		Application.LoadLevel (levelName);
 	}
 
-	//activate UI if bear closes distance with closet
-	void activateButton()
-	{
-		if (closedDistance && activated == false)
-		{
-			closetButton.SetActive(true);
-			activated = true;
-		}
-
-		else if (!closedDistance && activated == true)
-		{
-			closetButton.SetActive(false);
-			activated = false;
-		}
-	}
-
-	void changeActivate()
-	{
-		activated = !activated;
-	}
 
 	void Update ()
 	{
 		//activateButton();
 		//checkDistance();
-
-		if (Input.GetKeyDown("e") && closedDistance)
-		{
-			//closetButton.SetActive(false);
-			GetComponent<AudioSource>().Play();
-			//fadeToBlack();
-			// wait 2 seconds, to let changing audio play
-			Invoke( "Reset", 2);	
-			Invoke ("changeActivate", 2);
-		}
 	}
 }
