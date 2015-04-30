@@ -16,6 +16,9 @@ public class Prince : MonoBehaviour {
 	private const float maxSpeed = 3f;
 	private const float minStopTime = 0.3f;
 	private const float maxStopTime = 2f;
+	
+	// actual NPC model
+	private GameObject model;
 
 	//waypoints
 	public GameObject[] waypoints;
@@ -71,6 +74,8 @@ public class Prince : MonoBehaviour {
 		button = GameObject.Find("e key");
 		audios = GetComponents<AudioSource>();
 
+		model = GetComponent<Transform>().Find("model").gameObject;
+
 		pressedE = false;
 		danceCirclePresent = false;
 		prevStartWalkTime = 0f;
@@ -111,6 +116,7 @@ public class Prince : MonoBehaviour {
 	// there is a bear in the room omg run away ahhhhhhhhhhhhhhhhh
 	void RunAway()
 	{
+		model.GetComponent<Animator>().SetInteger("walkState",2);
 		Vector3 tp = GetComponent<Transform>().position;
 		Vector3 bp = bear.GetComponent<Transform>().position;
 		
@@ -196,12 +202,14 @@ public class Prince : MonoBehaviour {
 
 						musics[0].Stop();
 						musics[2].Play();
+
+						model.GetComponent<Animator>().SetInteger("walkState",1);
+						
+						danceMeter.SetActive(true);
+						danceCirclePresent = true;
+						danceCircle.SetActive(true);
 					}
 			}
-
-			danceMeter.SetActive(true);
-			danceCirclePresent = true;
-			danceCircle.SetActive(true);
 			MoveTowardWaypoint();
 
 			if (Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) {
@@ -212,13 +220,13 @@ public class Prince : MonoBehaviour {
 				currentWaypoint = waypoints [currentIndex];
 			}
 
-			if (Vector3.Distance(bear.transform.position, transform.position) < 10f && danceCirclePresent && bearScript.isOnTwoLegs)
+			if ((bear.transform.position - transform.position).sqrMagnitude < 100f && danceCirclePresent && bearScript.isOnTwoLegs)
 			{
 				danceValue += 0.15f;
 
 			}
 
-			else if (danceCirclePresent && Vector3.Distance(bear.transform.position, transform.position) > 5f)
+			else if (danceCirclePresent && (bear.transform.position - transform.position).sqrMagnitude > 100f)
 			{
 				if (danceValue > 0f)
 				{
