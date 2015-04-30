@@ -21,9 +21,10 @@ public class Eating : MonoBehaviour {
 	private float startTime;
 
 	private float maxRudeness = 100f;
-	private float rudeness;
+	public float rudeness;
 	private float politenessGained = -4f;
 
+	private AudioSource[] audios;
 
 
 	// Use this for initialization
@@ -38,16 +39,21 @@ public class Eating : MonoBehaviour {
 
 		won = false;
 		started = false;
+
+		audios = GetComponents<AudioSource>();
 	}
 
 
-	void Lose(){
+	void Lose()
+	{
 		loseText.text = loseString;
 		losePanel.SetActive(true);
 		lose = true;
+		audios[0].Play();
 	}
 
-	void Win(){
+	void Win()
+	{
 		loseText.text = winString;
 		losePanel.SetActive(true);
 		won = true;
@@ -76,12 +82,20 @@ public class Eating : MonoBehaviour {
 	void Update () {
 		
 		// play the eating game
-		if(started){
-			if(rudeness >= 99.9f){
+		if(started && (!lose && !won))
+		{
+			if(rudeness >= 99.9f)
+			{
 				Lose ();
-			}else if(Time.timeSinceLevelLoad >= startTime + contestLength){
+			}
+			
+			else if(Time.timeSinceLevelLoad >= startTime + contestLength)
+			{
 				Win ();
-			}else{
+			}
+			
+			else
+			{
 				CheckControl();
 				IncreaseSlider();
 			}
