@@ -148,7 +148,7 @@ public class Prince : MonoBehaviour {
 	private void SetDanceCirclePosition()
 	{
 		Vector3 v = GetComponent<Transform>().position;
-		float y = GetComponent<Transform>().position.y - 1.08f;
+		float y = GetComponent<Transform>().position.y - 0.95f;
 		danceCircle.GetComponent<Transform>().position = new Vector3(v.x, y, v.z);
 	}
 	
