@@ -175,6 +175,7 @@ public class Prince : MonoBehaviour {
 
 		if (danceValue >= 100f)
 		{
+			
 			//you fuckin did it
 		}
 
@@ -206,7 +207,8 @@ public class Prince : MonoBehaviour {
 
 			if (Vector3.Distance(bear.transform.position, transform.position) < 5f && danceCirclePresent && bearScript.isOnTwoLegs)
 			{
-				danceValue += 0.1f;
+				danceValue += 0.15f;
+
 			}
 
 			else if (danceCirclePresent && Vector3.Distance(bear.transform.position, transform.position) > 5f)

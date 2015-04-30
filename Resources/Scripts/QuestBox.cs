@@ -11,7 +11,7 @@ public class QuestBox : MonoBehaviour {
 
 	private bool level2check1, level2check2;
 	Text questText;
-	string activeQuest = "Go to the Ballroom";
+	string activeQuest = "Go to the Dining Room";
 
 	// Use this for initialization
 	void Start () {
@@ -28,11 +28,14 @@ public class QuestBox : MonoBehaviour {
 
 		level2check1 = true;
 		level2check2 = false;
+
+		
 	}
 	
 	void ChangeQuest(string s){
 		questText.text = s;
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
