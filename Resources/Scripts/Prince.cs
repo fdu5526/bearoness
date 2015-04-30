@@ -220,13 +220,12 @@ public class Prince : MonoBehaviour {
 				currentWaypoint = waypoints [currentIndex];
 			}
 
-			if ((bear.transform.position - transform.position).sqrMagnitude < 100f && danceCirclePresent && bearScript.isOnTwoLegs)
+			if ((bear.transform.position - transform.position).sqrMagnitude < 40f && danceCirclePresent && bearScript.isOnTwoLegs)
 			{
 				danceValue += 0.15f;
 
 			}
-
-			else if (danceCirclePresent && (bear.transform.position - transform.position).sqrMagnitude > 100f)
+			else if (danceCirclePresent)
 			{
 				if (danceValue > 0f)
 				{
