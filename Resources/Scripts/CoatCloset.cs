@@ -20,10 +20,10 @@ public class CoatCloset : MonoBehaviour {
 	void Start(){
 		bear = GameObject.Find("Bear");
 		bearScript = bear.GetComponent<Bear>();
-		closetButton = GameObject.Find("closetE");
+		//closetButton = GameObject.Find("closetE");
 		//fadeBlack = GameObject.Find("FadeBlackObj").GetComponent<Image>();
-		closetButton.SetActive(false);
-		closedDistance = false;
+		//closetButton.SetActive(false);
+		//closedDistance = false;
 		activated = false;
 		//c = fadeBlack.color;
 		//c.a = 0;
@@ -92,12 +92,12 @@ public class CoatCloset : MonoBehaviour {
 
 	void Update ()
 	{
-		activateButton();
-		checkDistance();
+		//activateButton();
+		//checkDistance();
 
 		if (Input.GetKeyDown("e") && closedDistance)
 		{
-			closetButton.SetActive(false);
+			//closetButton.SetActive(false);
 			GetComponent<AudioSource>().Play();
 			//fadeToBlack();
 			// wait 2 seconds, to let changing audio play

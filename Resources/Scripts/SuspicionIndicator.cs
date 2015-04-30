@@ -8,6 +8,8 @@ public class SuspicionIndicator : MonoBehaviour {
 	public Sprite blue, green, orange, red;
 	Image image;
 
+	private Bear bearScript;
+
 	// Use this for initialization
 	void Start () {
 		suspicion = 0;
@@ -18,13 +20,15 @@ public class SuspicionIndicator : MonoBehaviour {
 		orange = Resources.Load <Sprite> ("Images/bearicon4");
 		red = Resources.Load <Sprite> ("Images/bearicon-v2");
 		*/
+
+		bearScript = GameObject.Find ("Bear").GetComponent<Bear>();
 		image.sprite = blue;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// get suspicion from bear
-		suspicion = GameObject.Find ("Bear").GetComponent<Bear>().suspicionPercent;
+		suspicion = bearScript.suspicionPercent;
 		
 		// change icon appropriately
 		if(suspicion >= 0f && suspicion < 25f){
