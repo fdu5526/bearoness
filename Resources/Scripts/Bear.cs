@@ -54,8 +54,8 @@ public class Bear : MonoBehaviour
   private float yRotation;
   
   // speed and force for 2 leg mode
-  private const float default2LegForce = 20f;
-  private const float max2LegWalkSpeed = 7f;
+  private const float default2LegForce = 10f;
+  private const float max2LegWalkSpeed = 4f;
     
   // how much player tilt during 2 leg mode
   private const float deltaTilt = 1f;
