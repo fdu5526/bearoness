@@ -17,7 +17,6 @@ public class CoatCloset : MonoBehaviour {
 		bear = GameObject.Find("Bear");
 		bearScript = bear.GetComponent<Bear>();
 		closetButton = GameObject.Find("UI").GetComponent<Transform>().GetChild(6).gameObject;
-
 		closedDistance = false;
 	}
 
