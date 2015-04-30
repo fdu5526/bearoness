@@ -7,10 +7,14 @@ public class CoatCloset : MonoBehaviour {
 	private bool pressedE, closedDistance, activated;
 	private GameObject closetButton;
 	//private Image fadeBlack;
+
 	private Color c;
 
 	private GameObject bear;
 	private Bear bearScript;
+
+	private string reload = "_reload";
+	public int checkpointNumber;
 
 
 	void Start(){
@@ -53,7 +57,15 @@ public class CoatCloset : MonoBehaviour {
 	private void Reset() 
 	{
 		string levelName = Application.loadedLevelName;
-		//levelName = levelName + "_reloaded";
+		/*if(levelName.Length < 8)
+		{
+			levelName = levelName + reload + checkpointNumber.ToString();
+		}
+		else
+		{
+			levelName = levelName.Substring(0, levelName.Length - 1) + checkpointNumber.ToString();
+		}*/
+		
 		Application.LoadLevel (levelName);
 	}
 
