@@ -50,12 +50,14 @@ public class Eating : MonoBehaviour {
 		losePanel.SetActive(true);
 		lose = true;
 		audios[0].Play();
+		audios[1].Stop();
 	}
 
 	void Win()
 	{
 		loseText.text = winString;
 		losePanel.SetActive(true);
+		audios[1].Stop();
 		won = true;
 	}
 
@@ -72,8 +74,9 @@ public class Eating : MonoBehaviour {
 
 	}
 	// increase rudeness automatically
-	void IncreaseSlider(){
-		rudeness += 0.5f;
+	void IncreaseSlider()
+	{
+		rudeness += Mathf.MoveTowards(0f, maxRudeness, 1f);
 		suspicionSlider.value = rudeness;
 		anim.speed = Mathf.MoveTowards(anim.speed, 2.5f, 0.15f);
 	}
@@ -84,6 +87,9 @@ public class Eating : MonoBehaviour {
 		// play the eating game
 		if(started && (!lose && !won))
 		{
+
+			audios[1].pitch = rudeness/maxRudeness * 2f + 1f;
+
 			if(rudeness >= 99.9f)
 			{
 				Lose ();
@@ -105,6 +111,7 @@ public class Eating : MonoBehaviour {
 		else if(!started && Input.GetKeyDown(KeyCode.Space))
 		{
 			started = true;
+			audios[1].Play();
 			startTime = Time.timeSinceLevelLoad;
 			//anim.SetBool("Eating", true);		
 		}
