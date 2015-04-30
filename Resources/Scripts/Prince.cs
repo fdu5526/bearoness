@@ -97,8 +97,9 @@ public class Prince : MonoBehaviour {
 		{
 			if (danceValue > 0f)
 				{
-					danceValue -= 0.04f;
+					danceValue -= 3f;
 				}
+			bearScript.IncreaseSuspicion(4f);
 			audios[0].Play();
 		}
 	}
@@ -230,7 +231,7 @@ public class Prince : MonoBehaviour {
 
 			if (danceCirclePresent && danceValue > 0f)
 			{
-					danceValue -= 0.04f;
+					danceValue -= 0.05f;
 			}
 		}
 		else if (bearScript.isDiscovered)				// run away if there is a bear
