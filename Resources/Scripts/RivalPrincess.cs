@@ -14,6 +14,7 @@ public class RivalPrincess : MonoBehaviour {
 	private const float getUpTime = 1.8f;
 	private bool isUp;
 	private Vector3 velocity;
+	private bool isPoisoned;
 
 	// actual NPC model
 	private GameObject model;
@@ -31,6 +32,7 @@ public class RivalPrincess : MonoBehaviour {
 	void Start ()
 	{
 		isUp = true;
+		isPoisoned = false;
 
 		bear = GameObject.Find ("Bear");
 		bearScript = bear.GetComponent<Bear>();
@@ -78,13 +80,30 @@ public class RivalPrincess : MonoBehaviour {
   {
     if(collider.CompareTag("Bear") && 
     	 !bearScript.isDiscovered && 
+    	 !bearScript.isDisabled &&
     	 bearScript.hasDrinkPlatter &&
     	 Input.GetKeyDown("e"))
     {
+    	bearScript.isDisabled = true;
+    	bearScript.RemoveDrinkPlatter();
 
+    	audios[3].Play();
 
+    	Invoke( "GetPoisoned", 6);	
 
     }
+  }
+
+
+  void GetPoisoned()
+  {
+  	GetComponent<Rigidbody>().useGravity = false;
+  	GetComponent<Rigidbody>().drag = 0f;
+  	GetComponent<Collider>().enabled = false;
+  	isPoisoned = true;
+  	GetComponent<Transform>().eulerAngles = new Vector3(0f,180f,0f);
+  	model.GetComponent<Animator>().SetInteger("walkState",2);
+  	audios[2].Play();
   }
 
 
@@ -108,31 +127,37 @@ public class RivalPrincess : MonoBehaviour {
 	void Update () 
 	{	
 
-		// only do things if NPC can do things
-		if(Time.time - prevSuspicionTime > getUpTime)
+		if(isPoisoned)
 		{
-			// if down, get up
-			if(!isUp)
+			GetComponent<Rigidbody>().velocity = new Vector3(0f,0f,-30f);
+		}
+		else
+		{
+			// only do things if NPC can do things
+			if(Time.time - prevSuspicionTime > getUpTime)
 			{
-				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;	
-				GetComponent<Transform>().eulerAngles = Vector3.zero;
-				GetComponent<Rigidbody>().velocity = Vector3.zero;
-				model.GetComponent<Animator>().SetInteger("walkState",0);
-				isUp = true;
-			}
-			else
-			{
-				if(bearScript.isDiscovered)	// run if there is bear
+				// if down, get up
+				if(!isUp)
 				{
-					if(model.GetComponent<Animator>().GetInteger("walkState") != 2)
+					GetComponent<Rigidbody>().angularVelocity = Vector3.zero;	
+					GetComponent<Transform>().eulerAngles = Vector3.zero;
+					GetComponent<Rigidbody>().velocity = Vector3.zero;
+					model.GetComponent<Animator>().SetInteger("walkState",0);
+					isUp = true;
+				}
+				else
+				{
+					if(bearScript.isDiscovered)	// run if there is bear
 					{
-						audios[1].Play();
-					}
+						if(model.GetComponent<Animator>().GetInteger("walkState") != 2)
+						{
+							audios[1].Play();
+						}
 
-					RunAway();
+						RunAway();
+					}
 				}
 			}
 		}
-
 	}
 }

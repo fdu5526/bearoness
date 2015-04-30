@@ -23,8 +23,11 @@ public class Bear : MonoBehaviour
   // player does suspicious things, gain suspicion
   public void IncreaseSuspicion(float amount)
   {
-    lastSuspicionTime = Time.time;
-    //suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    if(!isDisabled)
+    {
+      lastSuspicionTime = Time.time;
+      //suspicionPercent = Math.Min(100f, suspicionPercent + amount);
+    }
   }
 
   // if player is completely discovered, no going back to pretending
@@ -83,6 +86,22 @@ public class Bear : MonoBehaviour
 	}
 
 
+  public void GiveDrinkPlatter()
+  {
+    hasDrinkPlatter = true;
+    GameObject platter = GameObject.Find("DrinkPlatter");
+    platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,2.5f,0f);
+    platter.GetComponent<Transform>().parent = bearModel.GetComponent<Transform>();
+  }
+
+  public void RemoveDrinkPlatter()
+  {
+    hasDrinkPlatter = false;
+    GameObject platter = GameObject.Find("DrinkPlatter");
+    Destroy(platter);
+  }
+
+
   // for interaction systems
   void OnTriggerStay(Collider collider)
   {
@@ -90,10 +109,7 @@ public class Bear : MonoBehaviour
        Input.GetKeyDown("e") && 
        collider.CompareTag("DrinkPlatter"))
     {
-      hasDrinkPlatter = true;
-      GameObject platter = GameObject.Find("DrinkPlatter");
-      platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,2.5f,0f);
-      platter.GetComponent<Transform>().parent = bearModel.GetComponent<Transform>();
+      GiveDrinkPlatter();
     }
   }
 
