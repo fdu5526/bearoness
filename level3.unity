@@ -4490,14 +4490,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You have infiltrated the ball and secured favor with the other guests!
-    However, you''ve heard word that there is another princess present at the ball.
-    Not only that, she is looking to marry the prince and intiate a hostile takeover
-    of the kingdom! Find a way to put her out of commission; the kitchen should have
-    some supplies...
+  m_Text: 'You saved the prince from the nefarious princess! Now all that''s left
+    is to treat him to a dance and and finally win his heart!
 
 
-    Press the Spacebar to continue.'
+    Press SPACEBAR to continue.'
 --- !u!222 &1137419787
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8089,9 +8086,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Nice job! You've made it to the prince and are about to win his heart with
-    a dance! Stay in his dance radius to improve his favor of you; if you are able
-    to keep up for long enough, you'll win his heart! \n\nPress SPACEBAR to continue."
+  m_Text: "Nice job! You've made it to the prince and are about to engage him in a
+    dance! Stay in his dance radius to improve his favor of you; if you are able to
+    keep up for long enough, you'll win his heart! \n\nPress SPACEBAR to continue."
 --- !u!222 &1930581017
 CanvasRenderer:
   m_ObjectHideFlags: 0
