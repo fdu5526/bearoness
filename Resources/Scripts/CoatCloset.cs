@@ -47,7 +47,7 @@ public class CoatCloset : MonoBehaviour {
 			bearScript.isDisabled = true;
 
 			// wait 2 seconds, to let changing audio play
-			Invoke( "Reset", 4);
+			Invoke("Reset", 4);
 		}
 	}
 
