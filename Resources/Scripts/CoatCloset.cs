@@ -9,10 +9,16 @@ public class CoatCloset : MonoBehaviour {
 	//private Image fadeBlack;
 	private Color c;
 
+	private GameObject bear;
+	private Bear bearScript;
+
 
 	void Start(){
+		bear = GameObject.Find("Bear");
+		bearScript = bear.GetComponent<Bear>();
 		closetButton = GameObject.Find("closetE");
 		//fadeBlack = GameObject.Find("FadeBlackObj").GetComponent<Image>();
+		closetButton.SetActive(false);
 		closedDistance = false;
 		activated = false;
 		//c = fadeBlack.color;
@@ -21,11 +27,12 @@ public class CoatCloset : MonoBehaviour {
 	}
 
 	// enter the coat closet, time to reset
-	void OnTriggerEnter(Collider collider)
+	void checkDistance()
 	{
-		if(collider.CompareTag("Bear"))
+		if (Vector3.Distance(transform.position, bear.transform.position) < 5f)
 		{
-			closedDistance = true;		
+			Debug.Log("in range");
+			closedDistance = true;
 		}
 
 		else{
@@ -56,11 +63,13 @@ public class CoatCloset : MonoBehaviour {
 		if (closedDistance && activated == false)
 		{
 			closetButton.SetActive(true);
+			activated = true;
 		}
 
-		else
+		else if (!closedDistance && activated == true)
 		{
 			closetButton.SetActive(false);
+			activated = false;
 		}
 	}
 
@@ -72,10 +81,10 @@ public class CoatCloset : MonoBehaviour {
 	void Update ()
 	{
 		activateButton();
+		checkDistance();
 
 		if (Input.GetKeyDown("e") && closedDistance)
 		{
-			activated = true;
 			closetButton.SetActive(false);
 			GetComponent<AudioSource>().Play();
 			//fadeToBlack();
