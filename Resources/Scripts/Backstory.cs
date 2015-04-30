@@ -2,15 +2,13 @@
 using System.Collections;
 
 public class Backstory : MonoBehaviour {
-	private GameObject popup;
 	public bool shouldMoveOnToLevel;
 	public int nextLevelNumber;
 
 	// Use this for initialization
-	void Start () {
-		//popup = GameObject.Find("Backstory pop-up");
-		//Time.timeScale = 0;
-		//popup.SetActive(true);
+	void Start () 
+	{
+		Time.timeScale = 0;
 	}
 	
 	// Update is called once per frame
@@ -18,7 +16,7 @@ public class Backstory : MonoBehaviour {
 		if (Input.GetKeyDown("space"))
 		{
 			gameObject.SetActive(false);
-			//Time.timeScale = 1;
+			Time.timeScale = 1;
 
 			if(shouldMoveOnToLevel)
 			{

@@ -6,10 +6,6 @@ public class CoatCloset : MonoBehaviour {
 
 	private bool pressedE, closedDistance, activated;
 	private GameObject closetButton;
-	//private Image fadeBlack;
-
-	private Color c;
-
 	private GameObject bear;
 	private Bear bearScript;
 

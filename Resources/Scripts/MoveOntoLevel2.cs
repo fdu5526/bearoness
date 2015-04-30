@@ -12,7 +12,7 @@ public class MoveOntoLevel2 : MonoBehaviour {
 	{
 		if(collision.gameObject.name.Equals("Bear"))
 		{
-			Application.LoadLevel ("level2");
+			Application.LoadLevel ("EatingContest");
 		}
 	}
 	
