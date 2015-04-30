@@ -83,6 +83,11 @@ public class Bear : MonoBehaviour
     suspicionMeter = GameObject.Find("UI").GetComponent<Transform>().Find("SuspicionMeter").gameObject.GetComponent<Slider>();
     SwitchLegMode();
 
+    // if a reloaded level, change clothes
+    if(Application.loadedLevelName.Length > 8)
+    {
+      ChangeToRandomClothing();
+    }
 	}
 
   // let player have drink platter
@@ -359,11 +364,6 @@ public class Bear : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-    //TODO
-    if(Input.GetKeyDown("space"))
-    {
-      ChangeToRandomClothing();
-    }
 
     suspicionMeter.value = suspicionPercent;
 
