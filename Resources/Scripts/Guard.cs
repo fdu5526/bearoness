@@ -15,6 +15,7 @@ public class Guard : MonoBehaviour {
 	private int currentIndex;
 	private int counter;
 	private bool hasWayPoints;
+	public bool hasSuspWaypoints;
 	private bool isSuspicious;
 
 	//rigidbody and guard model
@@ -157,8 +158,8 @@ public class Guard : MonoBehaviour {
 		{
 			MoveTowardWaypoint();
 
-			if ((Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) && (currentIndex <= (waypoints.Length -1))) {
-				if (currentIndex == (waypoints.Length - 1)){
+			if ((Vector3.Distance (currentWaypoint.transform.position, transform.position) < minDistance) && hasSuspWaypoints && (currentIndex < (waypoints.Length -1))) {
+				if (currentIndex >= (waypoints.Length - 1)){
 					rb.velocity = new Vector3(0,0,0);
 				}
 
