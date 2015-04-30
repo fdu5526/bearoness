@@ -29,6 +29,7 @@ public class Eating : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		bearModel = GameObject.Find("Bear").GetComponent<Transform>().Find("bearModel").gameObject;
 		anim = bearModel.GetComponent<Animator>();
 		lastKeyPressed = 0f;
 		rudeness = 0f;
@@ -76,9 +77,9 @@ public class Eating : MonoBehaviour {
 	// increase rudeness automatically
 	void IncreaseSlider()
 	{
-		rudeness += Mathf.MoveTowards(0f, maxRudeness, 1f);
+		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 1.5f + 0.7f;
 		suspicionSlider.value = rudeness;
-		anim.speed = Mathf.MoveTowards(anim.speed, 2.5f, 0.15f);
+		anim.speed = rudeness/maxRudeness * 5f + 1f;
 	}
 	
 	// Update is called once per frame
@@ -88,7 +89,7 @@ public class Eating : MonoBehaviour {
 		if(started && (!lose && !won))
 		{
 
-			audios[1].pitch = rudeness/maxRudeness * 2f + 1f;
+			audios[1].pitch = rudeness/maxRudeness * 3f + 1f;
 
 			if(rudeness >= 99.9f)
 			{
@@ -113,7 +114,6 @@ public class Eating : MonoBehaviour {
 			started = true;
 			audios[1].Play();
 			startTime = Time.timeSinceLevelLoad;
-			//anim.SetBool("Eating", true);		
 		}
 		// lost
 		else if (lose && Input.GetKeyDown(KeyCode.Space))
