@@ -137,13 +137,15 @@ public class Guard : MonoBehaviour {
 		// get back up after getting hit
 		if(Time.time - prevSuspicionTime > getUpTime)
 		{
+			GetComponent<Rigidbody>().angularVelocity = Vector3.zero;	
+			GetComponent<Transform>().eulerAngles = Vector3.zero;
+				
 			if(!hasWayPoints)
 			{
 				if(!isSuspicious)
 				{
 					model.GetComponent<Animator>().SetInteger("walkState",0);
 				}
-				GetComponent<Transform>().eulerAngles = Vector3.zero;
 			}
 			else if(!isSuspicious)
 			{

@@ -252,6 +252,7 @@ public class RegularNPC : MonoBehaviour {
 			{
 				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;	
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				GetComponent<Transform>().eulerAngles = Vector3.zero;
 				model.GetComponent<Animator>().SetInteger("walkState",0);
 				isUp = true;
 			}
