@@ -29,6 +29,7 @@ public class musicController : MonoBehaviour {
 				normPlaying = false;
 				detectMusic.Play();
 				detectMusic.loop = true;
+				audios[2].Stop();
 			}
 		}
 

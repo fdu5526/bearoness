@@ -208,6 +208,7 @@ public class Prince : MonoBehaviour {
 						AudioSource[] musics = GameObject.Find("Main Camera").GetComponents<AudioSource>();
 
 						musics[0].Stop();
+						musics[1].Stop();
 						musics[2].Play();
 
 						model.GetComponent<Animator>().SetInteger("walkState",1);
