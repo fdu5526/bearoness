@@ -11,7 +11,7 @@ public class QuestBox : MonoBehaviour {
 
 	private bool level2check1, level2check2;
 	Text questText;
-	string activeQuest = "Go to the Dining Room";
+	string activeQuest = "Sit at the Dining Room Table";
 
 	// Use this for initialization
 	void Start () {
@@ -52,7 +52,7 @@ public class QuestBox : MonoBehaviour {
 				ChangeQuest("Go to the Kitchen");
 			}
 
-			else if (level2check2)
+			if (bearScript.hasDrinkPlatter)
 			{
 				ChangeQuest("Find the rogue princess!");
 			}

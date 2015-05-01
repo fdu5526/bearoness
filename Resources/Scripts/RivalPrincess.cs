@@ -28,6 +28,10 @@ public class RivalPrincess : MonoBehaviour {
 	// audio
 	private AudioSource[] audios;
 
+	//UI
+	private GameObject princessE;
+	private bool princessActive;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -40,6 +44,9 @@ public class RivalPrincess : MonoBehaviour {
 
 		GetComponent<Rigidbody>().centerOfMass = new Vector3(0f,-1f,0f);
 		model = GetComponent<Transform>().Find("model").gameObject;
+
+		princessE = GameObject.Find("PrincessE");
+		princessActive = false;
 
 	}
 
@@ -81,18 +88,21 @@ public class RivalPrincess : MonoBehaviour {
     if(collider.CompareTag("Bear") && 
     	 !bearScript.isDiscovered && 
     	 !bearScript.isDisabled &&
-    	 bearScript.hasDrinkPlatter &&
-    	 Input.GetKeyDown("e"))
+    	 bearScript.hasDrinkPlatter)    	 
     {
-    	bearScript.isDisabled = true;
-    	bearScript.RemoveDrinkPlatter();
+    	princessActive = true;
+    	if (Input.GetKeyDown("e")){
+    		princessActive = false;
+	    	bearScript.isDisabled = true;
+	    	bearScript.RemoveDrinkPlatter();
 
-    	audios[3].Play();
+	    	audios[3].Play();
 
-    	Invoke( "GetPoisoned", 6);
-    	Invoke( "Level2Victory", 10);
-
+	    	Invoke( "GetPoisoned", 6);
+	    	Invoke( "Level2Victory", 10);
+	    }
     }
+
   }
 
   // get poisoned, run away really fast, ignore gravity and collision
@@ -134,6 +144,16 @@ public class RivalPrincess : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
+		if (princessActive == true)
+	    {
+	      princessE.SetActive(true);
+	    }
+
+	    else if (princessActive == false && princessE.activeInHierarchy == true)
+	    {
+	      princessE.SetActive(false);
+	    }
+
 
 		if(isPoisoned)
 		{
