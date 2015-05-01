@@ -59,14 +59,14 @@ public class CoatCloset : MonoBehaviour {
 	private void Reset() 
 	{
 		string levelName = Application.loadedLevelName;
-		/*if(levelName.Length < 8)
+		if(levelName.Length < 8)
 		{
 			levelName = levelName + reload + checkpointNumber.ToString();
 		}
 		else
 		{
 			levelName = levelName.Substring(0, levelName.Length - 1) + checkpointNumber.ToString();
-		}*/
+		}
 		
 		Application.LoadLevel (levelName);
 	}

@@ -45,7 +45,7 @@ public class QuestBox : MonoBehaviour {
 			ChangeQuest("Find a Changing Room!");
 		}
 
-		if (Application.loadedLevelName == "level2")
+		if (Application.loadedLevelName.StartsWith("level2"))
 		{
 			if (level2check1)
 			{
@@ -64,7 +64,7 @@ public class QuestBox : MonoBehaviour {
 			}
 		}
 
-		if (Application.loadedLevelName == "level3")
+		if (Application.loadedLevelName.StartsWith("level3"))
 		{
 			ChangeQuest("Find the prince in the Ballroom");
 

@@ -95,8 +95,8 @@ public class Bear : MonoBehaviour
       ChangeToRandomClothing();
     }
 
-    drinkE = GameObject.Find("DrinkPlatterE");
-    if (Application.loadedLevelName == "level2")
+    drinkE = GameObject.Find("UI").GetComponent<Transform>().Find("DrinkPlatterE").gameObject;
+    if (Application.loadedLevelName.StartsWith("level2"))
     {
       drinkE.SetActive(false);
     }
@@ -381,11 +381,11 @@ public class Bear : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-    if (drinkActive == true && Application.loadedLevelName == "level2")
+    if (drinkActive == true && Application.loadedLevelName.StartsWith("level2"))
     {
       drinkE.SetActive(true);
     }
-    else if (drinkActive == false && Application.loadedLevelName == "level2"){
+    else if (drinkActive == false && Application.loadedLevelName.StartsWith("level2")){
       if (drinkE.activeInHierarchy == true){
         drinkE.SetActive(false);
       }
