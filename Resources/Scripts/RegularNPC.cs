@@ -52,7 +52,7 @@ public class RegularNPC : MonoBehaviour {
 		bearScript = bear.GetComponent<Bear>();
 		audios = GetComponents<AudioSource>();
 
-		LoadDialogues();
+		//LoadDialogues();
 
 		GetComponent<Rigidbody>().centerOfMass = new Vector3(0f,-1f,0f);
 		model = GetComponent<Transform>().Find("model").gameObject;
@@ -94,7 +94,7 @@ public class RegularNPC : MonoBehaviour {
     
   }
 
-
+  /*
 	// load file name's contents into the list
 	private void LoadDialoguesFromFileToList(string name, List<string> list)
 	{
@@ -130,6 +130,7 @@ public class RegularNPC : MonoBehaviour {
 		}
 		
 	}
+	*/
 
 	// bear runs into this NPC
 	void OnCollisionEnter(Collision collision)
@@ -162,7 +163,7 @@ public class RegularNPC : MonoBehaviour {
 		}
 	}
 
-
+	/*
 	// player near vincinity to talk
 	void OnTriggerStay(Collider collider)
   {
@@ -189,6 +190,7 @@ public class RegularNPC : MonoBehaviour {
     	preDialogueTime = Time.time;
     }
   }
+  */
 
 	// random walk this NPC
 	void Patrol()
