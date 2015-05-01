@@ -70,6 +70,8 @@ public class Bear : MonoBehaviour
   // Use this for initialization
 	void Start () 
 	{
+    Application.targetFrameRate = 30;
+    
 		suspicionPercent = 0f;
 		yRotation = 0f;
     lastSuspicionTime = 0f;

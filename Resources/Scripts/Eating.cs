@@ -29,6 +29,7 @@ public class Eating : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Application.targetFrameRate = 30;
 		bearModel = GameObject.Find("Bear").GetComponent<Transform>().Find("bearModel").gameObject;
 		anim = bearModel.GetComponent<Animator>();
 		lastKeyPressed = 0f;
@@ -77,7 +78,7 @@ public class Eating : MonoBehaviour {
 	// increase rudeness automatically
 	void IncreaseSlider()
 	{
-		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 0.5f + 0.7f;
+		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 1.3f + 0.7f;
 		suspicionSlider.value = rudeness;
 		anim.speed = rudeness/maxRudeness * 5f + 1f;
 	}
