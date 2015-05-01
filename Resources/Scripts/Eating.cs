@@ -77,7 +77,7 @@ public class Eating : MonoBehaviour {
 	// increase rudeness automatically
 	void IncreaseSlider()
 	{
-		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 1.3f + 0.7f;
+		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 0.5f + 0.7f;
 		suspicionSlider.value = rudeness;
 		anim.speed = rudeness/maxRudeness * 5f + 1f;
 	}
