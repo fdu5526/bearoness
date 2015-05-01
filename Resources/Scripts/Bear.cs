@@ -95,9 +95,9 @@ public class Bear : MonoBehaviour
       ChangeToRandomClothing();
     }
 
-    drinkE = GameObject.Find("UI").GetComponent<Transform>().Find("DrinkPlatterE").gameObject;
     if (Application.loadedLevelName.StartsWith("level2"))
     {
+      drinkE = GameObject.Find("UI").GetComponent<Transform>().Find("DrinkPlatterE").gameObject;
       drinkE.SetActive(false);
     }
     drinkActive = false;

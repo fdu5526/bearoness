@@ -415,6 +415,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 848786172}
   m_RootOrder: 0
+--- !u!1 &9087391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 180462, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 9087392}
+  - 222: {fileID: 9087394}
+  - 114: {fileID: 9087393}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9087392
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22437078, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 9087391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 738971605}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 5, y: -88}
+  m_SizeDelta: {x: 350, y: 400}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &9087393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11479048, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 9087391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 4a0f78d880cbca74caf2c66150f5e723, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'You have been spotted! Run to a changing closet and change into a new dress;
+    this will reset your suspicion meter to zero.
+
+
+    Press SPACEBAR to continue.'
+--- !u!222 &9087394
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22222762, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 9087391}
 --- !u!1 &12295280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,7 +2675,7 @@ RectTransform:
   m_Children:
   - {fileID: 1371788133}
   m_Father: {fileID: 2090492947}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -10, y: -66}
@@ -19950,6 +20023,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 284947522}
   m_RootOrder: 0
+--- !u!1 &738971604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 129316, guid: c14e32ab134ab8e48b84de5dbdbaf4ee, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 738971605}
+  - 222: {fileID: 738971607}
+  - 114: {fileID: 738971606}
+  m_Layer: 5
+  m_Name: DetectedBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &738971605
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22424238, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738971604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9087392}
+  m_Father: {fileID: 2090492947}
+  m_RootOrder: 7
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: -2.5, y: -48.2999878}
+  m_SizeDelta: {x: 400, y: 400}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &738971606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11428758, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738971604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e64d5b90632e67848a03f833a5109f54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &738971607
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22265632, guid: c14e32ab134ab8e48b84de5dbdbaf4ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738971604}
 --- !u!1 &739560138
 GameObject:
   m_ObjectHideFlags: 0
@@ -26581,7 +26719,7 @@ Transform:
   m_PrefabParentObject: {fileID: 470312, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1009986233}
-  m_LocalRotation: {x: .194092378, y: .815718889, z: .126135319, w: .530113757}
+  m_LocalRotation: {x: .194092408, y: .815719008, z: .126135334, w: .530113816}
   m_LocalPosition: {x: .00735873124, y: .00106469996, z: .000316625519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -26958,7 +27096,7 @@ Transform:
   m_PrefabParentObject: {fileID: 402354, guid: 0ec70dfb56185014eb216da5e2ecf3b1, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1037470677}
-  m_LocalRotation: {x: .194092378, y: .815718889, z: .126135319, w: .530113757}
+  m_LocalRotation: {x: .194092408, y: .815719008, z: .126135334, w: .530113816}
   m_LocalPosition: {x: -.00735898828, y: -.0010647031, z: -.000317094993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -40950,7 +41088,7 @@ RectTransform:
   m_Children:
   - {fileID: 522257948}
   m_Father: {fileID: 2090492947}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -2.5, y: -48.3000183}
@@ -54027,8 +54165,9 @@ RectTransform:
   - {fileID: 880363000}
   - {fileID: 454798493}
   - {fileID: 1652285576}
-  - {fileID: 115059007}
   - {fileID: 1568519952}
+  - {fileID: 115059007}
+  - {fileID: 738971605}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_AnchorMin: {x: 0, y: 0}
