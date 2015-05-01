@@ -3,12 +3,12 @@ using System.Collections;
 
 public class startMouseover : MonoBehaviour {
 
-	Sprite start0, start1;
+	public Sprite start0, start1;
 
 	// Use this for initialization
 	void Start () {
-		start0 = Resources.Load<Sprite>("Sprites/start");
-		start1 = Resources.Load<Sprite>("Sprites/start_mouseover");
+		//start0 = Resources.Load<Sprite>("Sprites/startblack");
+		//start1 = Resources.Load<Sprite>("Sprites/startwhite");
 	}
 
 	void OnMouseEnter(){
