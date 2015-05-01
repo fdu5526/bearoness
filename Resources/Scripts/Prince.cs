@@ -20,6 +20,10 @@ public class Prince : MonoBehaviour {
 	// actual NPC model
 	private GameObject model;
 
+
+	private float prevSuspicionTime;
+	private const float suspicionCooldown = 0.5f;
+
 	//waypoints
 	public GameObject[] waypoints;
 	private GameObject currentWaypoint;
@@ -93,8 +97,10 @@ public class Prince : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{	
 		// bear run into this NPC
-		if(collision.gameObject.name.Equals("Bear"))
+		if(Time.time - prevSuspicionTime > suspicionCooldown &&
+			collision.gameObject.name.Equals("Bear"))
 		{
+			prevSuspicionTime = Time.time;
 			if (danceValue > 0f)
 				{
 					danceValue -= 3f;
@@ -232,7 +238,7 @@ public class Prince : MonoBehaviour {
 
 			if (danceCirclePresent && danceValue > 0f)
 			{
-					danceValue -= 0.03f;
+					danceValue -= 0.04f;
 			}
 		}
 		else if (bearScript.isDiscovered)				// run away if there is a bear
