@@ -170,6 +170,12 @@ public class Prince : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{	
+		if(bearScript.isDiscovered)
+		{
+			return;
+		}
+
+
 		if(!pressedE)
 		{
 			checkBearDistance();
