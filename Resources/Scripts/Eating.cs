@@ -20,6 +20,10 @@ public class Eating : MonoBehaviour {
 	public Animator anim;
 	private float startTime;
 
+
+	private float lastIncreaseTime;
+	private const float increaseCooldown = 0.01f;
+
 	private float maxRudeness = 100f;
 	public float rudeness;
 	private float politenessGained = -4f;
@@ -78,7 +82,7 @@ public class Eating : MonoBehaviour {
 	// increase rudeness automatically
 	void IncreaseSlider()
 	{
-		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 0.7f + 0.7f;
+		rudeness += (Time.timeSinceLevelLoad - startTime)/contestLength * 0.4f + 0.7f;
 		suspicionSlider.value = rudeness;
 		anim.speed = rudeness/maxRudeness * 5f + 1f;
 	}
@@ -105,7 +109,12 @@ public class Eating : MonoBehaviour {
 			else
 			{
 				CheckControl();
-				IncreaseSlider();
+
+				if(Time.time - lastIncreaseTime > increaseCooldown)
+				{
+					IncreaseSlider();
+					lastIncreaseTime = Time.time;
+				}
 			}
 
 		}
