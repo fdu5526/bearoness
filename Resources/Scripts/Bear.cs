@@ -65,6 +65,10 @@ public class Bear : MonoBehaviour
   private AudioSource[] audios;
   private AudioSource growl, run2, run4;
 
+  //UI
+  private GameObject drinkE;
+  private bool drinkActive;
+
 ///////////////////////////////////////////////////////////////////////////////////////////  
 
   // Use this for initialization
@@ -88,6 +92,13 @@ public class Bear : MonoBehaviour
     {
       ChangeToRandomClothing();
     }
+
+    drinkE = GameObject.Find("DrinkPlatterE");
+    if (Application.loadedLevelName == "level2")
+    {
+      drinkE.SetActive(false);
+    }
+    drinkActive = false;
 	}
 
   // let player have drink platter
@@ -96,7 +107,7 @@ public class Bear : MonoBehaviour
     audios[3].Play();
     hasDrinkPlatter = true;
     GameObject platter = GameObject.Find("DrinkPlatter");
-    platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,2.5f,0f);
+    platter.GetComponent<Transform>().position = GetComponent<Transform>().position + new Vector3(0f,0f,-1.5f);
     platter.GetComponent<Transform>().parent = bearModel.GetComponent<Transform>();
   }
 
@@ -114,10 +125,14 @@ public class Bear : MonoBehaviour
   void OnTriggerStay(Collider collider)
   {
     if(!hasDrinkPlatter && 
-       Input.GetKeyDown("e") && 
        collider.CompareTag("DrinkPlatter"))
     {
-      GiveDrinkPlatter();
+      drinkActive = true;
+      if (Input.GetKeyDown("e"))
+      {
+        GiveDrinkPlatter();
+        drinkActive = false;
+      }
     }
   }
 
@@ -364,6 +379,16 @@ public class Bear : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+    if (drinkActive == true && Application.loadedLevelName == "level2")
+    {
+      drinkE.SetActive(true);
+    }
+    else if (drinkActive == false && Application.loadedLevelName == "level2"){
+      if (drinkE.activeInHierarchy == true){
+        drinkE.SetActive(false);
+      }
+    }
+
     suspicionMeter.value = suspicionPercent;
 
     if(!isDisabled)
